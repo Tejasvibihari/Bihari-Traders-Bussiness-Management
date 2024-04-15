@@ -11,7 +11,7 @@ export default function SignUpForm() {
             <div className='flex mx-auto justify-center items-center max-w-lg py-16'>
                 <form>
 
-                    <Typography component="h1" variant="h5" align="center" color="black" margin="" gutterBottom>
+                    <Typography component="h1" variant="h4" align="center" color="black" marginTop="4" gutterBottom>
                         Sign Up
                     </Typography>
                     <TextField  id="name" label="Name" variant="filled" fullWidth margin="normal" required />

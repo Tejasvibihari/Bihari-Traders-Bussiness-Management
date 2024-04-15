@@ -11,7 +11,7 @@ export default function LoginForm() {
             <div className='flex mx-auto justify-center items-center max-w-lg lg:py-20 py-12'>
                 <form>
 
-                    <Typography component="h1" variant="h5" align="center" color="black" margin="" gutterBottom>
+                    <Typography component="h1" variant="h4" align="center" color="black" margin="" gutterBottom>
                         Sign In
                     </Typography>
                     <TextField  id="email" label="Email" variant="filled" fullWidth margin="normal" required />
