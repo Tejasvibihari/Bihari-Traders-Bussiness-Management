@@ -18,12 +18,12 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import InventoryRoundedIcon from '@mui/icons-material/InventoryRounded';
-import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
-import ChecklistRoundedIcon from '@mui/icons-material/ChecklistRounded';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import Avatar from '@mui/material/Avatar';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import InventoryIcon from '@mui/icons-material/Inventory';
 
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -222,7 +222,7 @@ export default function MiniDrawer({ children }) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    <PeopleRoundedIcon />
+                                    <PostAddIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Add Invoice" sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
@@ -244,7 +244,7 @@ export default function MiniDrawer({ children }) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    <ChecklistRoundedIcon />
+                                    <InventoryIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Inventory" sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
