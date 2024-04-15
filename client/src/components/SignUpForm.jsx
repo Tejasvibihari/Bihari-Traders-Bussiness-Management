@@ -1,7 +1,16 @@
+<<<<<<< HEAD
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
+
+
+=======
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+>>>>>>> 314a650aaf79df10796b035a7da90f858b9f9686
 
 export default function SignUpForm() {
 
