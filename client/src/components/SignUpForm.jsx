@@ -1,15 +1,12 @@
-import React from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider, useTheme } from '@mui/material/styles';
-import { outlinedInputClasses } from '@mui/material/OutlinedInput';
+
 
 
 
 export default function SignUpForm() {
-    const outerTheme = useTheme();
+
     return (
         <>
 
