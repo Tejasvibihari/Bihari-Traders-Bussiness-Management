@@ -1,4 +1,4 @@
-import Inventory from "../models/inventoryModel";
+import Inventory from "../models/inventoryModel.js";
 import nodemailer from "nodemailer";
 
 // Path: Bihari%20Traders%20Bussiness%20Management/server/controllers/inventoryController.js
@@ -34,21 +34,34 @@ export const deleteInventory = async (req, res) => {
 
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
+    host: "smtp.gmail.com",
     port: 587,
     secure: false, // Use `true` for port 465, `false` for all other ports
     auth: {
-        user: "maddison53@ethereal.email",
-        pass: "jn7jnAPss4f63QBp6D",
+        user: "manojbihari35@gmail.com",
+        pass: "mbygodqftmlxenyl",
     },
 });
 
 export const otpGeneration = async (req, res) => {
+    const { email } = req.body;
     try {
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        try {
+            const info = await transporter.sendMail({
+                from: '"Bihari Traders" <gamingwiz8011@gmail.com>', // sender address
+                to: "tejasvibihari2000@gmail.com", // list of receivers
+                subject: "Otp For Inventory Management", // Subject line
+                text: `Your OTP is ${otp}`, // plain text body
+                html: `Your OTP is ${otp}`, // html body
+            });
+            console.log("Message sent: %s", info.messageId);
+        } catch (error) {
+            console.log(error)
+        }
 
     } catch (error) {
-
+        console.log(error)
     }
 }
 

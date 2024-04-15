@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import SignUpForm from '../components/SignUpForm'
-import LoginForm from '../components/LoginFrom'
+import SignInForm from '../components/SignInForm'
 
 
 
@@ -16,7 +16,7 @@ export default function SignUp() {
         <>
             <div className='signup h-screen'>
                 {
-                    haveAccount ? <LoginForm /> : <SignUpForm />
+                    haveAccount ? <SignInForm /> : <SignUpForm />
                 }
                 {
                     haveAccount ?
