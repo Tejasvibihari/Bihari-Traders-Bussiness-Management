@@ -1,4 +1,5 @@
 import Dashboard from '../components/Dashboard'
+import InventoryCard from '../components/InventoryCard'
 
 
 
@@ -6,8 +7,7 @@ export default function Inventory() {
     return (
         <div>
             <Dashboard>
-                <h1>Inventory</h1>
-                
+                <InventoryCard />
             </Dashboard>
         </div>
     )
