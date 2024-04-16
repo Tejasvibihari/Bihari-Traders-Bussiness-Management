@@ -1,5 +1,6 @@
 import Inventory from "../models/inventoryModel.js";
 import nodemailer from "nodemailer";
+import User from "../models/userModel.js";
 
 // Path: Bihari%20Traders%20Bussiness%20Management/server/controllers/inventoryController.js
 
@@ -47,34 +48,47 @@ export const otpGeneration = async (req, res) => {
     const { email } = req.body;
     try {
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        const info = await transporter.sendMail({
+            from: '"Bihari Traders" <tejasvibihari2000@gmail.com>', // sender address
+            to: email, // list of receivers
+            subject: "Otp For Inventory Management", // Subject line
+            text: `Your OTP is ${otp}`, // plain text body
+            html: `Your OTP is ${otp}`, // html body
+        });
+        res.json({ message: "Otp sent successfully" });
         try {
-            const info = await transporter.sendMail({
-                from: '"Bihari Traders" <gamingwiz8011@gmail.com>', // sender address
-                to: "tejasvibihari2000@gmail.com", // list of receivers
-                subject: "Otp For Inventory Management", // Subject line
-                text: `Your OTP is ${otp}`, // plain text body
-                html: `Your OTP is ${otp}`, // html body
-            });
-            console.log("Message sent: %s", info.messageId);
+            const user = await User.findOne({ email });
+            if (user) {
+                user.otp = otp;
+                await user.save();
+            }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
+        const createOtp = new User({ otp: otp });
+        await createOtp.save();
+    } catch (error) {
+        console.log(error)
+    }
 
+}
+
+export const updateInventory = async (req, res) => {
+    // const { productQuantity } = req.body;
+    const reqOtp = req.body.otp;
+    try {
+        const findOtp = await User.findOne({ otp: reqOtp });
+        if (!findOtp) {
+            return res.status(404).json({ message: "Otp Invalid OTP" });
+        }
+        res.json({ message: "Inventory updated successfully" })
+        // const upadateInventory = await Inventory.findById(req.params.id);
+        // upadateInventory.productQuantity = productQuantity;
+        // await updateInventory.save();
+        // res.json(updateInventory);
     } catch (error) {
         console.log(error)
     }
 }
 
 
-export const updateInventory = async (req, res) => {
-    const { productName, productCategory, productPrice, productWeight, productQuantity, productImage, hsnCode } = req.body;
-    try {
-        const upadateInventory = await Inventory.findById(req.params.id);
-        upadateInventory.productQuantity = productQuantity;
-
-        await updateInventory.save();
-        res.json(updateInventory);
-    } catch (error) {
-        console.log(error);
-    }
-}
