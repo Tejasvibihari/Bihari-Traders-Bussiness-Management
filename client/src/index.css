@@ -31,3 +31,7 @@
         src: url(/font/Montserrat-VariableFont_wght.ttf) format('truetype');
     }
 }
+
+.card5 {
+    background-image: repeating-linear-gradient(45deg, rgba(193, 249, 252, 0.12) 0px, rgba(193, 249, 252, 0.12) 1px, transparent 1px, transparent 13px), repeating-linear-gradient(135deg, rgba(193, 249, 252, 0.12) 0px, rgba(193, 249, 252, 0.12) 1px, transparent 1px, transparent 13px), linear-gradient(90deg, rgb(215, 32, 135), rgb(223, 206, 104));
+}
