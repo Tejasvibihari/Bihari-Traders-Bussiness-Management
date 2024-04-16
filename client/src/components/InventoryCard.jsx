@@ -1,10 +1,10 @@
-import React from 'react'
-import Zoom from '@mui/material/Zoom';
+
+import Grow from '@mui/material/Grow';
 export default function InventoryCard() {
     return (
         <>
             <div>
-                <Zoom in="load">
+                <Grow in="load">
                     <div className='flex flex-col max-w-64 h-64 border p-4 shadow-md'>
                         <div className="font-[montserrat] font-bold text-xl mb-4">Product Name</div>
                         <div className="font-[montserrat] font-semibold text-slate-500 mt-20">Quantity - 987987</div>
@@ -20,7 +20,7 @@ export default function InventoryCard() {
                             </div>
                         </div>
                     </div>
-                </Zoom>
+                </Grow>
             </div>
         </>
     )

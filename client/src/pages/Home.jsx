@@ -4,7 +4,6 @@ import DashBoardCard from '../components/DashBoardCard'
 import Icon1 from '/image/cement1.gif'
 import Icon2 from '/image/chem.gif'
 import Icon3 from '/image/iron.gif'
-import Icon4 from '/image/stones1.png'
 import Icon from '/image/invoice1.gif'
 import Paper from '@mui/material/Paper';
 import Grow from '@mui/material/Grow';
