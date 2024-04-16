@@ -1,11 +1,13 @@
 
 import Dashboard from '../components/Dashboard'
 import DashBoardCard from '../components/DashBoardCard'
-import Icon from '/image/invoice1.gif'
 import Icon1 from '/image/cement1.gif'
 import Icon2 from '/image/chem.gif'
 import Icon3 from '/image/iron.gif'
+import Icon4 from '../../public/image/stones1.png'
+import Icon from '../../public/image/invoice1.gif'
 import Paper from '@mui/material/Paper';
+import SimpleLineChart from '../components/SimpleLineChart'
 
 export default function Home() {
     return (
@@ -37,19 +39,33 @@ export default function Home() {
                         />
                         {/* Change This for Stone  */}
                         <DashBoardCard
-                            title="Total Invoice"
+                            title="Stone"
                             value="345"
-                            icon={Icon}
+                            icon={Icon4}
                             dynamicColor="card1"
                         />
                     </div>
                 </Paper>
                 <div className='flex flex-row gap-4'>
-                    <div>
-                        Use card here
+                    <div className=' card5 rounded-xl shadow-2xl overflow-hidden m-5'>
+                        <div className='md:flex'>
+                            <div className='md:flex-shrink-0'>
+                                <img className='h-48 w-full  object-cover md:w-48' src={Icon} alt='Invoice icon' />
+                            </div>
+                            <div className='p-8'>
+                                <div className='uppercase tracking-wide text-2xl font-extrabold'>Total invoice</div>
+                                <div className='block mt-1 text-lg leading-tight font-semibold text-black'>4545</div>
+                                <div className='mt-2 text-gray-900'>
+                                    <div className='font-semibold text-xl'>Iron invoice: 45</div>
+                                    <div className='font-semibold text-xl'>Chemical invoice: 45</div>
+                                    <div className='font-semibold text-xl'>Stone invoice: 45</div>
+                                    <div className='font-semibold text-xl'>Cement invoice: 45</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div>
-                        Use Line Chart Here
+                        <SimpleLineChart />
                     </div>
                 </div>
             </Dashboard>
