@@ -4,11 +4,11 @@ import DashBoardCard from '../components/DashBoardCard'
 import Icon1 from '/image/cement1.gif'
 import Icon2 from '/image/chem.gif'
 import Icon3 from '/image/iron.gif'
-import Icon4 from '../../public/image/stones1.png'
-import Icon from '../../public/image/invoice1.gif'
+import Icon4 from '/image/stones1.png'
+import Icon from '/image/invoice1.gif'
 import Paper from '@mui/material/Paper';
 import Grow from '@mui/material/Grow';
-import SimpleLineChart from '../components/LineChart'
+import SimpleLineChart from '../components/SimpleLineChart'
 
 export default function Home() {
     return (
@@ -56,27 +56,37 @@ export default function Home() {
                         </div>
                     </Grow >
                 </Paper >
-                <div className='flex flex-row gap-4'>
-                    <div className=' card5 rounded-xl shadow-2xl overflow-hidden m-5'>
-                        <div className='md:flex'>
-                            <div className='md:flex-shrink-0'>
-                                <img className='h-48 w-full  object-cover md:w-48' src={Icon} alt='Invoice icon' />
-                            </div>
-                            <div className='p-8'>
-                                <div className='uppercase tracking-wide text-2xl font-extrabold'>Total invoice</div>
-                                <div className='block mt-1 text-lg leading-tight font-semibold text-black'>4545</div>
-                                <div className='mt-2 text-gray-900'>
-                                    <div className='font-semibold text-xl'>Iron invoice: 45</div>
-                                    <div className='font-semibold text-xl'>Chemical invoice: 45</div>
-                                    <div className='font-semibold text-xl'>Stone invoice: 45</div>
-                                    <div className='font-semibold text-xl'>Cement invoice: 45</div>
+                <div className='my-4'>
+                    <Paper elevation={3} className='p-5'>
+                        <div className='grid grid-cols-2 gap-4'>
+                            <Grow in timeout={{ enter: 1500, exit: 500 }} style={{ transformOrigin: '0 0 0' }}>
+                                <div className='flex items-center justify-center card5 rounded-xl shadow-gray-600 shadow-2xl overflow-hidden m-5 p-7'>
+                                    <div className='flex items-center'>
+                                        <img className='h-48 w-full  object-cover md:w-48' src={Icon} alt='Invoice icon' />
+                                    </div>
+                                    <div className='p-8 flex flex-row gap-4'>
+                                        <div>
+                                            <div className='uppercase tracking-wide text-lg font-extrabold'>Total invoice</div>
+                                            <div className='mt-1 text-2xl  leading-tight font-semibold text-black text-center flex items-center justify-center py-7'>4545</div>
+                                        </div>
+                                        <div className='mt-2 text-gray-900'>
+                                            <div className='font-semibold text-lg'>Iron invoice: 45</div>
+                                            <div className='font-semibold text-lg'>Chemical invoice: 45</div>
+                                            <div className='font-semibold text-lg'>Stone invoice: 45</div>
+                                            <div className='font-semibold text-lg'>Cement invoice: 45</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </Grow>
+                            <Grow in timeout={{ enter: 2000, exit: 500 }} style={{ transformOrigin: '0 0 0' }}>
+                                <div className='mx-auto flex justify-center items-center'>
+
+                                    <SimpleLineChart />
+
+                                </div>
+                            </Grow>
                         </div>
-                    </div>
-                    <div>
-                        <SimpleLineChart />
-                    </div>
+                    </Paper>
                 </div>
             </Dashboard >
         </div >
