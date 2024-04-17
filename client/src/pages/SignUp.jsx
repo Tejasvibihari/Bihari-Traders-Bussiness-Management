@@ -21,18 +21,18 @@ export default function SignUp() {
                 {
                     haveAccount ?
                         <div className='flex items-center justify-center text-black mb-5 px-3 '>
-                            <p className='font-bold'>Don&apos;t Have Account ?</p>
+                            <p className='font-bold font-[montserrat]'>Don&apos;t Have Account ?</p>
                             <div onClick={toggleHaveAccount}
-                                className='flex px-3 underline cursor-pointer'
+                                className='flex px-3 underline cursor-pointer font-[montserrat]'
                             >
                                 Create One
                             </div>
                         </div> :
                         <div className='flex items-center justify-center text-black px-3 mb-5 '>
-                            <p className='font-bold'>Already Have Account</p>
+                            <p className='font-bold py-5 font-[montserrat]'>Already Have Account</p>
                             <div
                                 onClick={toggleHaveAccount}
-                                className='flex px-3 underline cursor-pointer'
+                                className='flex px-3 underline cursor-pointer font-[montserrat]'
                             >
                                 SignIn
                             </div>
