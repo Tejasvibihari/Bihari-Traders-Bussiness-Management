@@ -2,22 +2,27 @@ import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import axios from "axios";
 import TextField from '@mui/material/TextField';
-
+import { useDispatch } from 'react-redux';
+import { signUpStart, signUpSuccess, signUpFailure } from '../app/user/userSlice';
 
 export default function SignUpForm() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [bussinessName, setBusinessName] = useState('');
+    const dispatch = useDispatch();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = { name, email, password, bussinessName };
         try {
+            dispatch(signUpStart())
             const response = await axios.post('/api/user/signup', formData);
             console.log(response.data)
+            dispatch(signUpSuccess())
         } catch (error) {
             console.log(error)
+            dispatch(signUpFailure())
         }
     }
 
