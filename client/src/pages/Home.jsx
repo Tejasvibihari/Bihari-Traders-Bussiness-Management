@@ -79,9 +79,7 @@ export default function Home() {
                             </Grow>
                             <Grow in timeout={{ enter: 2000, exit: 500 }} style={{ transformOrigin: '0 0 0' }}>
                                 <div className='mx-auto flex justify-center items-center'>
-
                                     <SimpleLineChart />
-
                                 </div>
                             </Grow>
                         </div>

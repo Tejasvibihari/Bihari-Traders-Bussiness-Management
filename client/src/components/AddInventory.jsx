@@ -156,13 +156,13 @@ export default function AddInventory() {
                 >
                     <SpeedDialAction
                         icon={<DomainAddIcon />}
-                        tooltipTitle="Add Brand"
+                        tooltipTitle="Brand"
                         tooltipOpen
                         onClick={handleBrandOpen}
                     />
                     <SpeedDialAction
                         icon={<PlaylistAddCircleIcon />}
-                        tooltipTitle="Add Product"
+                        tooltipTitle="Product"
                         tooltipOpen
                         onClick={handleInventoryOpen}
                     />
@@ -298,7 +298,6 @@ export default function AddInventory() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleInventoryClose}>Cancel</Button>
-                    <Button type="submit">Subscribe</Button>
                 </DialogActions>
             </Dialog>
             {/* Inventory Add Form Ended */}
