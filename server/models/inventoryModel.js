@@ -1,33 +1,29 @@
 import mongoose from "mongoose";
 
 const inventorySchema = new mongoose.Schema({
-    productName: {
+    name: {
         type: String,
         required: true
     },
-    productCategory: {
+    category: {
         type: String,
         required: true
     },
-    productPrice: {
-        type: Number,
-        required: true
-    },
-    productWeight: {
-        type: Number,
-        required: true
-    },
-    productQuantity: {
-        type: Number,
-        required: true
-    },
-    productImage: {
+    brand: {
         type: String
+    },
+    weight: {
+        type: Number,
+    },
+    quantity: {
+        type: Number,
+    },
+    cft: {
+        type: Number,
     },
     hsnCode: {
         type: String,
         required: true
-
     }
 });
 
