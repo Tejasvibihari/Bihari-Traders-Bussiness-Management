@@ -69,10 +69,10 @@ export default function Home() {
                                             <div className='mt-1 inline-block text-2xl leading-tight  font-semibold text-black text-center items-center justify-center py-7 px-3'>4545</div>
                                         </div>
                                         <div className='mt-2 text-gray-900'>
-                                            <div className='flex font-semibold text-lg whitespace-nowrap'>Iron invoice: 45</div>
-                                            <div className='flex font-semibold text-lg whitespace-nowrap'>Chemical invoice: 45</div>
-                                            <div className='flex font-semibold text-lg whitespace-nowrap'>Stone invoice: 45</div>
-                                            <div className='flex font-semibold text-lg whitespace-nowrap'>Cement invoice: 45</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Iron invoice: 45</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Chemical invoice: 45</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Stone invoice: 45</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Cement invoice: 45</div>
                                         </div>
                                     </div>
                                 </div>

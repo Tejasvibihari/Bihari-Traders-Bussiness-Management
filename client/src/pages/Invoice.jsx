@@ -26,24 +26,24 @@ export default function Invoice() {
             <Dashboard>
                 <Paper elevation={3} sx={{ padding: 3 }} >
                     <div className='flex flex-row items-center gap-1'>
-                        <span><FilterAltIcon /></span><div className='text-black font-serif text-lg'>Filter</div>
+                        <span><FilterAltIcon /></span><div className='text-black font-[montserrat] text-lg'>Filter</div>
                     </div>
                     <div className='flex flex-row gap-4'>
                         <div className='w-full'>
-                            <label className='text-lg'>Name<span className="text-red-700">*</span></label>
-                            <input type='text' name='to' placeholder='To M/s' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
+                            <label className='text-lg font-[montserrat]'>Name<span className="text-red-700">*</span></label>
+                            <input type='text' name='to' placeholder='To M/s' className='w-full p-2 my-2 border border-gray-300 text-lg font-[montserrat]' required />
                         </div>
                         <div className='w-full'>
-                            <label className='text-lg'>Date From<span className="text-red-700">*</span></label>
-                            <input type='text' name='to' placeholder='To M/s' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
+                            <label className='text-lg font-[montserrat]'>Date From<span className="text-red-700">*</span></label>
+                            <input type='text' name='to' placeholder='To M/s' className='w-full p-2 my-2 border border-gray-300 text-lg font-[montserrat]' required />
                         </div>
                         <div className='w-full'>
-                            <label className='text-lg'>Date To<span className="text-red-700">*</span></label>
-                            <input type='text' name='to' placeholder='To M/s' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
+                            <label className='text-lg font-[montserrat]'>Date To<span className="text-red-700">*</span></label>
+                            <input type='text' name='to' placeholder='To M/s' className='w-full p-2 my-2 border border-gray-300 text-lg font-[montserrat]' required />
                         </div>
                         <div className='w-full'>
-                            <label className='text-lg'>Particulars<span className="text-red-700">*</span></label>
-                            <input type='text' name='to' placeholder='To M/s' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
+                            <label className='text-lg font-[montserrat]'>Particulars<span className="text-red-700">*</span></label>
+                            <input type='text' name='to' placeholder='To M/s' className='w-full p-2 my-2 border border-gray-300 text-lg font-[montserrat]' required />
                         </div>
                     </div>
 
