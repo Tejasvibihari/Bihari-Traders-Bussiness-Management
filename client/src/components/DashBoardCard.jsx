@@ -11,9 +11,9 @@ export default function DashBoardCard({ title, value, icon, dynamicColor }) {
             <div className={`w-80 flex flex-col ${dynamicColor} shadow-gray-600 shadow-2xl rounded-lg overflow-hidden relative`}>
                 <div className="p-6 flex flex-col justify-between">
                     <div>
-                        <div className="text-3xl font-semibold text-gray-900">{title}</div>
+                        <div className="text-3xl font-semibold text-gray-900 font-[montserrat]">{title}</div>
                         <div className='flex flex-row items-center justify-between'>
-                            <div className="mt-2 text-gray-900 text-2xl pr-4">{value}</div>
+                            <div className="mt-2 text-gray-900 text-2xl pr-4 font-[montserrat]">{value}</div>
                             <div className='mr-4'><img src={icon} alt="" className='w-20' /></div>
                         </div>
                     </div>
