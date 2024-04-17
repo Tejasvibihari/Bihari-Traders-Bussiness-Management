@@ -104,12 +104,12 @@ export default function AddInvoiceForm() {
         <>
             <Paper elevation={3} sx={{ padding: 3 }} >
                 <div className="text-black font-serif">
-                    <h1 className='my-2 text-lg text-orange-800'>Add Invoice</h1>
+                    <h1 className='my-2 text-lg text-orange-800 font-[montserrat]'>Add Invoice</h1>
                     <div>
                         <form>
                             <div className='flex flex-row gap-4'>
                                 <div className='w-full'>
-                                    <label className='text-lg'>Invoice No.<span className="text-red-700">*</span></label>
+                                    <label className='text-lg font-[montserrat]'>Invoice No.<span className="text-red-700">*</span></label>
                                     <input type='number' name='invoiceno' value={invoiceno} onChange={handleInputChange} placeholder='Invoice No.' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                                 </div>
                                 <div className='w-full'>
@@ -166,7 +166,21 @@ export default function AddInvoiceForm() {
                                 </div>
                             </div>
                             <div className='flex justify-end'>
-                                <button onClick={handleInvoiceSubmit} className='p-3 bg-black text-white hover:bg-white hover:text-black font-bold m-4 border hover:border-black' type="submit">Add Invoice</button>
+                                {/* <button onClick={handleInvoiceSubmit} className='p-3 bg-black text-white hover:bg-white hover:text-black font-bold m-4 border hover:border-black' type="submit">Add Invoice</button> */}
+                                <button onClick={handleInvoiceSubmit} className="relative inline-flex h-12 overflow-hidden p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                                    <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#fd1d1d_0%,#833ab4_50%,#fd1d1d_100%)]" />
+                                    <span className="inline-flex h-full w-full cursor-pointer items-center justify-center px-6 font-medium text-slate-200 transition-all backdrop-blur-3xl"
+                                        style={{
+                                            backgroundImage: 'linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)',
+                                            backgroundSize: '200% 100%',
+                                            transition: 'background-position 0.5s ease',
+                                        }}
+                                        onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
+                                        onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
+                                    >
+                                        Add Invoice
+                                    </span>
+                                </button>
                             </div>
                         </form>
                     </div>

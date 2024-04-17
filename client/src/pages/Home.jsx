@@ -64,15 +64,15 @@ export default function Home() {
                                         <img className='h-48 w-full  object-cover md:w-48' src={Icon} alt='Invoice icon' />
                                     </div>
                                     <div className='p-8 flex flex-row gap-4'>
-                                        <div>
-                                            <div className='uppercase tracking-wide text-lg font-extrabold'>Total invoice</div>
-                                            <div className='mt-1 text-2xl  leading-tight font-semibold text-black text-center flex items-center justify-center py-7'>4545</div>
+                                        <div className=''>
+                                            <div className='inline-block text-lg uppercase tracking-wide font-extrabold font-[montserrat]'>Total invoice</div>
+                                            <div className='mt-1 inline-block text-2xl leading-tight  font-semibold text-black text-center items-center justify-center py-7 px-3'>4545</div>
                                         </div>
                                         <div className='mt-2 text-gray-900'>
-                                            <div className='font-semibold text-lg'>Iron invoice: 45</div>
-                                            <div className='font-semibold text-lg'>Chemical invoice: 45</div>
-                                            <div className='font-semibold text-lg'>Stone invoice: 45</div>
-                                            <div className='font-semibold text-lg'>Cement invoice: 45</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap'>Iron invoice: 45</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap'>Chemical invoice: 45</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap'>Stone invoice: 45</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap'>Cement invoice: 45</div>
                                         </div>
                                     </div>
                                 </div>
