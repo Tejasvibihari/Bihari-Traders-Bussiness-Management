@@ -5,11 +5,19 @@ import User from "../models/userModel.js";
 // Path: Bihari%20Traders%20Bussiness%20Management/server/controllers/inventoryController.js
 
 export const addInventory = async (req, res) => {
-    const { productName, productCategory, productPrice, productWeight, productQuantity, productImage, hsnCode } = req.body;
+    const { name, category, brand, weight, quantity, cft, hsnCode } = req.body;
     try {
-        const newInventory = new Inventory({ productName, productCategory, productPrice, productWeight, productQuantity, productImage, hsnCode });
+        const newInventory = new Inventory({
+            name,
+            category,
+            brand,
+            weight,
+            quantity,
+            cft,
+            hsnCode
+        });
         await newInventory.save();
-        res.status(201).json(newInventory);
+        res.status(201).json({ newInventory, message: "Product Added to Inventory successfully" });
     } catch (error) {
         res.status(409).json({ message: error.message });
     }

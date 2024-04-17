@@ -1,8 +1,10 @@
-import { otpGeneration, updateInventory } from '../controllers/inventoryController.js';
+import { otpGeneration, updateInventory, addInventory } from '../controllers/inventoryController.js';
 import express from 'express';
 
 const router = express.Router();
 
+
+router.post('/addinventory', addInventory);
 router.post('/otp', otpGeneration);
 router.post('/updateinventory', updateInventory);
 
