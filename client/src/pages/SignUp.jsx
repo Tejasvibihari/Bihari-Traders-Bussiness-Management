@@ -21,7 +21,7 @@ export default function SignUp() {
                 {
                     haveAccount ?
                         <div className='flex items-center justify-center text-black mb-5 px-3 '>
-                            <p className='font-bold'>Dont Have Account ?</p>
+                            <p className='font-bold'>Don&apos;t Have Account ?</p>
                             <div onClick={toggleHaveAccount}
                                 className='flex px-3 underline cursor-pointer'
                             >

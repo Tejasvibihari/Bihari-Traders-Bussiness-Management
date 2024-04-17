@@ -103,7 +103,7 @@ export default function AddInvoiceForm() {
     return (
         <>
             <Paper elevation={3} sx={{ padding: 3 }} >
-                <div className="text-black font-serif">
+                <div className="text-black font-[montserrat]">
                     <h1 className='my-2 text-lg text-orange-800 font-[montserrat]'>Add Invoice</h1>
                     <div>
                         <form>
@@ -113,25 +113,25 @@ export default function AddInvoiceForm() {
                                     <input type='number' name='invoiceno' value={invoiceno} onChange={handleInputChange} placeholder='Invoice No.' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                                 </div>
                                 <div className='w-full'>
-                                    <label className='text-lg'>Date<span className="text-red-700">*</span></label>
+                                    <label className='text-lg font-[montserrat]'>Date<span className="text-red-700">*</span></label>
                                     <input type='date' name='date' value={date} onChange={handleInputChange} placeholder='Date' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                                 </div>
                                 <div className='w-full'>
-                                    <label className='text-lg'>GSTIN<span className="text-red-700"></span></label>
+                                    <label className='text-lg font-[montserrat]'>GSTIN<span className="text-red-700"></span></label>
                                     <input type='text' name='gstin' value={gstin} onChange={handleInputChange} placeholder='GSTIN' className='w-full p-2 my-2 border border-gray-300 text-lg' />
                                 </div>
                                 <div className='w-full'>
-                                    <label className='text-lg'>Aadhar No.<span className="text-red-700"></span></label>
+                                    <label className='text-lg font-[montserrat]'>Aadhar No.<span className="text-red-700"></span></label>
                                     <input type='number' name='aadhar' value={aadhar} onChange={handleInputChange} placeholder='Adhar' className='w-full p-2 my-2 border border-gray-300 text-lg' />
                                 </div>
                             </div>
                             <div className='flex flex-row gap-4'>
                                 <div className='w-full'>
-                                    <label className='text-lg'>To M/s<span className="text-red-700">*</span></label>
+                                    <label className='text-lg font-[montserrat]'>To M/s<span className="text-red-700">*</span></label>
                                     <input type='text' name='to' value={to} onChange={handleInputChange} placeholder='To M/s' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                                 </div>
                                 <div className='w-full'>
-                                    <label className='text-lg'>Address<span className="text-red-700">*</span></label>
+                                    <label className='text-lg font-[montserrat]'>Address<span className="text-red-700">*</span></label>
                                     <input type='text' name='address' value={address} onChange={handleInputChange} placeholder='Address' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                                 </div>
                                 <div className='w-full'>
@@ -153,21 +153,21 @@ export default function AddInvoiceForm() {
                             </div>
                             <div className='flex flex-row gap-4'>
                                 <div className='w-full'>
-                                    <label className='text-lg'>Quantity<span className="text-red-700">*</span></label>
+                                    <label className='text-lg font-[montserrat]'>Quantity<span className="text-red-700">*</span></label>
                                     <input type='number' name='quantity' value={quantity} onChange={handleInputChange} placeholder='Quantity' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                                 </div>
                                 <div className='w-full'>
-                                    <label className='text-lg'>Rate<span className="text-red-700">*</span></label>
+                                    <label className='text-lg font-[montserrat]'>Rate<span className="text-red-700">*</span></label>
                                     <input type='number' name='rate' value={rate} onChange={handleInputChange} placeholder='Rate' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                                 </div>
                                 <div className='w-full'>
-                                    <label className='text-lg'>Amount<span className="text-red-700">*</span></label>
+                                    <label className='text-lg font-[montserrat]'>Amount<span className="text-red-700">*</span></label>
                                     <input type='number' name='amount' value={amount} onChange={handleInputChange} placeholder='Amount' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                                 </div>
                             </div>
                             <div className='flex justify-end'>
                                 {/* <button onClick={handleInvoiceSubmit} className='p-3 bg-black text-white hover:bg-white hover:text-black font-bold m-4 border hover:border-black' type="submit">Add Invoice</button> */}
-                                <button onClick={handleInvoiceSubmit} className="relative inline-flex h-12 overflow-hidden p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                                <button onClick={handleInvoiceSubmit} className="relative inline-flex h-12 overflow-hidden p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 font-[montserrat]">
                                     <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#fd1d1d_0%,#833ab4_50%,#fd1d1d_100%)]" />
                                     <span className="inline-flex h-full w-full cursor-pointer items-center justify-center px-6 font-medium text-slate-200 transition-all backdrop-blur-3xl"
                                         style={{
