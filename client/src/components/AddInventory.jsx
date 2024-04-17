@@ -17,6 +17,14 @@ import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
 import DomainAddIcon from '@mui/icons-material/DomainAdd';
+import axios from 'axios';
+
+
+
+
+
+
+
 export default function AddInventory() {
     // Speed Dial  Open Close
     const [speedDialopen, setSpeedDialOpen] = useState(false);
@@ -38,6 +46,7 @@ export default function AddInventory() {
     const handleBrandClose = () => {
         setBrandOpen(false);
     };
+    // Inventory Form State
     const [productName, setProductName] = useState("");
     const [hsnCode, setHsnCode] = useState("");
     const [category, setCategory] = useState("");
@@ -45,15 +54,45 @@ export default function AddInventory() {
     const [weight, setWeight] = useState("");
     const [quantity, seQuantity] = useState("");
 
-    const cementBrand = ["Ultratech", "Ambuja", "ACC", "Birla Gold"];
-    const ironBrand = ["Tata", "Sail", "Jindal", "Rathi", "Kamdhenu"];
-    const stoneBrand = ["Gaya", "Kodarma", "Bhagalpur", "Munger", "Buxar"];
+    // Brand Form State
+    const [brandName, setBrandName] = useState("");
+    const [brandCategory, setBrandCategory] = useState("");
+
+    //Brand Form Handlling 
+    const handleBrandChange = (event) => {
+        setBrandName((event.target.value).charAt(0).toUpperCase() + event.target.value.slice(1));
+    }
+    const handleBrandCategoryChange = (event) => {
+        setBrandCategory(event.target.value);
+    }
+    const handleBrandSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const brandFormData = { brandName: brandName, brandCategory: brandCategory }
+            console.log(brandFormData);
+            const brandData = await axios.post("/api/inventory/brand/createbrand", brandFormData);
+            console.log(brandData);
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
     const handleChange = (event) => {
         setCategory(event.target.value);
     }
+
+
+
+
+
+
     useEffect(() => {
         console.log(category)
-    }, [category])
+        console.log(brandName);
+        console.log(brandCategory);
+    }, [category, brandName, brandCategory])
     return (
         <div>
             <Box sx={{ height: 330, transform: 'translateZ(0px)', flexGrow: 1 }}>
@@ -233,13 +272,12 @@ export default function AddInventory() {
                     // },
                 }}
             >
-                <DialogTitle>Add Brand To Inventory</DialogTitle>
+                <DialogTitle className='text-center'>Add Brand To Inventory</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We
-                        will send updates occasionally.
+                        Add Name of the Brand to the Inventory id not exists
                     </DialogContentText>
-                    <Box component="form" noValidate sx={{ mt: 3 }}>
+                    <Box component="form" onSubmit={handleBrandSubmit} noValidate sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={12}>
                                 <TextField
@@ -250,7 +288,29 @@ export default function AddInventory() {
                                     id="brandName"
                                     label="Brand Name"
                                     autoFocus
+                                    onChange={handleBrandChange}
                                 />
+                            </Grid>
+                            <Grid item xs={12} sm={12}>
+                                <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-helper-label"
+                                    id="demo-simple-select-helper"
+                                    fullWidth
+                                    label="Category"
+                                    name="brandCategory"
+                                    onChange={handleBrandCategoryChange}
+                                    placeholder='Category'
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value="Cement">Cement</MenuItem>
+                                    <MenuItem value="Iron">Iron</MenuItem>
+                                    <MenuItem value="5/8">5/8</MenuItem>
+                                    <MenuItem value="3/4">3/4</MenuItem>
+                                    <MenuItem value="Chemicals">Chemicals</MenuItem>
+                                </Select>
                             </Grid>
                         </Grid>
                         <Button

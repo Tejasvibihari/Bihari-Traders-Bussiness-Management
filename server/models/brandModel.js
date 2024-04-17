@@ -4,6 +4,10 @@ const brandSchema = new mongoose.Schema({
     brandName: {
         type: String,
         required: true
+    },
+    brandCategory: {
+        type: String,
+        required: true
     }
 })
 
