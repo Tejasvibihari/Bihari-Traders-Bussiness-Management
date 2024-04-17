@@ -1,6 +1,3 @@
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -14,10 +11,33 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
-
+import Backdrop from '@mui/material/Backdrop';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
+import DomainAddIcon from '@mui/icons-material/DomainAdd';
 export default function AddInventory() {
-
-    const [open, setOpen] = useState(false);
+    // Speed Dial  Open Close
+    const [speedDialopen, setSpeedDialOpen] = useState(false);
+    const handleSpeedDialOpen = () => setSpeedDialOpen(true);
+    const handleSpeedDialClose = () => setSpeedDialOpen(false);
+    // Inventory Form Open Close 
+    const [Inventoryopen, setInventoryOpen] = useState(false);
+    const handleInventoryOpen = () => {
+        setInventoryOpen(true);
+    };
+    const handleInventoryClose = () => {
+        setInventoryOpen(false);
+    };
+    // Brand Form Open Close 
+    const [Brandopen, setBrandOpen] = useState(false);
+    const handleBrandOpen = () => {
+        setBrandOpen(true);
+    };
+    const handleBrandClose = () => {
+        setBrandOpen(false);
+    };
     const [productName, setProductName] = useState("");
     const [hsnCode, setHsnCode] = useState("");
     const [category, setCategory] = useState("");
@@ -31,26 +51,38 @@ export default function AddInventory() {
     const handleChange = (event) => {
         setCategory(event.target.value);
     }
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
     useEffect(() => {
         console.log(category)
     }, [category])
     return (
         <div>
-            <Tooltip title="Add Product">
-                <IconButton onClick={handleClickOpen}>
-                    <AddCircleRoundedIcon sx={{ fontSize: 60 }} />
-                </IconButton>
-            </Tooltip>
+            <Box sx={{ height: 330, transform: 'translateZ(0px)', flexGrow: 1 }}>
+                <Backdrop open={open} />
+                <SpeedDial
+                    ariaLabel="SpeedDial tooltip example"
+                    sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                    icon={<SpeedDialIcon />}
+                    onClose={handleSpeedDialClose}
+                    onOpen={handleSpeedDialOpen}
+                    open={speedDialopen}
+                >
+                    <SpeedDialAction
+                        icon={<DomainAddIcon />}
+                        tooltipTitle="Add Brand"
+                        tooltipOpen
+                        onClick={handleBrandOpen}
+                    />
+                    <SpeedDialAction
+                        icon={<PlaylistAddCircleIcon />}
+                        tooltipTitle="Add Product"
+                        tooltipOpen
+                        onClick={handleInventoryOpen}
+                    />
+                </SpeedDial>
+            </Box>
             <Dialog
-                open={open}
-                onClose={handleClose}
+                open={Inventoryopen}
+                onClose={handleInventoryClose}
                 PaperProps={{
                     component: 'form',
                     onSubmit: (event) => {
@@ -59,7 +91,7 @@ export default function AddInventory() {
                         const formJson = Object.fromEntries(formData.entries());
                         const email = formJson.email;
                         console.log(email);
-                        handleClose();
+                        handleInventoryClose();
                     },
                 }}
             >
@@ -180,8 +212,59 @@ export default function AddInventory() {
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={handleInventoryClose}>Cancel</Button>
                     <Button type="submit">Subscribe</Button>
+                </DialogActions>
+            </Dialog>
+            {/* Inventory Add Form Ended */}
+            {/* Brand Add Form  */}
+            <Dialog
+                open={Brandopen}
+                onClose={handleBrandClose}
+                PaperProps={{
+                    // component: 'form',
+                    // onSubmit: (event) => {
+                    // event.preventDefault();
+                    // const formData = new FormData(event.currentTarget);
+                    // const formJson = Object.fromEntries(formData.entries());
+                    // const email = formJson.email;
+                    // console.log(email);
+                    // handleBrandClose();
+                    // },
+                }}
+            >
+                <DialogTitle>Add Brand To Inventory</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        To subscribe to this website, please enter your email address here. We
+                        will send updates occasionally.
+                    </DialogContentText>
+                    <Box component="form" noValidate sx={{ mt: 3 }}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12} sm={12}>
+                                <TextField
+                                    autoComplete="Brand Name"
+                                    name="brandName"
+                                    required
+                                    fullWidth
+                                    id="brandName"
+                                    label="Brand Name"
+                                    autoFocus
+                                />
+                            </Grid>
+                        </Grid>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Add Brand
+                        </Button>
+                    </Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleBrandClose}>Cancel</Button>
                 </DialogActions>
             </Dialog>
         </div >
