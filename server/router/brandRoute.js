@@ -4,6 +4,6 @@ import { createBrand, getBrand } from '../controllers/brandController.js';
 const router = express.Router();
 
 router.post('/createbrand', createBrand);
-router.get('/getbrand', getBrand)
+router.post('/getbrand', getBrand)
 
 export default router;

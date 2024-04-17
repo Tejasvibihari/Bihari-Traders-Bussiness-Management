@@ -6,7 +6,10 @@ export default function InventoryCard() {
             <div>
                 <Grow in="load">
                     <div className='flex flex-col max-w-64 h-64 border p-4 shadow-md'>
-                        <div className="font-[montserrat] font-bold text-xl mb-4">Product Name</div>
+                        <div className="font-[montserrat] font-bold text-xl mb-1">Product Name</div>
+                        <div className='text-sm text-gray-600'>
+                            Brand Name
+                        </div>
                         <div className="font-[montserrat] font-semibold text-slate-500 mt-20">Quantity - 987987</div>
                         <div className='font-[montserrat] text-slate-500 font-semibold mb-2'>
                             Bag 7889

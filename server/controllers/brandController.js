@@ -12,7 +12,7 @@ export const createBrand = async (req, res) => {
         });
 
         await createBrand.save();
-        res.json({ createBrand, message: "Brand Created Successfully" })
+        res.json({ message: "Brand Created Successfully" })
     } catch (error) {
         console.log(error)
         res.json({ message: error.message });
@@ -20,9 +20,10 @@ export const createBrand = async (req, res) => {
 }
 
 export const getBrand = async (req, res) => {
+    const { category } = req.body;
     try {
-        const brands = await Brand.find();
-        res.json(brands)
+        const brandData = await Brand.find({ brandCategory: category });
+        res.json(brandData)
     } catch (error) {
         console.log(error)
     }

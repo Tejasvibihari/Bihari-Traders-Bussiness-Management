@@ -18,20 +18,47 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
 import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import axios from 'axios';
-
-
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 
 
 
 
 export default function AddInventory() {
-    // Speed Dial  Open Close
+    // SnackBar State 
+    const [snackBar, setSnackBar] = useState(false);
+    // Inventory State 
+    const [Inventoryopen, setInventoryOpen] = useState(false);
+    //Speed Dial State 
     const [speedDialopen, setSpeedDialOpen] = useState(false);
+    //Brand Form Open Close State
+    const [Brandopen, setBrandOpen] = useState(false);
+    const [brandMsg, setBrandMsg] = useState("");
+    // Brand Form State
+    const [brandName, setBrandName] = useState("");
+    const [brandCategory, setBrandCategory] = useState("");
+    //Inventory Form State
+    const [formBrand, setFormBrand] = useState([]);
+
+
+    const handleSnackBarOpen = () => {
+        setSnackBar(true);
+    };
+
+    const handleSnackBarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnackBar(false);
+        setBrandMsg("");
+    };
+
+    // Speed Dial  Open Close
     const handleSpeedDialOpen = () => setSpeedDialOpen(true);
     const handleSpeedDialClose = () => setSpeedDialOpen(false);
     // Inventory Form Open Close 
-    const [Inventoryopen, setInventoryOpen] = useState(false);
     const handleInventoryOpen = () => {
         setInventoryOpen(true);
     };
@@ -39,11 +66,10 @@ export default function AddInventory() {
         setInventoryOpen(false);
     };
     // Brand Form Open Close 
-    const [Brandopen, setBrandOpen] = useState(false);
     const handleBrandOpen = () => {
         setBrandOpen(true);
     };
-    const handleBrandClose = () => {
+    const handleBrandFormClose = () => {
         setBrandOpen(false);
     };
     // Inventory Form State
@@ -53,11 +79,6 @@ export default function AddInventory() {
     const [brand, setBrand] = useState("");
     const [weight, setWeight] = useState("");
     const [quantity, seQuantity] = useState("");
-
-    // Brand Form State
-    const [brandName, setBrandName] = useState("");
-    const [brandCategory, setBrandCategory] = useState("");
-
     //Brand Form Handlling 
     const handleBrandChange = (event) => {
         setBrandName((event.target.value).charAt(0).toUpperCase() + event.target.value.slice(1));
@@ -69,10 +90,10 @@ export default function AddInventory() {
         event.preventDefault();
         try {
             const brandFormData = { brandName: brandName, brandCategory: brandCategory }
-            console.log(brandFormData);
             const brandData = await axios.post("/api/inventory/brand/createbrand", brandFormData);
-            console.log(brandData);
-
+            setBrandMsg(brandData.data.message)
+            handleBrandFormClose()
+            handleSnackBarOpen()
         } catch (error) {
             console.log(error)
         }
@@ -83,8 +104,16 @@ export default function AddInventory() {
         setCategory(event.target.value);
     }
 
-
-
+    const getBrand = async () => {
+        try {
+            const categoryReq = { category: category }
+            const brands = await axios.post("/api/inventory/brand/getbrand", categoryReq);
+            console.log(brands)
+            setFormBrand(brands.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
 
 
@@ -92,9 +121,29 @@ export default function AddInventory() {
         console.log(category)
         console.log(brandName);
         console.log(brandCategory);
-    }, [category, brandName, brandCategory])
+        console.log(brandMsg)
+        console.log(formBrand)
+    }, [category, brandName, brandCategory, brandMsg, formBrand])
     return (
         <div>
+            {/* Notification Component  */}
+            <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                open={snackBar}
+                onClose={handleSnackBarClose}
+
+
+            >
+                <Alert
+                    onClose={handleSnackBarClose}
+                    severity="success"
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    {brandMsg === "Brand Created Successfully" ? brandMsg : null}
+                </Alert>
+            </Snackbar>
+
             <Box sx={{ height: 330, transform: 'translateZ(0px)', flexGrow: 1 }}>
                 <Backdrop open={open} />
                 <SpeedDial
@@ -172,6 +221,7 @@ export default function AddInventory() {
                                     name="category"
                                     onChange={handleChange}
                                     placeholder='Category'
+                                    onBlur={getBrand}
                                 >
                                     <MenuItem value="">
                                         <em>None</em>
@@ -191,16 +241,12 @@ export default function AddInventory() {
                                     fullWidth
                                     label="Brand"
                                     name="brand"
-
                                     placeholder='Brand'
                                 >
                                     <MenuItem value="">
                                         <em>None</em>
                                     </MenuItem>
-                                    {category === "Cement" ? cementBrand.map((brand, i) => (<MenuItem key={i} value={brand}>{brand}</MenuItem>)) : null}
-                                    {category === "Iron" ? ironBrand.map((brand, i) => (<MenuItem key={i} value={brand}>{brand}</MenuItem>)) : null}
-                                    {category === "5/8" || category === "3/4" ? stoneBrand.map((brand, i) => (<MenuItem key={i} value={brand}>{brand}</MenuItem>)) : null}
-
+                                    {formBrand.map((brand, i) => <MenuItem key={i} value={brand.brandName}>{brand.brandName}</MenuItem>)}
                                 </Select>
                             </Grid>
                             <Grid item xs={6}>
@@ -259,7 +305,7 @@ export default function AddInventory() {
             {/* Brand Add Form  */}
             <Dialog
                 open={Brandopen}
-                onClose={handleBrandClose}
+                onClose={handleBrandFormClose}
                 PaperProps={{
                     // component: 'form',
                     // onSubmit: (event) => {
@@ -324,7 +370,7 @@ export default function AddInventory() {
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleBrandClose}>Cancel</Button>
+                    <Button onClick={handleBrandFormClose}>Cancel</Button>
                 </DialogActions>
             </Dialog>
         </div >
