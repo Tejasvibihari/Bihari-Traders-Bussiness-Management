@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import invoiceRoute from './router/invoiceRoute.js';
 import userRoute from './router/userRoute.js'
 import inventoryRoute from './router/inventoryRoute.js';
+import brandRouter from './router/brandRoute.js'
 
 const app = express();
 const port = 3000;
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/user/', userRoute);
 app.use('/api/invoice', invoiceRoute);
 app.use('/api/inventory', inventoryRoute);
+app.use('/api/inventory/brand', brandRouter);
 
 app.listen(port, (req, res) => {
     console.log(`Connected to PORT ${port}...`)
