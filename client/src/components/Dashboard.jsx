@@ -21,10 +21,9 @@ import InventoryRoundedIcon from '@mui/icons-material/InventoryRounded';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import Avatar from '@mui/material/Avatar';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import InventoryIcon from '@mui/icons-material/Inventory';
-
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // Redux 
@@ -111,6 +110,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer({ children }) {
+    const user = useSelector(state => state.user.currentUser);
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -125,43 +125,44 @@ export default function MiniDrawer({ children }) {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar position="fixed" open={open}>
-                <Toolbar className='bg-[#73E2A7]'>
+                <Toolbar className='bg-gradient-to-r from-black to-[#130F40]'>
                     <IconButton
-                        color="inherit"
+                        color="white"
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
                         edge="start"
                         sx={{
                             marginRight: 5,
                             ...(open && { display: 'none' }),
+                            color: 'white',
                         }}
                     >
-                        <MenuIcon />
+                        <MenuIcon sx={{ color: 'white' }} />
                     </IconButton>
-                    <Typography className='text-black' variant="h6" noWrap component="div">
-                        Bihari Traders
+                    <Typography className='text-white' variant="h6" noWrap component="div">
+                        {user.bussinessName}
                     </Typography>
                     <div className='flex ms-auto'>
                         <IconButton aria-label="cart">
                             <StyledBadge badgeContent={19} color="secondary">
-                                <ShoppingCartIcon />
+                                <ShoppingCartIcon sx={{ color: 'white' }} />
                             </StyledBadge>
                         </IconButton>
                     </div>
                 </Toolbar>
             </AppBar>
-            <Drawer className='bg-[#73E2A7]' variant="permanent" open={open}>
-                <DrawerHeader className='bg-[#73E2A7]'>
+            <Drawer className='bg-gradient-to-r from-black to-[#130F40] ' variant="permanent" open={open}>
+                <DrawerHeader className='bg-gradient-to-r from-black to-[#130F40]'>
                     <div className="mx-auto">
-                        <span className='text-black text-lg font-semibold'>Hello</span>
+                        <span className='text-white text-lg font-semibold'>Hello {user.name} </span>
                     </div>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={handleDrawerClose} sx={{ color: 'white' }} >
                         {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                    </IconButton>
+                    </IconButton  >
                 </DrawerHeader>
                 <Divider />
                 {/* Dasboard Menu Icon with Name */}
-                <List className='bg-[#73E2A7]'>
+                <List className='bg-gradient-to-r from-black to-[#130F40]'>
                     <Link to="/">
                         <ListItem disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
@@ -169,6 +170,7 @@ export default function MiniDrawer({ children }) {
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
+                                    color: 'white',
                                 }}
                             >
                                 <ListItemIcon
@@ -176,6 +178,7 @@ export default function MiniDrawer({ children }) {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: 'white',
                                     }}
                                 >
                                     <DashboardIcon />
@@ -185,12 +188,13 @@ export default function MiniDrawer({ children }) {
                         </ListItem>
                     </Link>
                     <Link to="/invoice">
-                        <ListItem className='hover:bg-[#73E2A7]' disablePadding sx={{ display: 'block' }}>
+                        <ListItem className='' disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
+                                    color: 'white',
                                 }}
                             >
                                 <ListItemIcon
@@ -198,6 +202,7 @@ export default function MiniDrawer({ children }) {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: 'white',
                                     }}
                                 >
                                     <InventoryRoundedIcon />
@@ -213,6 +218,7 @@ export default function MiniDrawer({ children }) {
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
+                                    color: 'white',
                                 }}
                             >
                                 <ListItemIcon
@@ -220,6 +226,7 @@ export default function MiniDrawer({ children }) {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: 'white',
                                     }}
                                 >
                                     <PostAddIcon />
@@ -235,6 +242,7 @@ export default function MiniDrawer({ children }) {
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
+                                    color: 'white',
                                 }}
                             >
                                 <ListItemIcon
@@ -242,6 +250,7 @@ export default function MiniDrawer({ children }) {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: 'white',
                                     }}
                                 >
                                     <InventoryIcon />
@@ -252,7 +261,7 @@ export default function MiniDrawer({ children }) {
                     </Link>
                 </List>
                 <Divider />
-                <List className='bg-[#73E2A7]'>
+                <List className='bg-gradient-to-r from-black to-[#130F40]'>
                     <Link to="/profile">
                         <ListItem disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
@@ -260,6 +269,7 @@ export default function MiniDrawer({ children }) {
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
                                     px: 2.5,
+                                    color: 'white',
                                 }}
                             >
                                 <ListItemIcon
@@ -267,6 +277,7 @@ export default function MiniDrawer({ children }) {
                                         minWidth: 0,
                                         mr: open ? 3 : 'auto',
                                         justifyContent: 'center',
+                                        color: 'white',
                                     }}
                                 >
                                     <ManageAccountsIcon />
