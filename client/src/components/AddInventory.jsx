@@ -20,12 +20,17 @@ import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { useSelector, useDispatch } from 'react-redux';
+import { addInventoryError, addInventoryStart, addInventorySuccess } from '../app/inventory/inventorySlice';
 
 
 
 
 
 export default function AddInventory() {
+    const user = useSelector(state => state.user)
+    const inventory = useSelector(state => state.inventory)
+    const dispatch = useDispatch()
     // SnackBar State 
     const [snackBar, setSnackBar] = useState(false);
     // Inventory State 
@@ -48,11 +53,20 @@ export default function AddInventory() {
     const [weight, setWeight] = useState("");
     const [quantity, setQuantity] = useState("");
     const [cft, setCft] = useState("");
+    const [userId, setUserId] = useState("");
     const [inventoryMsg, setInventoryMsg] = useState("");
+
+
 
 
     const handleSnackBarOpen = () => {
         setSnackBar(true);
+        setName("");
+        setHsnCode("");
+        setCategory("");
+        setBrand("");
+        setWeight("");
+        setCft("");
     };
 
     const handleSnackBarClose = (event, reason) => {
@@ -106,6 +120,7 @@ export default function AddInventory() {
     const handleInventorySubmit = async (event) => {
         event.preventDefault();
         try {
+            dispatch(addInventoryStart())
             const inventoryFormData = {
                 name: name,
                 hsnCode: hsnCode,
@@ -113,14 +128,18 @@ export default function AddInventory() {
                 brand: brand,
                 weight: weight,
                 quantity: quantity,
-                cft: cft
+                cft: cft,
+                userId: userId
             }
             const inventoryData = await axios.post("/api/inventory/addinventory", inventoryFormData);
             setInventoryMsg(inventoryData.data.message)
             handleInventoryClose()
             handleSnackBarOpen()
+            console.log(inventoryData.data)
+            dispatch(addInventorySuccess(inventoryData.data.newInventory))
         } catch (error) {
             console.log(error)
+            dispatch(addInventoryError(error.response.data.message))
         }
     }
 
@@ -140,14 +159,19 @@ export default function AddInventory() {
     const WEIGHT_CONSTANT = 50; // Replace with a meaningful name and value
     useEffect(() => {
         const calculateQuantity = () => {
-            const quantity = weight / WEIGHT_CONSTANT;
-            setQuantity(quantity);
+            if (category === "Cement") {
+                const quantity = weight / WEIGHT_CONSTANT;
+                setQuantity(quantity);
+            } else {
+                setQuantity("");
+            }
         };
 
         if (weight) {
             calculateQuantity();
         }
-    }, [category, brandName, brandCategory, brandMsg, formBrand, weight]);
+        setUserId(user.currentUser._id)
+    }, [category, brandName, brandCategory, brandMsg, formBrand, weight, user.currentUser._id]);
 
     return (
         <div>
@@ -265,45 +289,56 @@ export default function AddInventory() {
                                     {formBrand.map((brand, i) => <MenuItem key={i} value={brand.brandName}>{brand.brandName}</MenuItem>)}
                                 </Select>
                             </Grid>
-                            <Grid item xs={6}>
-                                {category === "5/8" || category === "3/4" ? <TextField
-                                    required
-                                    fullWidth
-                                    id="cft"
-                                    label="CFT"
-                                    name="cft"
-                                    onChange={(event) => setCft(event.target.value)}
-                                /> : <TextField
-                                    required
-                                    fullWidth
-                                    id="weight"
-                                    label="Weight in (Kg)"
-                                    name="weight"
-                                    onChange={(event) => setWeight(event.target.value)}
-                                />}
-                            </Grid>
-                            <Grid item xs={6}>
-                                {category === "Cement" ?
+                            {category === "Cement" && (
+                                <>
+                                    <Grid item xs={6}>
+                                        <TextField
+                                            required
+                                            fullWidth
+                                            id="weight"
+                                            label="Weight in (Kg)"
+                                            name="weight"
+                                            onChange={(event) => setWeight(event.target.value)}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <TextField
+                                            required
+                                            fullWidth
+                                            name="quantity"
+                                            label="Quantity"
+                                            type="text"
+                                            id="quantity"
+                                            autoComplete="Quantity"
+                                            value={quantity}
+                                        />
+                                    </Grid>
+                                </>
+                            )}
+                            {category === "5/8" || category === "3/4" ? (
+                                <Grid item xs={6}>
                                     <TextField
                                         required
                                         fullWidth
-                                        name="quantity"
-                                        label="Quantity"
-                                        type="text"
-                                        id="quantity"
-                                        autoComplete="Quantity"
-                                        value={quantity}
-                                    /> : <TextField
+                                        id="cft"
+                                        label="CFT"
+                                        name="cft"
+                                        onChange={(event) => setCft(event.target.value)}
+                                    />
+                                </Grid>
+                            ) : null}
+                            {category === "Iron" && (
+                                <Grid item xs={6}>
+                                    <TextField
                                         required
                                         fullWidth
-                                        name="quantity"
-                                        label="Quantity"
-                                        type="text"
-                                        id="quantity"
-                                        disabled
-                                        autoComplete="Quantity"
-                                    />}
-                            </Grid>
+                                        id="weight"
+                                        label="Weight in (Kg)"
+                                        name="weight"
+                                        onChange={(event) => setWeight(event.target.value)}
+                                    />
+                                </Grid>
+                            )}
                         </Grid>
                         {/* Create product button */}
                         <div className="mt-3 w-full flex justify-center items-center">
@@ -318,7 +353,7 @@ export default function AddInventory() {
                                     onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                     onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                                 >
-                                    Create product
+                                    {inventory.loading ? "Creating Product..." : "Create Product"}
                                 </span>
                             </button>
                         </div>

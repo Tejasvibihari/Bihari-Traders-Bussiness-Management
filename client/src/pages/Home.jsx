@@ -8,8 +8,28 @@ import Icon from '/image/invoice1.gif'
 import Paper from '@mui/material/Paper';
 import Grow from '@mui/material/Grow';
 import SimpleLineChart from '../components/SimpleLineChart'
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { getInventorySuccess } from '../app/inventory/inventorySlice';
 
 export default function Home() {
+    const user = useSelector(state => state.user);
+    const dispatch = useDispatch()
+    useEffect(() => {
+        const getInventory = async () => {
+            try {
+                const userId = {
+                    userId: user.currentUser._id
+                }
+                const response = await axios.post('/api/inventory/getinventory', userId);
+                dispatch(getInventorySuccess(response.data))
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getInventory();
+    })
     return (
         <div>
             <Dashboard>

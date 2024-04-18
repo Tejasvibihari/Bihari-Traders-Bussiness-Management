@@ -24,6 +24,10 @@ const inventorySchema = new mongoose.Schema({
     hsnCode: {
         type: String,
         required: true
+    },
+    userId: {
+        type: String,
+        required: true
     }
 });
 

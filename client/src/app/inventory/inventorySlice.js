@@ -1,25 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const counterSlice = createSlice({
-    name: 'counter',
-    initialState: {
-        value: 0
-    },
+const initialState = {
+    inventory: [],
+    loading: false,
+    error: null,
+}
+export const inventorySlice = createSlice({
+    name: 'inventory',
+    initialState,
     reducers: {
-        increment: state => {
-           
-            state.value += 1
+        addInventoryStart: (state) => {
+            state.loading = true
         },
-        decrement: state => {
-            state.value -= 1
+        addInventorySuccess: (state, action) => {
+            state.loading = false
+            state.error = null
+            state.inventory.push(action.payload) // change this line
         },
-        incrementByAmount: (state, action) => {
-            state.value += action.payload
+        addInventoryError: (state, action) => {
+            state.loading = false
+            state.error = action.payload
+        },
+        getInventorySuccess: (state, action) => {
+            state.inventory = action.payload
         }
     }
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { addInventoryStart, addInventorySuccess, addInventoryError, getInventorySuccess } = inventorySlice.actions
 
-export default counterSlice.reducer
+export default inventorySlice.reducer

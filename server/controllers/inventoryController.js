@@ -5,7 +5,7 @@ import User from "../models/userModel.js";
 // Path: Bihari%20Traders%20Bussiness%20Management/server/controllers/inventoryController.js
 
 export const addInventory = async (req, res) => {
-    const { name, category, brand, weight, quantity, cft, hsnCode } = req.body;
+    const { name, category, brand, weight, quantity, cft, hsnCode, userId } = req.body;
     try {
         const newInventory = new Inventory({
             name,
@@ -14,7 +14,8 @@ export const addInventory = async (req, res) => {
             weight,
             quantity,
             cft,
-            hsnCode
+            hsnCode,
+            userId
         });
         await newInventory.save();
         res.status(201).json({ newInventory, message: "Product Added to Inventory successfully" });
@@ -24,8 +25,11 @@ export const addInventory = async (req, res) => {
 }
 
 export const getInventory = async (req, res) => {
+    const { userId } = req.body;
+    console.log(userId)
     try {
-        const inventory = await Inventory.find();
+        const inventory = await Inventory.find({ userId });
+        console.log(inventory)
         res.status(200).json(inventory);
     } catch (error) {
         res.status(404).json({ message: error.message });
