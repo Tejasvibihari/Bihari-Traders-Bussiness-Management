@@ -1,18 +1,25 @@
-
 import Grow from '@mui/material/Grow';
-export default function InventoryCard() {
+export default function InventoryCard({ productname, brand, weight, quantity, cft }) {
     return (
         <>
             <div>
                 <Grow in="load">
-                    <div className='flex flex-col max-w-64 h-64 border p-2 shadow-md'>
-                        <div className="font-[montserrat] font-bold text-xl mb-1">Product Name</div>
+                    <div className='flex flex-col my-4 w-64 h-64 border p-4 shadow-md'>
+                        <div className="font-[montserrat] font-bold text-xl mb-1">{productname}</div>
                         <div className='text-sm text-gray-600'>
-                            Brand Name
+                            {brand}
                         </div>
-                        <div className="font-[montserrat] font-semibold text-slate-500 mt-20">Quantity - 987987</div>
-                        <div className='font-[montserrat] text-slate-500 font-semibold mb-2'>
-                            Bag 7889
+                        <div style={{ minHeight: '100px' }}> {/* Set a fixed height here */}
+                            {weight && <div className='font-[montserrat] text-slate-500 mt-2 font-semibold mb-2'> {/* Reduce top margin here */}
+                                Weight:- {weight}
+                            </div>}
+                            {quantity &&
+                                <div className='font-[montserrat] text-slate-500 font-semibold mb-2'>
+                                    Bag:- {quantity}
+                                </div>}
+                            {cft && <div className='font-[montserrat] text-slate-500 mt-2 font-semibold mb-2'> {/* Reduce top margin here */}
+                                Cft:- {cft}
+                            </div>}
                         </div>
                         <div>
                             <img src="" className='w-10' />
@@ -34,11 +41,10 @@ export default function InventoryCard() {
                                     </span>
                                 </button>
                             </div>
-                            {/* hello */}
                         </div>
                     </div>
-                </Grow>
-            </div>
+                </Grow >
+            </div >
         </>
     )
 }
