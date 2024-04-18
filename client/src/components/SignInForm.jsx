@@ -4,27 +4,69 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { signInStart, signInSuccess, signInFailure } from '../app/user/userSlice';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+
 
 export default function SignInForm() {
+    const user = useSelector(state => state.user);
+    const loading = user.loading;
+    const [snackOpen, setSnackOpen] = useState(false);
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    // Snack Open Close
+    const handleSnackOpen = () => {
+        setSnackOpen(true);
+    };
+
+    const handleSnackClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnackOpen(false);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            dispatch(signInStart())
             const formData = { email, password };
             const response = await axios.post('/api/user/signin', formData);
             console.log(response.data)
+            dispatch(signInSuccess(response.data.existingUser))
+            navigate("/")
         } catch (error) {
-            console.log(error)
+            dispatch(signInFailure(error.response.data.message))
+            handleSnackOpen()
         }
     }
 
 
     return (
         <>
-            <div className='flex mx-auto justify-center items-center max-w-lg lg:py-20 py-12 font-[montserrat] '>
+            <div>
+                <Snackbar open={snackOpen} autoHideDuration={3000} onClose={handleSnackClose}>
+                    {user.error ? (
+                        <Alert
+                            onClose={handleSnackClose}
+                            severity="error"
+                            variant="filled"
+                            sx={{ width: '100%' }}
+                        >
+                            {user.error}
+                        </Alert>
+                    ) : null}
+                </Snackbar>
+            </div>
+            <div className='flex mx-auto justify-center items-center max-w-lg lg:pt-20 pb-4 pt-12 font-[montserrat] '>
                 <form onSubmit={handleSubmit} className='font-[montserrat]'>
                     <Typography component="h1" variant="h4" align="center" color="black" margin="" gutterBottom>
                         Sign In
@@ -44,7 +86,7 @@ export default function SignInForm() {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                Sing In
+                                {loading ? "Please Wait..." : "Sign In"}
                             </span>
                         </button>
                     </div>

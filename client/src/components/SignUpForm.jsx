@@ -32,7 +32,6 @@ export default function SignUpForm() {
 
         setSnackOpen(false);
     };
-    console.log(error)
     const handleSubmit = async (event) => {
         event.preventDefault();
         const formData = { name, email, password, bussinessName };
