@@ -41,7 +41,8 @@ export default function SignInForm() {
             const formData = { email, password };
             const response = await axios.post('/api/user/signin', formData);
             console.log(response.data)
-            dispatch(signInSuccess(response.data.existingUser))
+            dispatch(signInSuccess(response.data))
+            localStorage.setItem('token', response.data.token);
             navigate("/")
         } catch (error) {
             dispatch(signInFailure(error.response.data.message))
