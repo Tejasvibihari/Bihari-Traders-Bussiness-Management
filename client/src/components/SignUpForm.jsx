@@ -88,7 +88,7 @@ export default function SignUpForm() {
                             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#fd1d1d_0%,#833ab4_50%,#fd1d1d_100%)]" />
                             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center px-6 font-medium text-center  text-slate-200 transition-all backdrop-blur-3xl"
                                 style={{
-                                    backgroundImage: 'linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)',
+                                    backgroundImage: 'linear-gradient(110deg, #e63946,40%,#1e2631,55%,#000103)',
                                     backgroundSize: '200% 100%',
                                     transition: 'background-position 0.5s ease',
                                 }}
