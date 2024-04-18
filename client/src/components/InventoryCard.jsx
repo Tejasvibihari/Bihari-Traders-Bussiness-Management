@@ -1,29 +1,44 @@
 import Grow from '@mui/material/Grow';
-export default function InventoryCard({ productname, brand, weight, quantity, cft }) {
+import { Link } from "react-router-dom";
+
+export default function InventoryCard({ productname, brand, weight, quantity, cft, category, handleClick }) {
     return (
         <>
             <div>
                 <Grow in="load">
                     <div className='flex flex-col my-4 w-64 h-64 border p-4 shadow-md'>
-                        <div className="font-[montserrat] font-bold text-xl mb-1">{productname}</div>
+                        <div className='flex justify-between'>
+                            <div className="font-[montserrat] font-bold text-xl mb-1">{productname}</div>
+                            <div>
+                                {category}
+                            </div>
+                        </div>
                         <div className='text-sm text-gray-600'>
                             {brand}
                         </div>
+
                         <div style={{ minHeight: '100px' }}> {/* Set a fixed height here */}
-                            {weight && <div className='font-[montserrat] text-slate-500 mt-2 font-semibold mb-2'> {/* Reduce top margin here */}
-                                Weight:- {weight}
-                            </div>}
+                            {weight &&
+                                <div className='font-[montserrat] text-slate-500 mt-2 font-semibold mb-2'> {/* Reduce top margin here */}
+                                    Weight:- {weight}
+                                </div>
+                            }
                             {quantity &&
                                 <div className='font-[montserrat] text-slate-500 font-semibold mb-2'>
                                     Bag:- {quantity}
-                                </div>}
-                            {cft && <div className='font-[montserrat] text-slate-500 mt-2 font-semibold mb-2'> {/* Reduce top margin here */}
-                                Cft:- {cft}
-                            </div>}
+                                </div>
+                            }
+                            {cft &&
+                                <div className='font-[montserrat] text-slate-500 mt-2 font-semibold mb-2'> {/* Reduce top margin here */}
+                                    Cft:- {cft}
+                                </div>
+                            }
                         </div>
                         <div>
                             <img src="" className='w-10' />
                         </div>
+
+                        {/* <Link to={link}> */}
                         <div className='flex mb-2 '>
                             <div className="w-full flex justify-center items-center mb-2">
                                 <button className="w-full relative inline-flex h-12 overflow-hidden p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ">
@@ -36,12 +51,15 @@ export default function InventoryCard({ productname, brand, weight, quantity, cf
                                         }}
                                         onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                         onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
+                                        onClick={handleClick}
                                     >
                                         Update
                                     </span>
                                 </button>
                             </div>
                         </div>
+                        {/* </Link> */}
+
                     </div>
                 </Grow >
             </div >

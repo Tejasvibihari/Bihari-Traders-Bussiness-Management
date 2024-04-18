@@ -23,11 +23,14 @@ export const inventorySlice = createSlice({
         },
         getInventorySuccess: (state, action) => {
             state.inventory = action.payload
+        },
+        logoutInventory: (state) => {
+            state.inventory = []
         }
     }
 })
 
 // Action creators are generated for each case reducer function
-export const { addInventoryStart, addInventorySuccess, addInventoryError, getInventorySuccess } = inventorySlice.actions
+export const { addInventoryStart, addInventorySuccess, addInventoryError, getInventorySuccess, logoutInventory } = inventorySlice.actions
 
 export default inventorySlice.reducer

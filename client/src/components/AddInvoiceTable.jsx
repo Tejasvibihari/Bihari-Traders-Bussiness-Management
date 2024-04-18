@@ -37,7 +37,6 @@ export default function AddInvoiceTable({ invoice }) {
         }
         setSelected([]);
     };
-
     const handleClick = (event, id) => {
         const selectedIndex = selected.indexOf(id);
         let newSelected = [];
@@ -51,9 +50,10 @@ export default function AddInvoiceTable({ invoice }) {
         } else if (selectedIndex > 0) {
             newSelected = newSelected.concat(
                 selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1)
+                selected.slice(selectedIndex + 1),
             );
         }
+
         setSelected(newSelected);
     };
 
@@ -109,7 +109,7 @@ export default function AddInvoiceTable({ invoice }) {
                     <TableRow>
                         <TableCell padding="checkbox">
                             <Checkbox
-                                color="success"
+                                color="primary"
                                 indeterminate={selected.length > 0 && selected.length < invoice.length}
                                 checked={invoice.length > 0 && selected.length === invoice.length}
                                 onChange={handleSelectAllClick}
@@ -157,7 +157,7 @@ export default function AddInvoiceTable({ invoice }) {
                             >
                                 <TableCell padding="checkbox">
                                     <Checkbox
-                                        color="success"
+                                        color="primary"
                                         checked={isItemSelected}
                                         inputProps={{
                                             'aria-labelledby': labelId,

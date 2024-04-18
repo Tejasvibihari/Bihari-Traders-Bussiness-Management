@@ -1,12 +1,19 @@
 import Dashboard from '../components/Dashboard'
 import Paper from '@mui/material/Paper';
 // import Avatar from '@mui/material/Avatar';
-import profilepic from '../../public/image/person.jpg'
-
+import profilepic from '/image/person.jpg'
+import { useDispatch, useSelector } from 'react-redux';
+import { userLogout } from '../app/user/userSlice';
+import { logoutInventory } from '../app/inventory/inventorySlice';
 
 
 export default function Profile() {
-
+    const user = useSelector(state => state.user.currentUser)
+    const dispatch = useDispatch()
+    const logout = () => {
+        dispatch(userLogout())
+        dispatch(logoutInventory())
+    }
 
     return (
         <>
@@ -17,10 +24,10 @@ export default function Profile() {
                             <div className='p-10 flex flex-col items-center '>
                                 <div>
                                     <img src={profilepic} alt='Profile pic' className='w-32 h-32 rounded-full' />
-                               </div>
-                                <div className="mt-4 text-2xl font-bold text-gray-200 font-[montserrat]">Marry doe</div>
-                                <div className="mt-2 text-xl text-gray-200 font-[montserrat]">Business Name</div>
-                                <div className="mt-2 text-xl text-gray-200 font-[montserrat]">johndoe@example.com</div>
+                                </div>
+                                <div className="mt-4 text-2xl font-bold text-gray-200 font-[montserrat]">{user.name}</div>
+                                <div className="mt-2 text-xl text-gray-200 font-[montserrat]">{user.bussinessName}</div>
+                                <div className="mt-2 text-xl text-gray-200 font-[montserrat]">{user.email}</div>
                                 {/* profile edit Button */}
                                 <div className="mt-2 w-full flex justify-center items-center">
                                     <button className="w-full relative inline-flex h-12 overflow-hidden p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
@@ -50,6 +57,7 @@ export default function Profile() {
                                             }}
                                             onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                             onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
+                                            onClick={logout}
                                         >
                                             Log Out
                                         </span>
@@ -66,7 +74,7 @@ export default function Profile() {
 
 
 
-       
+
 
 }
 
