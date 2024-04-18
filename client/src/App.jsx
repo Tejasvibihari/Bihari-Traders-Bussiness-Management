@@ -6,6 +6,7 @@ import Invoice from "./pages/Invoice"
 import Inventory from "./pages/Inventory"
 import SignUp from "./pages/SignUp"
 import PrivateRoute from './components/PrivateRoute';
+import Profile from "./pages/Profile"
 export default function App() {
   return (
     <>
@@ -17,6 +18,7 @@ export default function App() {
             <Route path="/addinvoice" element={<AddInvoice />} />
             <Route path="/invoice" element={<Invoice />} />
             <Route path="/inventory" element={<Inventory />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>
       </BrowserRouter>

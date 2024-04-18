@@ -253,28 +253,7 @@ export default function MiniDrawer({ children }) {
                 </List>
                 <Divider />
                 <List className='bg-[#73E2A7]'>
-                    <ListItem disablePadding sx={{ display: 'block' }}>
-                        <ListItemButton
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                <ManageAccountsIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Edit Profile" sx={{ opacity: open ? 1 : 0 }} />
-                        </ListItemButton>
-
-                    </ListItem>
-                    <Link to="/admindetail">
+                    <Link to="/profile">
                         <ListItem disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
@@ -290,7 +269,7 @@ export default function MiniDrawer({ children }) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    <Avatar alt="Hello" src />
+                                    <ManageAccountsIcon />
                                 </ListItemIcon>
                                 <ListItemText primary="Profile" sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
