@@ -38,8 +38,17 @@ export default function AddInventory() {
     // Brand Form State
     const [brandName, setBrandName] = useState("");
     const [brandCategory, setBrandCategory] = useState("");
-    //Inventory Form State
+    //Inventory Form State data from Database
     const [formBrand, setFormBrand] = useState([]);
+    // Inventory Form State
+    const [name, setName] = useState("");
+    const [hsnCode, setHsnCode] = useState("");
+    const [category, setCategory] = useState("");
+    const [brand, setBrand] = useState("");
+    const [weight, setWeight] = useState("");
+    const [quantity, setQuantity] = useState("");
+    const [cft, setCft] = useState("");
+    const [inventoryMsg, setInventoryMsg] = useState("");
 
 
     const handleSnackBarOpen = () => {
@@ -72,13 +81,7 @@ export default function AddInventory() {
     const handleBrandFormClose = () => {
         setBrandOpen(false);
     };
-    // Inventory Form State
-    const [productName, setProductName] = useState("");
-    const [hsnCode, setHsnCode] = useState("");
-    const [category, setCategory] = useState("");
-    const [brand, setBrand] = useState("");
-    const [weight, setWeight] = useState("");
-    const [quantity, seQuantity] = useState("");
+
     //Brand Form Handlling 
     const handleBrandChange = (event) => {
         setBrandName((event.target.value).charAt(0).toUpperCase() + event.target.value.slice(1));
@@ -99,9 +102,26 @@ export default function AddInventory() {
         }
     }
 
-
-    const handleChange = (event) => {
-        setCategory(event.target.value);
+    // Inventory Form Handling
+    const handleInventorySubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const inventoryFormData = {
+                name: name,
+                hsnCode: hsnCode,
+                category: category,
+                brand: brand,
+                weight: weight,
+                quantity: quantity,
+                cft: cft
+            }
+            const inventoryData = await axios.post("/api/inventory/addinventory", inventoryFormData);
+            setInventoryMsg(inventoryData.data.message)
+            handleInventoryClose()
+            handleSnackBarOpen()
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const getBrand = async () => {
@@ -117,22 +137,26 @@ export default function AddInventory() {
 
 
 
+    const WEIGHT_CONSTANT = 50; // Replace with a meaningful name and value
     useEffect(() => {
-        console.log(category)
-        console.log(brandName);
-        console.log(brandCategory);
-        console.log(brandMsg)
-        console.log(formBrand)
-    }, [category, brandName, brandCategory, brandMsg, formBrand])
+        const calculateQuantity = () => {
+            const quantity = weight / WEIGHT_CONSTANT;
+            setQuantity(quantity);
+        };
+
+        if (weight) {
+            calculateQuantity();
+        }
+    }, [category, brandName, brandCategory, brandMsg, formBrand, weight]);
+
     return (
         <div>
             {/* Notification Component  */}
             <Snackbar
+                className='mt-12'
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 open={snackBar}
                 onClose={handleSnackBarClose}
-
-
             >
                 <Alert
                     onClose={handleSnackBarClose}
@@ -140,7 +164,7 @@ export default function AddInventory() {
                     variant="filled"
                     sx={{ width: '100%' }}
                 >
-                    {brandMsg === "Brand Created Successfully" ? brandMsg : null}
+                    {brandMsg === "Brand Created Successfully" ? brandMsg : (inventoryMsg === "Product Added to Inventory successfully" ? inventoryMsg : null)}
                 </Alert>
             </Snackbar>
 
@@ -171,17 +195,6 @@ export default function AddInventory() {
             <Dialog
                 open={Inventoryopen}
                 onClose={handleInventoryClose}
-                PaperProps={{
-                    component: 'form',
-                    onSubmit: (event) => {
-                        event.preventDefault();
-                        const formData = new FormData(event.currentTarget);
-                        const formJson = Object.fromEntries(formData.entries());
-                        const email = formJson.email;
-                        console.log(email);
-                        handleInventoryClose();
-                    },
-                }}
             >
                 <DialogTitle>Add Product To Inventory</DialogTitle>
                 <DialogContent>
@@ -189,7 +202,7 @@ export default function AddInventory() {
                         To subscribe to this website, please enter your email address here. We
                         will send updates occasionally.
                     </DialogContentText>
-                    <Box component="form" noValidate sx={{ mt: 3 }}>
+                    <Box component="form" onSubmit={handleInventorySubmit} noValidate sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -200,6 +213,7 @@ export default function AddInventory() {
                                     id="productName"
                                     label="Product Name"
                                     autoFocus
+                                    onChange={(event) => setName(event.target.value)}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -209,6 +223,7 @@ export default function AddInventory() {
                                     id="hsncode"
                                     label="HSN Code"
                                     name="hsn"
+                                    onChange={(event) => setHsnCode(event.target.value)}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -219,9 +234,9 @@ export default function AddInventory() {
                                     fullWidth
                                     label="Category"
                                     name="category"
-                                    onChange={handleChange}
                                     placeholder='Category'
                                     onBlur={getBrand}
+                                    onChange={(event) => setCategory(event.target.value)}
                                 >
                                     <MenuItem value="">
                                         <em>None</em>
@@ -242,6 +257,7 @@ export default function AddInventory() {
                                     label="Brand"
                                     name="brand"
                                     placeholder='Brand'
+                                    onChange={(event) => setBrand(event.target.value)}
                                 >
                                     <MenuItem value="">
                                         <em>None</em>
@@ -256,12 +272,14 @@ export default function AddInventory() {
                                     id="cft"
                                     label="CFT"
                                     name="cft"
+                                    onChange={(event) => setCft(event.target.value)}
                                 /> : <TextField
                                     required
                                     fullWidth
                                     id="weight"
                                     label="Weight in (Kg)"
                                     name="weight"
+                                    onChange={(event) => setWeight(event.target.value)}
                                 />}
                             </Grid>
                             <Grid item xs={6}>
@@ -274,6 +292,7 @@ export default function AddInventory() {
                                         type="text"
                                         id="quantity"
                                         autoComplete="Quantity"
+                                        value={quantity}
                                     /> : <TextField
                                         required
                                         fullWidth
@@ -314,17 +333,6 @@ export default function AddInventory() {
             <Dialog
                 open={Brandopen}
                 onClose={handleBrandFormClose}
-                PaperProps={{
-                    // component: 'form',
-                    // onSubmit: (event) => {
-                    // event.preventDefault();
-                    // const formData = new FormData(event.currentTarget);
-                    // const formJson = Object.fromEntries(formData.entries());
-                    // const email = formJson.email;
-                    // console.log(email);
-                    // handleBrandClose();
-                    // },
-                }}
             >
                 <DialogTitle className='text-center'>Add Brand To Inventory</DialogTitle>
                 <DialogContent>
