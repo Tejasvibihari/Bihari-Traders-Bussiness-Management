@@ -2,13 +2,15 @@ import User from "../models/userModel.js";
 import bcrypt from "bcrypt";
 
 
-const saltRound = 12;
 export const signUp = async (req, res) => {
     const { name, email, password, bussinessName } = req.body;
     try {
         const existingUser = await User.findOne({ email });
-        existingUser ? res.status(400).json({ message: "User already exists" }) : null;
+        if (existingUser) {
+            return res.status(400).json({ message: "User already exists" });
+        }
 
+        const saltRound = 10;
         const hashedPassword = await bcrypt.hash(password, saltRound);
         const createUser = await User.create({
             name,
@@ -16,8 +18,8 @@ export const signUp = async (req, res) => {
             password: hashedPassword,
             bussinessName
         });
-        createUser.save();
-        res.status(201).json({ user: createUser });
+
+        return res.status(201).json({ user: createUser, message: "User created" });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Something went wrong" });
