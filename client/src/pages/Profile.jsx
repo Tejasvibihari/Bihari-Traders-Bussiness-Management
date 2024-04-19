@@ -1,7 +1,7 @@
 import Dashboard from '../components/Dashboard'
 import Paper from '@mui/material/Paper';
 // import Avatar from '@mui/material/Avatar';
-import profilepic from '../../public/image/person.jpg'
+import profilepic from '/image/person.jpg'
 
 
 
