@@ -3,7 +3,6 @@ import Dashboard from '../components/Dashboard'
 import InventoryCard from '../components/InventoryCard'
 import { useSelector } from 'react-redux'
 import Paper from '@mui/material/Paper';
-import axios from "axios";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,10 +12,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useState } from 'react';
 import DialogCard from '../components/DialogCard';
 import InventoryUpdateForm from '../components/InventoryUpdateForm';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+
+
 export default function Inventory() {
     const inventory = useSelector(state => state.inventory.inventory)
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [snackOpen, setSnackOpen] = useState(false);
     const handleClickOpen = (item) => {
         setOpen(true);
         setSelectedItem(item);
@@ -25,14 +29,22 @@ export default function Inventory() {
     const handleClose = () => {
         setOpen(false);
     };
+    const handleInventoryUpdateSuccess = () => {
+        handleClose();
+        handleSnackClick();
+    };
 
-    const fetchInventory = async () => {
-        try {
-            console.log("hello")
-        } catch (error) {
-            console.log(error)
+    const handleSnackClick = () => {
+        setSnackOpen(true);
+    };
+
+    const handleSnackClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
         }
-    }
+
+        setSnackOpen(false);
+    };
 
     const cementItems = inventory.filter(item => item.category === "Cement");
     const ironItems = inventory.filter(item => item.category === "Iron");
@@ -41,7 +53,20 @@ export default function Inventory() {
 
     return (
         <div>
+
             <Dashboard>
+                <div>
+                    <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleSnackClose}>
+                        <Alert
+                            onClose={handleSnackClose}
+                            severity="success"
+                            variant="filled"
+                            sx={{ width: '100%' }}
+                        >
+                            Inventory Product Updated
+                        </Alert>
+                    </Snackbar>
+                </div>
                 <div>
                     <Dialog
                         open={open}
@@ -62,6 +87,8 @@ export default function Inventory() {
                             />
                             <InventoryUpdateForm
                                 product={selectedItem}
+                                onSuccess={handleInventoryUpdateSuccess}
+                                handleClose={handleClose}
                             />
                         </DialogContent>
                         <DialogActions>
@@ -159,7 +186,7 @@ export default function Inventory() {
                             </div>
                         </div>) : null}
                 </Paper>
-                <div className='absolute bottom-0 right-0 mb-10 mr-10'>
+                <div className='fixed bottom-0 right-0 mb-10 mr-10'>
                     <AddInventory />
                 </div>
             </Dashboard>

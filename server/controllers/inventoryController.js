@@ -86,21 +86,19 @@ export const otpGeneration = async (req, res) => {
 }
 
 export const updateInventory = async (req, res) => {
-    // const { productQuantity } = req.body;
-    const reqOtp = req.body.otp;
+    const { id, quantity, weight, cft } = req.body;
     try {
-        const findOtp = await User.findOne({ otp: reqOtp });
-        if (!findOtp) {
-            return res.status(404).json({ message: "Otp Invalid OTP" });
-        }
-        res.json({ message: "Inventory updated successfully" })
-        // const upadateInventory = await Inventory.findById(req.params.id);
-        // upadateInventory.productQuantity = productQuantity;
-        // await updateInventory.save();
-        // res.json(updateInventory);
+        const updatedInventory = await Inventory.findOneAndUpdate(
+            { _id: id },
+            { $set: { quantity, weight, cft } },
+            { new: true } // This option returns the updated document
+        );
+        console.log(updatedInventory);
+        res.json({ message: "Inventory updated successfully", data: updatedInventory });
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        res.status(500).json({ message: "An error occurred while updating the inventory" });
     }
-}
+};
 
 
