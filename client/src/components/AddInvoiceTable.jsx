@@ -22,6 +22,7 @@ export default function AddInvoiceTable({ invoice }) {
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
     const [selected, setSelected] = useState([]);
+   
 
     const handleRequestSort = (property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -33,16 +34,16 @@ export default function AddInvoiceTable({ invoice }) {
         if (event.target.checked) {
             const newSelected = invoice.map((row) => row.id);
             setSelected(newSelected);
-            return;
+        } else {
+            setSelected([]);
         }
-        setSelected([]);
     };
     const handleClick = (event, id) => {
         const selectedIndex = selected.indexOf(id);
         let newSelected = [];
 
         if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, id);
+            newSelected = newSelected.concat(selected, [id]);
         } else if (selectedIndex === 0) {
             newSelected = newSelected.concat(selected.slice(1));
         } else if (selectedIndex === selected.length - 1) {
@@ -55,7 +56,10 @@ export default function AddInvoiceTable({ invoice }) {
         }
 
         setSelected(newSelected);
+
     };
+
+  
 
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
@@ -72,6 +76,8 @@ export default function AddInvoiceTable({ invoice }) {
         { id: 'rate', label: 'Rate' },
         { id: 'amount', label: 'Amount' },
     ];
+
+
 
     return (
         <TableContainer component={Paper}>
@@ -142,23 +148,25 @@ export default function AddInvoiceTable({ invoice }) {
                 </TableHead>
                 <TableBody>
                     {invoice.map((row) => {
-                        const isItemSelected = isSelected(row.id);
+                        const isItemSelected = isSelected(row.id);           
                         const labelId = `enhanced-table-checkbox-${row.id}`;
 
                         return (
                             <TableRow
                                 hover
-                                onClick={(event) => handleClick(event, row.id)}
                                 role="checkbox"
                                 aria-checked={isItemSelected}
                                 tabIndex={-1}
                                 key={row.id}
                                 selected={isItemSelected}
+                               
                             >
                                 <TableCell padding="checkbox">
                                     <Checkbox
                                         color="primary"
                                         checked={isItemSelected}
+                                        onClick={(event) => handleClick(event, row.id)}
+                                       
                                         inputProps={{
                                             'aria-labelledby': labelId,
                                         }}

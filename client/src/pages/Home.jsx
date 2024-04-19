@@ -4,6 +4,7 @@ import DashBoardCard from '../components/DashBoardCard'
 import Icon1 from '/image/cement1.gif'
 import Icon2 from '/image/chem.gif'
 import Icon3 from '/image/iron.gif'
+import Icon4 from '/image/stones1.png'
 import Icon from '/image/invoice1.gif'
 import Paper from '@mui/material/Paper';
 import Grow from '@mui/material/Grow';
@@ -36,18 +37,14 @@ export default function Home() {
                 <Paper elevation={3} className='p-10'>
                     <Grow in timeout={{ enter: 500, exit: 500 }} style={{ transformOrigin: '0 0 0' }}>
                         <div className='flex flex-wrap gap-3'>
-                            {/* second card */}
-
+                            {/* First card */}
                             <DashBoardCard
                                 title="Cement"
                                 value="345"
                                 icon={Icon1}
                                 dynamicColor="card2"
                             />
-
-
-                            {/* third card */}
-
+                            {/* second card */}
                             <DashBoardCard
                                 title="Chemical"
                                 value="345"
@@ -55,8 +52,7 @@ export default function Home() {
                                 dynamicColor="card3"
                             />
 
-                            {/* Forth card */}
-
+                            {/* thrid card */}
                             <DashBoardCard
                                 title="Iron"
                                 value="345"
@@ -64,17 +60,17 @@ export default function Home() {
                                 dynamicColor="card4"
                             />
 
-                            {/* Change This for Stone  */}
-
+                            {/* forth Stone card  */}
                             <DashBoardCard
-                                title="Total Invoice"
+                                title="Stone"
                                 value="345"
-                                icon={Icon}
+                                icon={Icon4}
                                 dynamicColor="card1"
                             />
                         </div>
                     </Grow >
                 </Paper >
+                {/* Total invoice card  and line chart */}
                 <div className='my-4'>
                     <Paper elevation={3} className='p-5'>
                         <div className='grid grid-cols-2 gap-4'>
@@ -97,6 +93,7 @@ export default function Home() {
                                     </div>
                                 </div>
                             </Grow>
+                            {/* Line chart */}
                             <Grow in timeout={{ enter: 2000, exit: 500 }} style={{ transformOrigin: '0 0 0' }}>
                                 <div className='mx-auto flex justify-center items-center'>
                                     <SimpleLineChart />
