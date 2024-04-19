@@ -6,7 +6,8 @@ export default function InventoryCard({ productname, brand, weight, quantity, cf
         <>
             <div>
                 <Grow in="load">
-                    <div className='flex flex-col my-4 w-64 h-64 border p-4 shadow-md'>
+                    <div className='flex flex-col my-4 w-64 h-64 border p-4 shadow-md '>
+                        {/* <div className="back-content  w-40 h-full bg-gradient-to-r from-transparent via-red-500 to-transparent animate-rotation"></div> */}
                         <div className='flex justify-between'>
                             <div className="font-[montserrat] font-bold text-xl mb-1">{productname}</div>
                             <div>
