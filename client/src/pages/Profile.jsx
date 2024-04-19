@@ -18,20 +18,29 @@ export default function Profile() {
     return (
         <>
             <Dashboard>
-                <Paper elevation={3} className='p-10 max-w-xl mx-auto'>
-                    <div className='flex items-center justify-center'>
-                        <div className='profile flex flex-col items-center shadow-gray-600 shadow-2xl rounded-lg'>
-                            <div className='p-10 flex flex-col items-center '>
-                                <div>
-                                    <img src={profilepic} alt='Profile pic' className='w-32 h-32 rounded-full' />
-                                </div>
-                                <div className="mt-4 text-2xl font-bold text-gray-200 font-[montserrat]">{user.name}</div>
-                                <div className="mt-2 text-xl text-gray-200 font-[montserrat]">{user.bussinessName}</div>
-                                <div className="mt-2 text-xl text-gray-200 font-[montserrat]">{user.email}</div>
+                
+                    <div className="flex items-center justify-center mt-3   ">
+                        <div className="relative w-80 h-96 flex flex-col items-center rounded-xl justify-center shadow-lg ">
+                            <div className="h-48 w-full rounded-t-xl overflow-hidden">
+                                <svg className="container" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                                    <pattern id="diagonal-stripes" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                                        <rect width="5" height="10" fill="orange" />
+                                        <rect width="5" height="10" x="5" y="5" fill="orangered" />
+                                    </pattern>
+                                    <rect width="100%" height="100%" fill="url(#diagonal-stripes)" />
+                                </svg>
+                            </div>
+                            <div className="absolute top-1/2 transform -translate-y-1/2 w-28 h-28 rounded-full mb-4 ">
+                                <img src={profilepic} alt="Profile pic" className="w-full h-full rounded-full" />
+                            </div>
+                            <div className="mt-10 text-center ">
+                                <div className="mt-6 font-semibold text-lg text-black">{user.name}</div>
+                                <div className="mt-2 text-gray-600">{user.bussinessName}</div>
+                            </div>
+                            <div className="mt-4 flex mb-2">
                                 {/* profile edit Button */}
                                 <div className="mt-2 w-full flex justify-center items-center">
-                                    <button className="w-full relative inline-flex h-12 overflow-hidden p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                                        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ff006e_0%,#ffbe0b_50%,#8338ec_100%)]" />
+                                    <button className="w-full relative inline-flex h-12 overflow-hidden p-1 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-nowrap">
                                         <span className="inline-flex h-full w-full cursor-pointer items-center justify-center px-6 font-medium text-center  text-slate-200 transition-all backdrop-blur-3xl"
                                             style={{
                                                 backgroundImage: 'linear-gradient(110deg, #e63946,40%,#1e2631,55%,#000103)',
@@ -47,8 +56,7 @@ export default function Profile() {
                                 </div>
                                 {/* Log Out Button */}
                                 <div className="mt-2 w-full flex justify-center items-center">
-                                    <button className="w-full relative inline-flex h-12 overflow-hidden p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                                        <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#ff006e_0%,#ffbe0b_50%,#8338ec_100%)]" />
+                                    <button className="w-full relative inline-flex h-12 overflow-hidden p-1 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                                         <span className="inline-flex h-full w-full cursor-pointer items-center justify-center px-6 font-medium text-center  text-slate-200 transition-all backdrop-blur-3xl"
                                             style={{
                                                 backgroundImage: 'linear-gradient(110deg, #e63946,40%,#1e2631,55%,#000103)',
@@ -64,15 +72,16 @@ export default function Profile() {
                                     </button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
-                </Paper>
+
+                
             </Dashboard>
         </>
     )
 
-
-
+    
 
 
 

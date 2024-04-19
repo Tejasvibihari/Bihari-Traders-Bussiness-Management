@@ -11,6 +11,15 @@ export default {
         'montserrat': ['Montserrat Thin', 'sans-serif'],
         'italina': ['Italina', 'sans-serif'],
       },
+      animation: {
+        'border-slide': 'border-slide 5s infinite linear',
+      },
+      keyframes: {
+        'border-slide': {
+          '0%': { backgroundPosition: '0% 0%' },
+          '100%': { backgroundPosition: '100% 100%' },
+        },
+      },
     },
   },
   plugins: [],
