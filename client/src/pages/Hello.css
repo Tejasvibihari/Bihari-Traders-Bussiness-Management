@@ -1,0 +1,478 @@
+/** GLOBAL CLASSES **/
+
+.table {
+    color: #535353;
+}
+
+.invoice-content {
+    font-family: 'Poppins', sans-serif;
+    color: #535353;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.invoice-content a {
+    text-decoration: none;
+}
+
+.invoice-content .img-fluid {
+    max-width: 100% !important;
+    height: auto;
+}
+
+.invoice-content .form-control:focus {
+    box-shadow: none;
+}
+
+.invoice-content h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: 'Poppins', sans-serif;
+    color: #535353;
+}
+
+/** BTN LG **/
+.btn-lg {
+    font-size: 15px;
+    height: 50px;
+    padding: 0 35px;
+    line-height: 50px;
+    border-radius: 3px;
+    color: #ffffff;
+    border: none;
+    margin: 3px;
+}
+
+.btn-lg {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    text-transform: capitalize;
+    transition: all 0.3s linear;
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.btn-lg:hover {
+    color: #ffffff;
+}
+
+.btn-lg:hover:after {
+    transform: perspective(200px) scaleX(1.05) rotateX(0deg) translateZ(0);
+    transition: transform 0.9s linear, transform 0.4s linear;
+}
+
+.btn-lg:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: "";
+    transform: perspective(200px) scaleX(0.1) rotateX(90deg) translateZ(-10px);
+    transform-origin: bottom center;
+    transition: transform 0.9s linear, transform 0.4s linear;
+    z-index: -1;
+}
+
+.btn-check:focus+.btn,
+.btn:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.btn-download {
+    background: #2565cc !important;
+}
+
+.btn-download:after {
+    background: #1e59b7;
+}
+
+.btn-print {
+    background: #2b2a2a;
+}
+
+.btn-print:after {
+    background: #1d1c1c;
+}
+
+.invoice-content .f-w-600 {
+    font-weight: 600 !important;
+}
+
+.invoice-content .text-13 {
+    font-size: 13px;
+}
+
+.invoice-content .invoice-table th:first-child,
+.invoice-content .invoice-table td:first-child {
+    text-align: left;
+}
+
+.invoice-content .color-white {
+    color: #fff !important;
+}
+
+.invoice-content .inv-header-1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 24px;
+    color: #262525;
+}
+
+.invoice-content .inv-header-2 {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.invoice-content .inv-title-1 {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.invoice-content .invo-addr-1 {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.invoice-content .item-desc-1 {
+    text-align: left;
+}
+
+.invoice-content .item-desc-1 span {
+    display: block;
+}
+
+.invoice-content .item-desc-1 small {
+    display: block;
+}
+
+.invoice-content .important-notes-list-1 {
+    font-size: 13px !important;
+    padding-left: 15px;
+    margin-bottom: 15px;
+}
+
+.invoice-content .important-notes-list-1 li {
+    margin-bottom: 5px;
+}
+
+.invoice-content .bank-transfer-list-1 {
+    font-size: 13px !important;
+    padding-left: 0px;
+}
+
+.invoice-content .important-notes {
+    font-size: 12px !important;
+}
+
+.invoice-content .invoice-btn-section {
+    text-align: center;
+    margin-top: 30px;
+}
+
+table th {
+    font-weight: 500;
+}
+
+/** Invoice 1 Start **/
+.invoice-1 {
+    padding: 30px 0;
+    background: #fff6f6;
+}
+
+.invoice-1 .mb-30 {
+    margin-bottom: 30px;
+}
+
+.invoice-1 .invoice-info {
+    background: #fff;
+    position: relative;
+}
+
+.invoice-1 .name {
+    font-size: 18px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    color: #262525;
+    font-weight: 500;
+}
+
+.invoice-1 .mb-10 {
+    margin-bottom: 10px;
+}
+
+.invoice-1 .invoice-headar {
+    height: 125px;
+    margin-bottom: 25px;
+    background-image: linear-gradient(to bottom, #ffffff, #f3f3f3);
+}
+
+.invoice-1 .invoice-headar p span {
+    float: right;
+}
+
+.invoice-1 .invoice-number-inner {
+    max-width: 200px;
+    margin-left: auto;
+}
+
+.invoice-1 .invoice-id .info {
+    max-width: 200px;
+    margin: 0 50px 0 auto;
+    padding: 34px 0;
+}
+
+.invoice-1 .invoice-id {
+    border-radius: 0 0 0 200px;
+    z-index: 0;
+    background-image: linear-gradient(to bottom, #ffb400, #ff8a00);
+}
+
+.invoice-1 .payment-method-list-1 {
+    padding: 0;
+}
+
+.invoice-1 .item-desc-1 span {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.invoice-1 .payment-method {
+    max-width: 200px;
+    margin-left: auto;
+}
+
+.invoice-1 .payment-method ul {
+    list-style: none;
+}
+
+.invoice-1 .payment-method ul li strong {
+    font-weight: 500;
+}
+
+.invoice-1 .table-striped>tbody>tr:nth-of-type(odd) {
+    --bs-table-accent-bg: rgb(255 255 255 / 5%);
+    color: var(--bs-table-striped-color);
+}
+
+.invoice-1 table th {
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.invoice-1 .invoice-top {
+    padding: 40px 50px 10px;
+    font-size: 15px;
+}
+
+.invoice-1 .inv-title-1 {
+    color: #ffb400;
+    margin-bottom: 5px;
+}
+
+.invoice-1 .invoice-logo {
+    padding: 50px;
+}
+
+.invoice-1 .invoice-logo img {
+    height: 25px;
+}
+
+.invoice-1 .table-section {
+    text-align: center;
+}
+
+.invoice-1 .invoice-center {
+    padding: 0 50px 40px;
+}
+
+.invoice-1 .table> :not(caption)>*>* {
+    padding: 13px 30px;
+}
+
+.invoice-1 .table> :not(caption)>*>* {
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 0;
+}
+
+.invoice-1 .table .pl0 {
+    padding-left: 0;
+}
+
+.invoice-1 .table td.pl0 {
+    padding-left: 0;
+}
+
+.invoice-1 .table td,
+.invoice-1 .table th {
+    vertical-align: middle;
+    border: none !important;
+}
+
+.invoice-1 .table td {
+    font-size: 15px;
+    color: #555;
+}
+
+.invoice-1 p {
+    font-size: 14px;
+}
+
+.invoice-1 .invoice-info-buttom .table .invoice-1 .invoice-info-buttom .table tr,
+.table tr {
+    border: 1px solid #e9ecef;
+}
+
+.invoice-1 .caption-top {
+    caption-side: top;
+    text-align: right;
+    margin-bottom: 0;
+}
+
+.invoice-1 .invoice-bottom {
+    padding: 0 50px 10px;
+}
+
+.invoice-1 .bg-active {
+    background-image: linear-gradient(to bottom, #ffb400, #ff8a00) !important;
+    color: #fff !important;
+}
+
+.invoice-1 .active-color {
+    color: #ffb400 !important;
+}
+
+.invoice-1 .invoice-bottom h3 {
+    margin-bottom: 7px;
+}
+
+.invoice-1 .contact-info {
+    padding: 30px 50px;
+    border-radius: 0 100px 0 0;
+    background-image: linear-gradient(to bottom, #f3f3f3, #ffffff);
+}
+
+.invoice-1 .contact-info a {
+    margin-right: 20px;
+    color: #535353;
+    font-size: 14px;
+}
+
+.invoice-1 .contact-info .mr-0 {
+    margin-right: 0;
+}
+
+.invoice-1 .inv-header-1 {
+    font-weight: 600;
+}
+
+.invoice-1 .invoice-contact::after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    height: 30px;
+    border-radius: 50px 0 0 0;
+    z-index: 0;
+    background-image: linear-gradient(to bottom, #ffb400, #ff8a00);
+}
+
+/** MEDIA **/
+@media (max-width: 992px) {
+    .invoice-1 {
+        padding: 30px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .invoice-1 .table> :not(caption)>*>* {
+        padding: 15px 10px;
+    }
+
+    .invoice-1.invoice-content .color-white {
+        color: #262525 !important;
+    }
+
+    .invoice-1 .payment-method {
+        margin: 0 auto 30px 0;
+    }
+
+    .invoice-1 .invoice-top {
+        padding: 30px 30px 0;
+    }
+
+    .invoice-1 .contact-info {
+        padding: 30px;
+        border-radius: 0;
+    }
+
+    .invoice-1 .invoice-center {
+        padding: 0 30px 30px;
+    }
+
+    .invoice-1 .invoice-contact::after {
+        display: none;
+    }
+
+    .invoice-1 .invoice-bottom {
+        padding: 0 30px;
+    }
+
+    .invoice-1 .invoice-id {
+        background: transparent;
+    }
+
+    .invoice-1 .invoice-logo {
+        padding: 0;
+        margin-bottom: 10px;
+    }
+
+    .invoice-1 .invoice-headar {
+        height: auto;
+        margin-bottom: 0;
+        padding: 30px;
+    }
+
+    .invoice-1 .invoice-id .info {
+        margin: 0 auto 0 15px;
+        padding: 0;
+    }
+
+    .invoice-1 .invoice-number-inner {
+        margin: 0 auto 0 0;
+    }
+}
+
+@media (max-width: 580px) {
+    .invoice-1 .invoice-id .info {
+        margin: 0 auto 0 15px;
+    }
+
+    .invoice-1 .invoice-id .info {
+        margin: 0 auto 0 0;
+    }
+
+    .invoice-1 .d-none-580 {
+        display: none !important;
+    }
+}
+
+/** Invoice 1 end **/

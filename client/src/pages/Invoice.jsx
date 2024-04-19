@@ -3,7 +3,9 @@ import Paper from '@mui/material/Paper'
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import AddInvoiceTable from '../components/AddInvoiceTable';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import ReactToPrint from 'react-to-print';
+
 
 export default function Invoice() {
     const [invoices, setInvoices] = useState([]);
@@ -20,7 +22,7 @@ export default function Invoice() {
 
     })
 
-
+    const componentRef = useRef();
     return (
         <div>
             <Dashboard>
@@ -50,7 +52,14 @@ export default function Invoice() {
 
 
                     <div className='my-10'>
-                        <AddInvoiceTable invoice={invoices} />
+                        <ReactToPrint
+                            trigger={() => <button>Download</button>}
+                            content={() => componentRef.current}
+                        />
+                        <AddInvoiceTable
+                            invoice={invoices}
+                            ref={componentRef} />
+
                     </div>
                 </Paper>
             </Dashboard>
