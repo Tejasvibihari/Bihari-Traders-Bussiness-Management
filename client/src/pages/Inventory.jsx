@@ -96,96 +96,96 @@ export default function Inventory() {
                         </DialogActions>
                     </Dialog>
                 </div>
-                <Paper elevation={3} className='px-3 my-2'>
-                    {cementItems.length > 0 ? (
-                        <div>
-                            <div className='pt-4 text-xl font-[montserrat] text-red-600'>
-                                Cement
-                            </div>
-                            <div className='grid md:grid-cols-5 items-center justify-center'>
-                                {cementItems.map((item, index) => (
-                                    <InventoryCard
-                                        key={index}
-                                        productname={item.name}
-                                        brand={item.brand}
-                                        weight={item.weight}
-                                        quantity={item.quantity}
-                                        cft={item.cft}
-                                        category={item.category}
-                                        handleClick={() => handleClickOpen(item)}
-                                    />
-                                ))}
-                            </div>
+                {/* <Paper elevation={3} className='px-3 my-2'> */}
+                {cementItems.length > 0 ? (
+                    <div>
+                        <div className='pt-4 text-xl font-[montserrat] text-red-600'>
+                            Cement
                         </div>
-                    ) : null}
-                </Paper>
-                <Paper elevation={3} className='px-3 my-2'>
-                    {ironItems.length > 0 ? (
-                        <div>
-                            <div className='pt-4 text-xl font-[montserrat] text-red-600'>
-                                Iron
-                            </div>
-                            <div className='grid md:grid-cols-5 items-center justify-center'>
-                                {inventory.filter(item => item.category === "Iron").map((item, index) => {
-                                    return <InventoryCard
-                                        key={index}
-                                        productname={item.name}
-                                        brand={item.brand}
-                                        weight={item.weight}
-                                        quantity={item.quantity}
-                                        cft={item.cft}
-                                        category={item.category}
-                                        handleClick={() => handleClickOpen(item)}
-                                    />
-                                })}
-                            </div>
+                        <div className='grid md:grid-cols-5 items-center justify-center'>
+                            {cementItems.map((item, index) => (
+                                <InventoryCard
+                                    key={index}
+                                    productname={item.name}
+                                    brand={item.brand}
+                                    weight={item.weight}
+                                    quantity={item.quantity}
+                                    cft={item.cft}
+                                    category={item.category}
+                                    handleClick={() => handleClickOpen(item)}
+                                />
+                            ))}
                         </div>
-                    ) : null}
-                </Paper>
-                <Paper elevation={3} className='px-3 my-2'>
-                    {gitiItems.length > 0 ? (
-                        <div>
-                            <div className='pt-4 text-xl font-[montserrat] text-red-600'>
-                                Giti
-                            </div>
-                            <div className='grid md:grid-cols-5 items-center justify-center'>
-                                {inventory.filter(item => item.category === "3/4" || item.category === "5/8").map((item, index) => {
-                                    return <InventoryCard
-                                        key={index}
-                                        productname={item.name}
-                                        brand={item.brand}
-                                        weight={item.weight}
-                                        quantity={item.quantity}
-                                        cft={item.cft}
-                                        category={item.category}
-                                        handleClick={() => handleClickOpen(item)}
-                                    />
-                                })}
-                            </div>
-                        </div>) : null}
-                </Paper>
-                <Paper elevation={3} className='px-3 my-2'>
-                    {chemicalItems.length > 0 ? (
-                        <div>
-                            <div className='pt-4 text-xl font-[montserrat] text-red-600'>
-                                Chemicals
-                            </div>
-                            <div className='grid md:grid-cols-5 items-center justify-center'>
-                                {inventory.filter(item => item.category === "Chemicals").map((item, index) => {
-                                    return <InventoryCard
-                                        key={index}
-                                        productname={item.name}
-                                        brand={item.brand}
-                                        weight={item.weight}
-                                        quantity={item.quantity}
-                                        cft={item.cft}
-                                        category={item.category}
-                                        handleClick={() => handleClickOpen(item)}
-                                    />
-                                })}
-                            </div>
-                        </div>) : null}
-                </Paper>
+                    </div>
+                ) : null}
+                {/* </Paper> */}
+                {/* <Paper elevation={3} className='px-3 my-2'> */}
+                {ironItems.length > 0 ? (
+                    <div>
+                        <div className='pt-4 text-xl font-[montserrat] text-red-600'>
+                            Iron
+                        </div>
+                        <div className='grid md:grid-cols-5 items-center justify-center'>
+                            {inventory.filter(item => item.category === "Iron").map((item, index) => {
+                                return <InventoryCard
+                                    key={index}
+                                    productname={item.name}
+                                    brand={item.brand}
+                                    weight={item.weight}
+                                    quantity={item.quantity}
+                                    cft={item.cft}
+                                    category={item.category}
+                                    handleClick={() => handleClickOpen(item)}
+                                />
+                            })}
+                        </div>
+                    </div>
+                ) : null}
+                {/* </Paper> */}
+                {/* <Paper elevation={3} className='px-3 my-2'> */}
+                {gitiItems.length > 0 ? (
+                    <div>
+                        <div className='pt-4 text-xl font-[montserrat] text-red-600'>
+                            Giti
+                        </div>
+                        <div className='grid md:grid-cols-5 items-center justify-center'>
+                            {inventory.filter(item => item.category === "3/4" || item.category === "5/8").map((item, index) => {
+                                return <InventoryCard
+                                    key={index}
+                                    productname={item.name}
+                                    brand={item.brand}
+                                    weight={item.weight}
+                                    quantity={item.quantity}
+                                    cft={item.cft}
+                                    category={item.category}
+                                    handleClick={() => handleClickOpen(item)}
+                                />
+                            })}
+                        </div>
+                    </div>) : null}
+                {/* </Paper> */}
+                {/* <Paper elevation={3} className='px-3 my-2'> */}
+                {chemicalItems.length > 0 ? (
+                    <div>
+                        <div className='pt-4 text-xl font-[montserrat] text-red-600'>
+                            Chemicals
+                        </div>
+                        <div className='grid md:grid-cols-5 items-center justify-center'>
+                            {inventory.filter(item => item.category === "Chemicals").map((item, index) => {
+                                return <InventoryCard
+                                    key={index}
+                                    productname={item.name}
+                                    brand={item.brand}
+                                    weight={item.weight}
+                                    quantity={item.quantity}
+                                    cft={item.cft}
+                                    category={item.category}
+                                    handleClick={() => handleClickOpen(item)}
+                                />
+                            })}
+                        </div>
+                    </div>) : null}
+                {/* </Paper> */}
                 <div className='fixed bottom-0 right-0 mb-10 mr-10'>
                     <AddInventory />
                 </div>

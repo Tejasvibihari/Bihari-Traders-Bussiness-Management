@@ -35,8 +35,9 @@
 .card5 {
     background-image: repeating-linear-gradient(45deg, rgba(193, 249, 252, 0.12) 0px, rgba(193, 249, 252, 0.12) 1px, transparent 1px, transparent 13px), repeating-linear-gradient(135deg, rgba(193, 249, 252, 0.12) 0px, rgba(193, 249, 252, 0.12) 1px, transparent 1px, transparent 13px), linear-gradient(90deg, rgb(215, 32, 135), rgb(223, 206, 104));
 }
-.profile{
-background-image: radial-gradient(circle at 13% 60%, rgba(70, 70, 70, 0.06) 0%, rgba(70, 70, 70, 0.06) 43%, transparent 43%, transparent 100%), radial-gradient(circle at 51% 56%, rgba(44, 44, 44, 0.06) 0%, rgba(44, 44, 44, 0.06) 18%, transparent 18%, transparent 100%), radial-gradient(circle at 97% 87%, rgba(219, 219, 219, 0.06) 0%, rgba(219, 219, 219, 0.06) 60%, transparent 60%, transparent 100%), radial-gradient(circle at 45% 35%, rgba(83, 83, 83, 0.06) 0%, rgba(83, 83, 83, 0.06) 26%, transparent 26%, transparent 100%), radial-gradient(circle at 81% 28%, rgba(215, 215, 215, 0.06) 0%, rgba(215, 215, 215, 0.06) 55%, transparent 55%, transparent 100%), radial-gradient(circle at 95% 15%, rgba(213, 213, 213, 0.06) 0%, rgba(213, 213, 213, 0.06) 52%, transparent 52%, transparent 100%), linear-gradient(90deg, rgb(193, 60, 179), rgb(214, 39, 128));
+
+.profile {
+    background-image: radial-gradient(circle at 13% 60%, rgba(70, 70, 70, 0.06) 0%, rgba(70, 70, 70, 0.06) 43%, transparent 43%, transparent 100%), radial-gradient(circle at 51% 56%, rgba(44, 44, 44, 0.06) 0%, rgba(44, 44, 44, 0.06) 18%, transparent 18%, transparent 100%), radial-gradient(circle at 97% 87%, rgba(219, 219, 219, 0.06) 0%, rgba(219, 219, 219, 0.06) 60%, transparent 60%, transparent 100%), radial-gradient(circle at 45% 35%, rgba(83, 83, 83, 0.06) 0%, rgba(83, 83, 83, 0.06) 26%, transparent 26%, transparent 100%), radial-gradient(circle at 81% 28%, rgba(215, 215, 215, 0.06) 0%, rgba(215, 215, 215, 0.06) 55%, transparent 55%, transparent 100%), radial-gradient(circle at 95% 15%, rgba(213, 213, 213, 0.06) 0%, rgba(213, 213, 213, 0.06) 52%, transparent 52%, transparent 100%), linear-gradient(90deg, rgb(193, 60, 179), rgb(214, 39, 128));
     /* background-image: radial-gradient(circle at top left, rgb(36, 82, 165) 0%, rgb(36, 82, 165) 5%, rgb(47, 100, 177) 5%, rgb(47, 100, 177) 10%, rgb(57, 117, 190) 10%, rgb(57, 117, 190) 15%, rgb(68, 135, 202) 15%, rgb(68, 135, 202) 20%, rgb(79, 152, 215) 20%, rgb(79, 152, 215) 25%, rgb(90, 170, 227) 25%, rgb(90, 170, 227) 30%, rgb(100, 187, 240) 30%, rgb(100, 187, 240) 35%, rgb(111, 205, 252) 35%, rgb(111, 205, 252) 100%); */
 }
 
@@ -125,3 +126,32 @@ background-image: radial-gradient(circle at 13% 60%, rgba(70, 70, 70, 0.06) 0%, 
     color: var(--main-color);
 }
 
+.back {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hh {
+    position: relative;
+    width: 256px;
+    height: 256px;
+
+}
+
+.hh::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 258px;
+    height: 100px;
+    background: linear-gradient(to right, rgb(255, 0, 0), rgb(0, 255, 4));
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    /* animation: helllo 0.5s linear infinite; */
+    overflow: hidden;
+}
