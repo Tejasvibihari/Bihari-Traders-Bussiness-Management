@@ -8,12 +8,15 @@ import SignUp from "./pages/SignUp"
 import PrivateRoute from './components/PrivateRoute';
 import Profile from "./pages/Profile"
 import InvoiceDownload from "./pages/InvoiceDownload"
+
+import ResetForm from "./components/ResetForm"
 export default function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/resetpassword" element={<ResetForm />} />
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<Home />} />
             <Route path="/addinvoice" element={<AddInvoice />} />

@@ -26,7 +26,6 @@ export const addInventory = async (req, res) => {
 
 export const getInventory = async (req, res) => {
     const { userId } = req.body;
-    console.log(userId)
     try {
         const inventory = await Inventory.find({ userId });
         console.log(inventory)
@@ -93,7 +92,7 @@ export const updateInventory = async (req, res) => {
             { $set: { quantity, weight, cft } },
             { new: true } // This option returns the updated document
         );
-        console.log(updatedInventory);
+        // console.log(updatedInventory);
         res.json({ message: "Inventory updated successfully", data: updatedInventory });
     } catch (error) {
         console.log(error);

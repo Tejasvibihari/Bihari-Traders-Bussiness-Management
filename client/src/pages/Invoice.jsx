@@ -14,12 +14,11 @@ export default function Invoice() {
     const invoices = useSelector(state => state.invoice.invoice);
     const user = useSelector(state => state.user.currentUser);
     const dispatch = useDispatch();
-
     const [nameFilter, setNameFilter] = useState('');
     const [fromDateFilter, setFromDateFilter] = useState('');
     const [toDateFilter, setToDateFilter] = useState('');
     const [particularFilter, setParticularFilter] = useState('');
-
+    const [invoiceNoFilter, setInvoiceNoFilter] = useState("");
     useEffect(() => {
         const fetchInvoices = async () => {
             try {
@@ -39,7 +38,8 @@ export default function Invoice() {
         const nameMatches = !nameFilter || (invoice.to && invoice.to.toLowerCase().includes(nameFilter.toLowerCase()));
         const dateMatches = (!fromDateFilter && !toDateFilter) || (invoice.date >= fromDateFilter && invoice.date <= toDateFilter);
         const particularMatches = !particularFilter || (invoice.particulars && invoice.particulars.toLowerCase().includes(particularFilter.toLowerCase()));
-        return nameMatches && dateMatches && particularMatches;
+        const invoiceNoMatches = !invoiceNoFilter || (invoice.invoiceno && invoice.invoiceno === Number(invoiceNoFilter));
+        return nameMatches && dateMatches && particularMatches && invoiceNoMatches;
     });
     useEffect(() => {
         dispatch(addFilterInvoice(filteredInvoices));
@@ -101,6 +101,19 @@ export default function Invoice() {
                                 className='w-full p-2 my-2 border border-gray-300 text-lg font-[montserrat]'
                                 value={particularFilter}
                                 onChange={e => setParticularFilter(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                    <div className='flex'>
+                        <div className='w-80'>
+                            <label className='text-lg font-[montserrat]'>Invoice Number</label>
+                            <input
+                                type='number'
+                                name='invoiceNo'
+                                placeholder='Invoice Number'
+                                className='w-full p-2 my-2 border border-gray-300 text-lg font-[montserrat]'
+                                value={invoiceNoFilter}
+                                onChange={e => setInvoiceNoFilter(e.target.value)}
                             />
                         </div>
                     </div>
