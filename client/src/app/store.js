@@ -4,8 +4,13 @@ import userReducer from './user/userSlice';
 import inventoryReducer from './inventory/inventorySlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import invoiceReducer from './invoice/invoiceSlice';
 
-const rootReducer = combineReducers({ user: userReducer, inventory: inventoryReducer });
+const rootReducer = combineReducers({
+    user: userReducer,
+    inventory: inventoryReducer,
+    invoice: invoiceReducer,
+});
 
 const persistConfig = {
     key: 'root',
