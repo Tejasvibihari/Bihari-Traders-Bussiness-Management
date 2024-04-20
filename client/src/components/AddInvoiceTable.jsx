@@ -9,8 +9,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import ReactToPrint, { useReactToPrint } from 'react-to-print';
-import { useRef } from 'react';
 import React from 'react';
 
 const AddInvoiceTable = React.forwardRef(({ invoice }, ref) => {
@@ -60,7 +58,7 @@ const AddInvoiceTable = React.forwardRef(({ invoice }, ref) => {
                     Invoice
                 </Typography>
             </Toolbar>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table" ref={ref}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         {headCells.map((headCell) => (
@@ -74,8 +72,8 @@ const AddInvoiceTable = React.forwardRef(({ invoice }, ref) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {invoice.map((row) => (
-                        <StyledTableRow key={row.name}>
+                    {invoice.map((row, i) => (
+                        <StyledTableRow key={i}>
                             <StyledTableCell component="th" scope="row">
                                 {row.invoiceno}
                             </StyledTableCell>

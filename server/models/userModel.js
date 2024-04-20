@@ -19,7 +19,16 @@ const userSchema = new mongoose.Schema({
     },
     otp: {
         type: String
-    }
+    },
+    mobile: {
+        type: String
+    },
+    address: {
+        type: String
+    },
+    gstin: {
+        type: String
+    },
 });
 
 const User = mongoose.model('User', userSchema);

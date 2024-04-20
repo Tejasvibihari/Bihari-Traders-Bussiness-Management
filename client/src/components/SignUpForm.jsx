@@ -18,6 +18,10 @@ export default function SignUpForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [bussinessName, setBusinessName] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [address, setAddress] = useState('');
+    const [gstin, setGstin] = useState('');
+
     const dispatch = useDispatch();
 
     // Snack Open Close
@@ -34,7 +38,7 @@ export default function SignUpForm() {
     };
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const formData = { name, email, password, bussinessName };
+        const formData = { name, email, password, bussinessName, mobile, address, gstin };
         try {
             dispatch(signUpStart())
             const response = await axios.post('/api/user/signup', formData);
@@ -80,8 +84,22 @@ export default function SignUpForm() {
                     </Typography>
                     <TextField id="name" label="Name" variant="filled" fullWidth margin="normal" required value={name} onChange={e => setName(e.target.value)} />
                     <TextField id="email" label="Email" variant="filled" fullWidth margin="normal" required type="email" value={email} onChange={e => setEmail(e.target.value)} />
+                    <TextField id="mobile" label="Mobile" variant="filled" fullWidth margin="normal" required type="number" value={mobile} onChange={e => setMobile(e.target.value)} />
+
+                    <div className='grid grid-cols-2 gap-2'>
+                        <div>
+                            <TextField id="businessName" label="Business Name" variant="filled" fullWidth margin="normal" required value={bussinessName} onChange={e => setBusinessName(e.target.value)} />
+                        </div>
+                        <div>
+                            <TextField id="gstin" label="GSTIN" variant="filled" fullWidth margin="normal" required value={gstin} onChange={e => setGstin(e.target.value)} />
+                        </div>
+                    </div>
+                    <TextField id="address" label="Address" variant="filled" fullWidth margin="normal" required value={address} onChange={e => setAddress(e.target.value)} />
+
                     <TextField id="password" label="Password" variant="filled" fullWidth margin="normal" required type="password" value={password} onChange={e => setPassword(e.target.value)} />
-                    <TextField id="businessName" label="Business Name" variant="filled" fullWidth margin="normal" required value={bussinessName} onChange={e => setBusinessName(e.target.value)} />
+
+
+
                     {/* Sign up Button */}
                     <div className="mt-2 w-full flex justify-center items-center ">
                         <button className=" w-full relative inline-flex h-12 overflow-hidden p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">

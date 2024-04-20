@@ -1,8 +1,7 @@
 import Invoice from '../models/invoiceModel.js';
 
 export const addInvoice = async (req, res) => {
-    const { invoiceno, date, gstin, aadhar, to, address, particulars, hsn, quantity, rate, amount } = req.body;
-    console.log(req.body)
+    const { invoiceno, date, gstin, aadhar, to, address, particulars, hsn, quantity, rate, amount, userId } = req.body;
     try {
         const invoice = new Invoice({
             invoiceno,
@@ -15,7 +14,8 @@ export const addInvoice = async (req, res) => {
             hsn,
             quantity,
             rate,
-            amount
+            amount,
+            userId
         });
         await invoice.save();
         res.status(201).json(invoice);
@@ -37,8 +37,9 @@ export const deleteInvoice = async (req, res) => {
 }
 
 export const getInvoices = async (req, res) => {
+    const { userId } = req.body;
     try {
-        const invoices = await Invoice.find({});
+        const invoices = await Invoice.find({ userId });
         res.json(invoices);
     } catch (error) {
         console.log(error);

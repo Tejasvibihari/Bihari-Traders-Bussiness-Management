@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export const signUp = async (req, res) => {
-    const { name, email, password, bussinessName } = req.body;
+    const { name, email, password, bussinessName, address, gstin, mobile } = req.body;
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -16,7 +16,10 @@ export const signUp = async (req, res) => {
             name,
             email,
             password: hashedPassword,
-            bussinessName
+            bussinessName,
+            address,
+            gstin,
+            mobile
         });
 
         return res.status(201).json({ user: createUser, message: "User created" });

@@ -3,12 +3,16 @@ import Paper from '@mui/material/Paper'
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import AddInvoiceTable from '../components/AddInvoiceTable';
 import axios from 'axios';
-import { useEffect, useState, useRef } from 'react';
-import ReactToPrint from 'react-to-print';
-import { getInvoiceSuccess } from '../app/invoice/invoiceSlice';
+import { useEffect, useState } from 'react';
+
+import { getInvoiceSuccess, addFilterInvoice } from '../app/invoice/invoiceSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+
 export default function Invoice() {
     const invoices = useSelector(state => state.invoice.invoice);
+    const user = useSelector(state => state.user.currentUser);
     const dispatch = useDispatch();
 
     const [nameFilter, setNameFilter] = useState('');
@@ -19,34 +23,36 @@ export default function Invoice() {
     useEffect(() => {
         const fetchInvoices = async () => {
             try {
-                const response = await axios.get('/api/invoice/getinvoices');
+                const userId = {
+                    userId: user._id
+                }
+                const response = await axios.post('/api/invoice/getinvoices', userId);
+                console.log(response.data);
                 dispatch(getInvoiceSuccess(response.data));
             } catch (error) {
                 console.log(error);
             }
         }
         fetchInvoices();
-    }, [dispatch]);
+    }, [dispatch, user._id]);
     const filteredInvoices = invoices.filter(invoice => {
         const nameMatches = !nameFilter || (invoice.to && invoice.to.toLowerCase().includes(nameFilter.toLowerCase()));
         const dateMatches = (!fromDateFilter && !toDateFilter) || (invoice.date >= fromDateFilter && invoice.date <= toDateFilter);
         const particularMatches = !particularFilter || (invoice.particulars && invoice.particulars.toLowerCase().includes(particularFilter.toLowerCase()));
         return nameMatches && dateMatches && particularMatches;
     });
-    // const filteredsInvoices = invoices.filter(invoice => {
-    //     const nameMatches = invoice.to && invoice.to.toLowerCase().includes(nameFilter.toLowerCase());
-    //     const dateMatches = !fromDateFilter || !toDateFilter || (
-    //         new Date(invoice.date) >= new Date(fromDateFilter) &&
-    //         new Date(invoice.date) <= new Date(toDateFilter)
-    //     );
-    //     const particularMatches = invoice.particular && invoice.particular.toLowerCase().includes(particularFilter.toLowerCase());
-    //     return nameMatches && dateMatches && particularMatches;
-    // });
+    useEffect(() => {
+        dispatch(addFilterInvoice(filteredInvoices));
+    }, [filteredInvoices, dispatch])
+
     return (
         <div>
             {/* Dashboard and Paper components */}
             <Dashboard>
                 <Paper elevation={3} sx={{ padding: 3 }}>
+                    <div>
+                        <FilterAltIcon />
+                    </div>
                     {/* Filter input fields */}
                     <div className='flex flex-row gap-4'>
                         {/* Name filter */}
@@ -98,15 +104,33 @@ export default function Invoice() {
                             />
                         </div>
                     </div>
-                    {/* ReactToPrint and AddInvoiceTable components */}
-                    <div className='my-10'>
-                        <ReactToPrint
-                            trigger={() => <button>Download</button>}
-                            content={() => componentRef.current}
-                        />
-                        <AddInvoiceTable invoice={filteredInvoices} />
+                    <div className='my-4'>
+                        <div className='flex items-end justify-end'>
+                            <Link to="/viewinvoice">
+                                <button className="relative inline-flex h-12 overflow-hidden p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ">
+                                    <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#fd1d1d_0%,#833ab4_50%,#fd1d1d_100%)]" />
+                                    <span className="inline-flex h-full w-full cursor-pointer items-center justify-center px-6 font-medium text-center  text-slate-200 transition-all backdrop-blur-3xl"
+                                        style={{
+                                            backgroundImage: 'linear-gradient(110deg, #e63946,40%,#1e2631,55%,#000103)',
+                                            backgroundSize: '200% 100%',
+                                            transition: 'background-position 0.5s ease',
+                                        }}
+                                        onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
+                                        onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
+                                    >
+                                        Get Invoice
+                                    </span>
+                                </button>
+                            </Link>
+                        </div>
                     </div>
                 </Paper>
+                {/* ReactToPrint and AddInvoiceTable components */}
+                <div className='my-10'>
+
+                    <AddInvoiceTable invoice={filteredInvoices} />
+                </div>
+
             </Dashboard>
         </div>
     );

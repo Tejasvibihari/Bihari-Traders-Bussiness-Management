@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import AddInvoiceTable from './AddInvoiceTable'
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
-
+import { useSelector } from 'react-redux';
 
 export default function AddInvoiceForm() {
+    const user = useSelector(state => state.user.currentUser);
     const [formData, setFormData] = useState({
         invoiceno: '',
         date: '',
@@ -30,6 +31,7 @@ export default function AddInvoiceForm() {
     const [quantity, setQuantity] = useState('');
     const [rate, setRate] = useState('');
     const [amount, setAmount] = useState('');
+    const [userId, setUserId] = useState();
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -79,9 +81,9 @@ export default function AddInvoiceForm() {
 
     useEffect(() => {
         setAmount(rate * quantity);
-        setFormData({ invoiceno, date, gstin, aadhar, to, address, particulars, hsn, quantity, rate, amount });
-        console.log(invoice);
-    }, [invoiceno, date, gstin, aadhar, to, address, particulars, hsn, quantity, rate, amount, invoice]);
+        setUserId(user._id)
+        setFormData({ invoiceno, date, gstin, aadhar, to, address, particulars, hsn, quantity, rate, amount, userId });
+    }, [invoiceno, date, gstin, aadhar, to, address, particulars, hsn, quantity, rate, amount, invoice, user._id, userId]);
 
 
     const handleInvoiceSubmit = async (event) => {
@@ -115,6 +117,7 @@ export default function AddInvoiceForm() {
                                     <label className='text-lg font-[montserrat]'>Invoice No.<span className="text-red-700">*</span></label>
                                     <input type='number' name='invoiceno' value={invoiceno} onChange={handleInputChange} placeholder='Invoice No.' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                                 </div>
+                                <input type='text' value={userId} hidden />
                                 <div className='w-full'>
                                     <label className='text-lg font-[montserrat]'>Date<span className="text-red-700">*</span></label>
                                     <input type='date' name='date' value={date} onChange={handleInputChange} placeholder='Date' className='w-full p-2 my-2 border border-gray-300 text-lg' required />

@@ -43,6 +43,11 @@ const InvoiceSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    userId: {
+        type: String,
+        required: true
+
+    }
 });
 
 const Invoice = mongoose.model('Invoice', InvoiceSchema);

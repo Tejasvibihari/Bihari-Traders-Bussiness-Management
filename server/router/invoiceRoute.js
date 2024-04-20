@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/addinvoice', addInvoice);
 router.delete('/deleteinvoice/:id', deleteInvoice)
-router.get('/getinvoices', getInvoices)
+router.post('/getinvoices', getInvoices)
 
 
 export default router;
