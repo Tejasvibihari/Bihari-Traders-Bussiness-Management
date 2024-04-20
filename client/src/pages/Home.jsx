@@ -13,9 +13,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { getInventorySuccess } from '../app/inventory/inventorySlice';
+import { getInvoiceSuccess } from '../app/invoice/invoiceSlice';
 
 export default function Home() {
-    const user = useSelector(state => state.user);
+
+    const user = useSelector(state => state.user.currentUser);
+    const invoices = useSelector(state => state.invoice.invoice);
+    const inventory = useSelector(state => state.inventory.inventory);
+    // console.log(inventory)
     const dispatch = useDispatch()
     useEffect(() => {
         const getInventory = async () => {
@@ -31,6 +36,26 @@ export default function Home() {
         }
         getInventory();
     })
+    useEffect(() => {
+        const fetchInvoices = async () => {
+            try {
+                const userId = {
+                    userId: user._id
+                }
+                const response = await axios.post('/api/invoice/getinvoices', userId);
+                dispatch(getInvoiceSuccess(response.data));
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchInvoices();
+    }, [dispatch, user._id]);
+    const cementInvoices = invoices.filter(invoice => invoice.particulars === "Cement");
+    const ironInvoices = invoices.filter(invoice => invoice.particulars === "Iron");
+    const cementInventory = inventory.filter(item => item.category === "Cement");
+    const ironInventory = inventory.filter(item => item.category === "Iron");
+    const stoneInventory = inventory.filter(item => item.category === "5/8" || item.category === "3/4");
+    const chemicalInventory = inventory.filter(item => item.category === "Chemical");
     return (
         <div>
             <Dashboard>
@@ -40,14 +65,14 @@ export default function Home() {
                             {/* First card */}
                             <DashBoardCard
                                 title="Cement"
-                                value="345"
+                                value={cementInventory.length}
                                 icon={Icon1}
                                 dynamicColor="card2"
                             />
                             {/* second card */}
                             <DashBoardCard
                                 title="Chemical"
-                                value="345"
+                                value={chemicalInventory.length}
                                 icon={Icon2}
                                 dynamicColor="card3"
                             />
@@ -55,7 +80,7 @@ export default function Home() {
                             {/* thrid card */}
                             <DashBoardCard
                                 title="Iron"
-                                value="345"
+                                value={ironInventory.length}
                                 icon={Icon3}
                                 dynamicColor="card4"
                             />
@@ -63,7 +88,7 @@ export default function Home() {
                             {/* forth Stone card  */}
                             <DashBoardCard
                                 title="Stone"
-                                value="345"
+                                value={stoneInventory.length}
                                 icon={Icon4}
                                 dynamicColor="card1"
                             />
@@ -79,16 +104,16 @@ export default function Home() {
                                     <div className='flex items-center'>
                                         <img className='h-48 w-full  object-cover md:w-48' src={Icon} alt='Invoice icon' />
                                     </div>
-                                    <div className='p-8 flex flex-row gap-4'>
-                                        <div className=''>
+                                    <div className='p-4 flex flex-row gap-4'>
+                                        <div className=' flex flex-col items-center justify-ccenter'>
                                             <div className='inline-block text-lg uppercase tracking-wide font-extrabold font-[montserrat]'>Total invoice</div>
-                                            <div className='mt-1 inline-block text-2xl leading-tight  font-semibold text-black text-center items-center justify-center py-7 px-3'>4545</div>
+                                            <div className='mt-1 inline-block text-2xl leading-tight  font-semibold text-black text-center items-center justify-center py-7 px-3'>{invoices.length}</div>
                                         </div>
-                                        <div className='mt-2 text-gray-900'>
-                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Iron invoice: 45</div>
-                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Chemical invoice: 45</div>
-                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Stone invoice: 45</div>
-                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Cement invoice: 45</div>
+                                        <div className='mt-2 text-gray-900 flex items-center flex-col justify-center'>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Iron invoice:- {ironInvoices.length}</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Chemical invoice:- {cementInvoices.length}</div>
+                                            {/* <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Stone invoice: 45</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Cement invoice: 45</div> */}
                                         </div>
                                     </div>
                                 </div>
