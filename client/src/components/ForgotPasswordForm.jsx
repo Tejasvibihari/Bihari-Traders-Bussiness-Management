@@ -80,7 +80,7 @@ export default function ForgotPasswordForm() {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {loading ? "Please Wait..." : "Reset Your Password"}
+                                {loading ? "Please Wait Sending Email..." : "Reset Your Password"}
                             </span>
                         </button>
                     </div>

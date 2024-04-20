@@ -20,13 +20,12 @@ export default function Home() {
     const user = useSelector(state => state.user.currentUser);
     const invoices = useSelector(state => state.invoice.invoice);
     const inventory = useSelector(state => state.inventory.inventory);
-    // console.log(inventory)
     const dispatch = useDispatch()
     useEffect(() => {
         const getInventory = async () => {
             try {
                 const userId = {
-                    userId: user.currentUser._id
+                    userId: user._id
                 }
                 const response = await axios.post('/api/inventory/getinventory', userId);
                 dispatch(getInventorySuccess(response.data))
@@ -35,7 +34,7 @@ export default function Home() {
             }
         }
         getInventory();
-    })
+    }, [user._id, dispatch])
     useEffect(() => {
         const fetchInvoices = async () => {
             try {

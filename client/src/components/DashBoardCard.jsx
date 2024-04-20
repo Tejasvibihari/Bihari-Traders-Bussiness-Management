@@ -26,7 +26,7 @@ export default function DashBoardCard({ title, value, icon, dynamicColor }) {
 
 DashBoardCard.propTypes = {
     title: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.number,
     icon: PropTypes.string,
     dynamicColor: PropTypes.string,
 }

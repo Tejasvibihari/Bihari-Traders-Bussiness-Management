@@ -28,7 +28,6 @@ export const getInventory = async (req, res) => {
     const { userId } = req.body;
     try {
         const inventory = await Inventory.find({ userId });
-        console.log(inventory)
         res.status(200).json(inventory);
     } catch (error) {
         res.status(404).json({ message: error.message });

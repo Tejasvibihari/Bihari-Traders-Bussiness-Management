@@ -26,7 +26,6 @@ export default function Invoice() {
                     userId: user._id
                 }
                 const response = await axios.post('/api/invoice/getinvoices', userId);
-                console.log(response.data);
                 dispatch(getInvoiceSuccess(response.data));
             } catch (error) {
                 console.log(error);

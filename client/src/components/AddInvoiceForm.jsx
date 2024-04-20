@@ -31,7 +31,7 @@ export default function AddInvoiceForm() {
     const [quantity, setQuantity] = useState('');
     const [rate, setRate] = useState('');
     const [amount, setAmount] = useState('');
-    const [userId, setUserId] = useState();
+    const [userId, setUserId] = useState('');
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -81,7 +81,6 @@ export default function AddInvoiceForm() {
 
     useEffect(() => {
         setAmount(rate * quantity);
-        setUserId(user._id)
         setFormData({ invoiceno, date, gstin, aadhar, to, address, particulars, hsn, quantity, rate, amount, userId });
     }, [invoiceno, date, gstin, aadhar, to, address, particulars, hsn, quantity, rate, amount, invoice, user._id, userId]);
 
@@ -105,6 +104,10 @@ export default function AddInvoiceForm() {
             console.log(error);
         }
     }
+
+    useEffect(() => {
+        setUserId(user._id);
+    }, []);
     return (
         <>
             <Paper elevation={3} sx={{ padding: 3 }} >
