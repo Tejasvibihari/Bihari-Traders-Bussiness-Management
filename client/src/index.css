@@ -53,6 +53,19 @@
     border-radius: 20px 20px 0 0;
 }
 
+.border-gradient {
+    position: relative;
+    padding: 10px;
+    border: 3px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #DE4612, #0B4286,#DE4612);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+   
+    box-decoration-break: clone;
+    /* This makes the border gradient continuous between elements */
+}
+
 
 
 
