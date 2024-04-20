@@ -38,9 +38,12 @@ export default function AddInvoiceForm() {
             case 'invoiceno':
                 setInvoiceno(value);
                 break;
-            case 'date':
-                setDate(value);
+            case 'date': {
+                const date = new Date(value);
+                const dateString = date.toISOString().slice(0, 10);
+                setDate(dateString);
                 break;
+            }
             case 'gstin':
                 setGstin(value);
                 break;
