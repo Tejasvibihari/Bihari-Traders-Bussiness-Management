@@ -4,7 +4,7 @@ import invoiceRoute from './router/invoiceRoute.js';
 import userRoute from './router/userRoute.js'
 import inventoryRoute from './router/inventoryRoute.js';
 import brandRouter from './router/brandRoute.js'
-
+import wholesaleRouter from './router/wholesaleRoute.js'
 const app = express();
 const port = 3000;
 mongoose.connect('mongodb://localhost:27017/bihariTraders')
@@ -18,6 +18,7 @@ app.use('/api/user/', userRoute);
 app.use('/api/invoice', invoiceRoute);
 app.use('/api/inventory', inventoryRoute);
 app.use('/api/inventory/brand', brandRouter);
+app.use('/api/inventory/wholesale', wholesaleRouter);
 
 app.listen(port, (req, res) => {
     console.log(`Connected to PORT ${port}...`)
