@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp"
 import PrivateRoute from './components/PrivateRoute';
 import Profile from "./pages/Profile"
 import Sample from "./pages/Sample"
+import WholesaleManagement from "./pages/WholesaleManagement"
 export default function App() {
   return (
     <>
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="/addinvoice" element={<AddInvoice />} />
             <Route path="/invoice" element={<Invoice />} />
             <Route path="/inventory" element={<Inventory />} />
+            <Route path="/wholesale" element={<WholesaleManagement />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/h" element={<Sample />} />
           </Route>
