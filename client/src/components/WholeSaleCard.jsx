@@ -17,7 +17,7 @@ export default function InventoryCard({ productname, brand, weight, quantity, cf
                             <div>
                                 {brand}
                             </div>
-                            <div className='text-lg'>
+                            <div className='text-lg text-[#e63946]'>
                                 {clientName}
                             </div>
                         </div>
