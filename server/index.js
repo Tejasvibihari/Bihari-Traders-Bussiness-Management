@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGODB_URI)
     .catch(err => console.error('Could not connect to MongoDB...'));
 
 app.use(cors({
-    origin: 'https://bihari-traders-api.vercel.app',
+    origin: 'https://bihari-traders.vercel.app',
     methods: ['GET', 'POST'], // Specify allowed HTTP methods
     credentials: true // Enable credentials
 }));
