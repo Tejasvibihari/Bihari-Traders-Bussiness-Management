@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import { StockInCementForm, StockOutCementForm, StockInIronForm, StockOutIronForm, StockInGitiForm, StockOutGitiForm } from './WholeSaleStockUpdateFrom';
+import { StockOutCementForm, StockOutIronForm, StockOutGitiForm } from './WholeSaleStockUpdateFrom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { updateInventory } from '../app/inventory/inventorySlice';
+import { updateWholesale } from '../app/wholesale/wholesaleSlice';
 
 
 export default function WholeSaleUpdateForm({ product, ...props }) {
@@ -26,7 +23,7 @@ export default function WholeSaleUpdateForm({ product, ...props }) {
         };
         try {
             const response = await axios.post('/api/inventory/wholesale/updatewholesale', data);
-            dispatch(updateInventory(response.data.data));
+            dispatch(updateWholesale(response.data.data));
 
             if (props.onSuccess) {
                 props.onSuccess();

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { userLogout } from '../app/user/userSlice';
 import { logoutInventory } from '../app/inventory/inventorySlice';
 import { logoutInvoice } from '../app/invoice/invoiceSlice';
+import { logoutWholesale } from '../app/wholesale/wholesaleSlice';
 
 export default function Profile() {
     const user = useSelector(state => state.user.currentUser)
@@ -14,6 +15,7 @@ export default function Profile() {
         dispatch(userLogout())
         dispatch(logoutInventory())
         dispatch(logoutInvoice())
+        dispatch(logoutWholesale())
     }
 
     return (

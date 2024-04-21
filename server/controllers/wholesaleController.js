@@ -36,3 +36,12 @@ export const updateWholesale = async (req, res) => {
         res.status(500).json({ message: "An error occurred while updating the inventory" });
     }
 };
+export const getWholesale = async (req, res) => {
+    const { userId } = req.body;
+    try {
+        const wholesale = await Wholesale.find({ userId });
+        res.status(200).json(wholesale);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}

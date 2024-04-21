@@ -2,7 +2,7 @@ import AddWholeSale from '../components/AddWholeSale'
 import Dashboard from '../components/Dashboard'
 import WholeSaleCard from '../components/WholeSaleCard'
 import { useSelector } from 'react-redux'
-
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -15,14 +15,28 @@ import WholeSaleDialogCard from '../components/WholeSaleDialogCard';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import WholeSaleUpdateForm from '../components/WholeSaleUpdateFrom';
+import Paper from '@mui/material/Paper';
+
+// import wholesaleSlice from '../app/wholesale/wholesaleSlice';
 
 
 
 export default function WholesaleManagement() {
-    const inventory = useSelector(state => state.inventory.inventory)
+    const wholesale = useSelector(state => state.wholesale.wholesale)
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const [snackOpen, setSnackOpen] = useState(false);
+
+    const [clientName, setClientName] = useState('');
+    const [category, setCategory] = useState('');
+
+    const handleClientNameChange = (event) => {
+        setClientName(event.target.value);
+    };
+
+    const handleCategoryChange = (event) => {
+        setCategory(event.target.value);
+    };
 
     const handleClickOpen = (item) => {
         setOpen(true);
@@ -49,10 +63,10 @@ export default function WholesaleManagement() {
         setSnackOpen(false);
     };
 
-    const cementItems = inventory.filter(item => item.category === "Cement");
-    const ironItems = inventory.filter(item => item.category === "Iron");
-    const gitiItems = inventory.filter(item => item.category === "3/4" || item.category === "5/8");
-    const chemicalItems = inventory.filter(item => item.category === "Chemicals");
+    const cementItems = wholesale.filter(item => item.category === "Cement");
+    const ironItems = wholesale.filter(item => item.category === "Iron");
+    const gitiItems = wholesale.filter(item => item.category === "3/4" || item.category === "5/8");
+    const chemicalItems = wholesale.filter(item => item.category === "Chemicals");
 
     return (
         <div>
@@ -101,14 +115,26 @@ export default function WholesaleManagement() {
                         </DialogActions>
                     </Dialog>
                 </div>
-                {/* <Paper elevation={3} className='px-3 my-2'> */}
-                {cementItems.length > 0 ? (
-                    <div>
-                        <div className='pt-4 text-xl font-[montserrat] text-red-600'>
-                            Cement
+                <Paper elevation={3} className='p-3 my-2'>
+                    <div className='my-2'>
+                        <FilterAltIcon />
+                    </div>
+                    <div className='flex flex-row gap-5'>
+                        <div className='flex flex-col'>
+                            <label className='my-1'>Name</label>
+                            <input placeholder='Client Name' name='clientName' className='border border-black p-2 w-72' onChange={handleClientNameChange} />
                         </div>
-                        <div className='grid md:grid-cols-5 items-center justify-center'>
-                            {cementItems.map((item, index) => (
+                        <div className='flex flex-col'>
+                            <label className='my-1'>Category</label>
+                            <input placeholder='Category' name='category' className='border border-black p-2 w-72' onChange={handleCategoryChange} />
+                        </div>
+                    </div>
+                </Paper>
+                {/* <Paper elevation={3} className='px-3 my-2'> */}
+                {wholesale.length > 0 ? (
+                    <div>
+                        <div className='grid md:grid-cols-5 gap-4 items-center justify-center'>
+                            {wholesale.filter(item => item.clientName.toLowerCase().includes(clientName.toLowerCase()) && item.category.toLowerCase().includes(category.toLowerCase())).map((item, index) => (
                                 <WholeSaleCard
                                     key={index}
                                     productname={item.name}
@@ -123,77 +149,10 @@ export default function WholesaleManagement() {
                             ))}
                         </div>
                     </div>
-                ) : null}
+                ) : "Nothing Added"}
                 {/* </Paper> */}
                 {/* <Paper elevation={3} className='px-3 my-2'> */}
-                {ironItems.length > 0 ? (
-                    <div>
-                        <div className='pt-4 text-xl font-[montserrat] text-red-600'>
-                            Iron
-                        </div>
-                        <div className='grid md:grid-cols-5 items-center justify-center'>
-                            {inventory.filter(item => item.category === "Iron").map((item, index) => {
-                                return <WholeSaleCard
-                                    key={index}
-                                    productname={item.name}
-                                    brand={item.brand}
-                                    clientName={item.clientName}
-                                    weight={item.weight}
-                                    quantity={item.quantity}
-                                    cft={item.cft}
-                                    category={item.category}
-                                    handleClick={() => handleClickOpen(item)}
-                                />
-                            })}
-                        </div>
-                    </div>
-                ) : null}
-                {/* </Paper> */}
-                {/* <Paper elevation={3} className='px-3 my-2'> */}
-                {gitiItems.length > 0 ? (
-                    <div>
-                        <div className='pt-4 text-xl font-[montserrat] text-red-600'>
-                            Giti
-                        </div>
-                        <div className='grid md:grid-cols-5 items-center justify-center'>
-                            {inventory.filter(item => item.category === "3/4" || item.category === "5/8").map((item, index) => {
-                                return <WholeSaleCard
-                                    key={index}
-                                    productname={item.name}
-                                    brand={item.brand}
-                                    clientName={item.clientName}
-                                    weight={item.weight}
-                                    quantity={item.quantity}
-                                    cft={item.cft}
-                                    category={item.category}
-                                    handleClick={() => handleClickOpen(item)}
-                                />
-                            })}
-                        </div>
-                    </div>) : null}
-                {/* </Paper> */}
-                {/* <Paper elevation={3} className='px-3 my-2'> */}
-                {chemicalItems.length > 0 ? (
-                    <div>
-                        <div className='pt-4 text-xl font-[montserrat] text-red-600'>
-                            Chemicals
-                        </div>
-                        <div className='grid md:grid-cols-5 items-center justify-center'>
-                            {inventory.filter(item => item.category === "Chemicals").map((item, index) => {
-                                return <WholeSaleCard
-                                    key={index}
-                                    productname={item.name}
-                                    brand={item.brand}
-                                    clientName={item.clientName}
-                                    weight={item.weight}
-                                    quantity={item.quantity}
-                                    cft={item.cft}
-                                    category={item.category}
-                                    handleClick={() => handleClickOpen(item)}
-                                />
-                            })}
-                        </div>
-                    </div>) : null}
+
                 {/* </Paper> */}
                 <div className='fixed bottom-0 right-0 mb-10 mr-10'>
                     <AddWholeSale />

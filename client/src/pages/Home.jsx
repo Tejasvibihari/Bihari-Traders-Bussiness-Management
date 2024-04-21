@@ -14,12 +14,14 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { getInventorySuccess } from '../app/inventory/inventorySlice';
 import { getInvoiceSuccess } from '../app/invoice/invoiceSlice';
+import { getWholesaleSuccess } from '../app/wholesale/wholesaleSlice.js';
 
 export default function Home() {
 
     const user = useSelector(state => state.user.currentUser);
     const invoices = useSelector(state => state.invoice.invoice);
     const inventory = useSelector(state => state.inventory.inventory);
+
     const dispatch = useDispatch()
     useEffect(() => {
         const getInventory = async () => {
@@ -35,6 +37,23 @@ export default function Home() {
         }
         getInventory();
     }, [user._id, dispatch])
+    // Get Data From data base of Wholesale 
+    useEffect(() => {
+        const getWholesale = async () => {
+            try {
+                const userId = {
+                    userId: user._id
+                }
+                const response = await axios.post('/api/inventory/wholesale/getwholesale', userId);
+                console.log(response.data)
+                dispatch(getWholesaleSuccess(response.data))
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getWholesale();
+    }, [user._id, dispatch])
+
     useEffect(() => {
         const fetchInvoices = async () => {
             try {

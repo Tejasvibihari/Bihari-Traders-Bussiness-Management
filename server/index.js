@@ -1,16 +1,21 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import invoiceRoute from './router/invoiceRoute.js';
 import userRoute from './router/userRoute.js'
 import inventoryRoute from './router/inventoryRoute.js';
 import brandRouter from './router/brandRoute.js'
 import wholesaleRouter from './router/wholesaleRoute.js'
+import dotenv from 'dotenv';
+
+dotenv.config();
 const app = express();
 const port = 3000;
-mongoose.connect('mongodb://localhost:27017/bihariTraders')
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('Connected to MongoDB...'))
     .catch(err => console.error('Could not connect to MongoDB...'));
 
+app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
