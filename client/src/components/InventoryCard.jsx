@@ -1,11 +1,10 @@
 import Grow from '@mui/material/Grow';
-import { Link } from "react-router-dom";
 
 export default function InventoryCard({ productname, brand, weight, quantity, cft, category, handleClick }) {
     return (
         <>
             <div className='flex justify-center items-center mb-7'>
-                <Grow in="load">
+                <Grow in>
                     <div className='relative flex flex-col my-4 w-60 h-60 border p-4 shadow-md  bg-gray-200 border-gradient'>
 
                         <div className='flex justify-between'>

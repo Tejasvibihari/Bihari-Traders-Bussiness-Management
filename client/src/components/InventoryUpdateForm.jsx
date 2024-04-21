@@ -136,5 +136,5 @@ InventoryUpdateForm.propTypes = {
         weight: PropTypes.number,
         quantity: PropTypes.number,
         cft: PropTypes.number,
-    }).isRequired,
+    }),
 };
