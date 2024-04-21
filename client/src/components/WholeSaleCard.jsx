@@ -56,7 +56,7 @@ export default function InventoryCard({ productname, brand, weight, quantity, cf
                                         }}
                                         onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                         onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
-                                    // onClick={handleClick}
+                                    onClick={handleClick}
                                     >
                                         Update
                                     </span>

@@ -323,6 +323,7 @@ export default function AddWholeSale() {
                                 </span>
                             </button>
                         </div>
+                        
                     </Box>
                 </DialogContent>
                 <DialogActions>

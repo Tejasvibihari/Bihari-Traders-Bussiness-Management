@@ -21,6 +21,7 @@ export default function Inventory() {
     const [open, setOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const [snackOpen, setSnackOpen] = useState(false);
+    
     const handleClickOpen = (item) => {
         setOpen(true);
         setSelectedItem(item);
