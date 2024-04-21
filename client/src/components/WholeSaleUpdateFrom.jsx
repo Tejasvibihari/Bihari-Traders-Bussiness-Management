@@ -14,7 +14,7 @@ export default function WholeSaleUpdateForm({ product, ...props }) {
     const [selectedValue, setSelectedValue] = useState('');
 
     const dispatch = useDispatch();
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -25,7 +25,7 @@ export default function WholeSaleUpdateForm({ product, ...props }) {
             cft: formData.get('cft'),
         };
         try {
-            const response = await axios.post('/api/inventory/updateinventory', data);
+            const response = await axios.post('/api/inventory/wholesale/updatewholesale', data);
             dispatch(updateInventory(response.data.data));
 
             if (props.onSuccess) {
