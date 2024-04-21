@@ -34,7 +34,7 @@ export default function AddWholeSale() {
     // SnackBar State 
     const [snackBar, setSnackBar] = useState(false);
     // Inventory State 
-    const [Inventoryopen, setInventoryOpen] = useState(false);
+    const [wholeSaleopen, setWholeSaleOpen] = useState(false);
     //Speed Dial State 
     const [speedDialopen, setSpeedDialOpen] = useState(false);
     //Brand Form Open Close State
@@ -47,7 +47,7 @@ export default function AddWholeSale() {
     const [formBrand, setFormBrand] = useState([]);
     // Inventory Form State
     const [name, setName] = useState("");
-    const [hsnCode, setHsnCode] = useState("");
+    const [clientName, setClientName] = useState("");
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
     const [weight, setWeight] = useState("");
@@ -62,7 +62,7 @@ export default function AddWholeSale() {
     const handleSnackBarOpen = () => {
         setSnackBar(true);
         setName("");
-        setHsnCode("");
+        setClientName("");
         setCategory("");
         setBrand("");
         setWeight("");
@@ -82,21 +82,21 @@ export default function AddWholeSale() {
     const handleSpeedDialOpen = () => setSpeedDialOpen(true);
     const handleSpeedDialClose = () => setSpeedDialOpen(false);
     // Inventory Form Open Close 
-    const handleInventoryOpen = () => {
-        setInventoryOpen(true);
+    const handleWholeSaleOpen = () => {
+        setWholeSaleOpen(true);
     };
-    const handleInventoryClose = () => {
-        setInventoryOpen(false);
+    const handleWholeSaleClose = () => {
+        setWholeSaleOpen(false);
     };
 
     // Inventory Form Handling
-    const handleInventorySubmit = async (event) => {
+    const handlewholeSaleSubmit = async (event) => {
         event.preventDefault();
         try {
             dispatch(addInventoryStart())
             const inventoryFormData = {
                 name: name,
-                hsnCode: hsnCode,
+                clientName: clientName,
                 category: category,
                 brand: brand,
                 weight: weight,
@@ -106,7 +106,7 @@ export default function AddWholeSale() {
             }
             const inventoryData = await axios.post("/api/inventory/addinventory", inventoryFormData);
             setInventoryMsg(inventoryData.data.message)
-            handleInventoryClose()
+            handleWholeSaleClose()
             handleSnackBarOpen()
             console.log(inventoryData.data)
             dispatch(addInventorySuccess(inventoryData.data.newInventory))
@@ -179,13 +179,13 @@ export default function AddWholeSale() {
                         icon={<PlaylistAddCircleIcon />}
                         tooltipTitle="Wholesale"
                         tooltipOpen
-                        onClick={handleInventoryOpen}
+                        onClick={handleWholeSaleOpen}
                     />
                 </SpeedDial>
             </Box>
             <Dialog
-                open={Inventoryopen}
-                onClose={handleInventoryClose}
+                open={wholeSaleopen}
+                onClose={handleWholeSaleClose}
             >
                 <DialogTitle>Add Product To Inventory</DialogTitle>
                 <DialogContent>
@@ -193,7 +193,7 @@ export default function AddWholeSale() {
                         To subscribe to this website, please enter your email address here. We
                         will send updates occasionally.
                     </DialogContentText>
-                    <Box component="form" onSubmit={handleInventorySubmit} noValidate sx={{ mt: 3 }}>
+                    <Box component="form" onSubmit={handlewholeSaleSubmit} noValidate sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
@@ -211,10 +211,10 @@ export default function AddWholeSale() {
                                 <TextField
                                     required
                                     fullWidth
-                                    id="hsncode"
-                                    label="HSN Code"
-                                    name="hsn"
-                                    onChange={(event) => setHsnCode(event.target.value)}
+                                    id="clientname"
+                                    label="Client Name"
+                                    name="clientname"
+                                    onChange={(event) => setClientName(event.target.value)}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -327,10 +327,10 @@ export default function AddWholeSale() {
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleInventoryClose}>Cancel</Button>
+                    <Button onClick={handleWholeSaleClose}>Cancel</Button>
                 </DialogActions>
             </Dialog>
-            {/* Whole Sale Add Form Ended */}
+            {/* Whole Sale  Form Ended */}
 
         </div >
     )
