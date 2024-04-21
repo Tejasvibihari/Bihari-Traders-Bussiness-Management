@@ -1,7 +1,7 @@
 import Wholesale from '../models/wholeSaleModel.js';
 
 export const addWholesale = async (req, res) => {
-    const { productName, name, category, brand, weight, quantity, cft, userId } = req.body
+    const { name, clientName, category, brand, weight, quantity, cft, userId } = req.body
     try {
         const createWholesale = new Wholesale({
             name,
@@ -14,7 +14,7 @@ export const addWholesale = async (req, res) => {
             userId
         })
         await createWholesale.save()
-        res.status(200).json({ message: "Wholesale added successfully" })
+        res.status(200).json({ createWholesale, message: "Client added successfully" })
 
     } catch (error) {
         console.log(error);
