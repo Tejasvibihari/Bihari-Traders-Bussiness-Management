@@ -41,7 +41,7 @@ export default function SignUpForm() {
         const formData = { name, email, password, bussinessName, mobile, address, gstin };
         try {
             dispatch(signUpStart())
-            const response = await axios.post('https://bihari-traders-api.vercel.app/api/user/signup', formData);
+            const response = await axios.post('/api/user/signup', formData);
             dispatch(signUpSuccess(response.data))
             handleSnackOpen()
         } catch (error) {
