@@ -16,12 +16,11 @@ import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
-import DomainAddIcon from '@mui/icons-material/DomainAdd';
 import axios from 'axios';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { useSelector, useDispatch } from 'react-redux';
-import { addInventoryError, addInventoryStart, addInventorySuccess } from '../app/inventory/inventorySlice';
+import { addWholesaleError, addWholesaleStart, addWholesaleSuccess } from '../app/wholesale/wholesaleSlice';
 
 
 
@@ -29,7 +28,7 @@ import { addInventoryError, addInventoryStart, addInventorySuccess } from '../ap
 
 export default function AddWholeSale() {
     const user = useSelector(state => state.user)
-    const inventory = useSelector(state => state.inventory)
+    const wholesale = useSelector(state => state.wholesale)
     const dispatch = useDispatch()
     // SnackBar State 
     const [snackBar, setSnackBar] = useState(false);
@@ -54,7 +53,7 @@ export default function AddWholeSale() {
     const [quantity, setQuantity] = useState("");
     const [cft, setCft] = useState("");
     const [userId, setUserId] = useState("");
-    const [inventoryMsg, setInventoryMsg] = useState("");
+    const [wholesaleMsg, setWholesaleMsg] = useState("");
 
 
 
@@ -93,8 +92,8 @@ export default function AddWholeSale() {
     const handlewholeSaleSubmit = async (event) => {
         event.preventDefault();
         try {
-            dispatch(addInventoryStart())
-            const inventoryFormData = {
+            dispatch(addWholesaleStart())
+            const wholesaleFormData = {
                 name: name,
                 clientName: clientName,
                 category: category,
@@ -104,15 +103,15 @@ export default function AddWholeSale() {
                 cft: cft,
                 userId: userId
             }
-            const inventoryData = await axios.post("/api/inventory/addinventory", inventoryFormData);
-            setInventoryMsg(inventoryData.data.message)
+            console.log(wholesaleFormData)
+            const wholesaleData = await axios.post("/api/inventory/wholesale/addwholsale", wholesaleFormData);
+            setWholesaleMsg(wholesaleData.data.message)
             handleWholeSaleClose()
             handleSnackBarOpen()
-            console.log(inventoryData.data)
-            dispatch(addInventorySuccess(inventoryData.data.newInventory))
+            dispatch(addWholesaleSuccess(wholesaleData.data.createWholesale))
         } catch (error) {
             console.log(error)
-            dispatch(addInventoryError(error.response.data.message))
+            dispatch(addWholesaleError(error.response.data.message))
         }
     }
 
@@ -161,7 +160,7 @@ export default function AddWholeSale() {
                     variant="filled"
                     sx={{ width: '100%' }}
                 >
-                    {brandMsg === "Brand Created Successfully" ? brandMsg : (inventoryMsg === "Product Added to Inventory successfully" ? inventoryMsg : null)}
+                    {brandMsg === "Brand Created Successfully" ? brandMsg : (wholesaleMsg === "Client added successfully" ? wholesaleMsg : null)}
                 </Alert>
             </Snackbar>
 
@@ -187,7 +186,7 @@ export default function AddWholeSale() {
                 open={wholeSaleopen}
                 onClose={handleWholeSaleClose}
             >
-                <DialogTitle>Add Product To Inventory</DialogTitle>
+                <DialogTitle>Add Inventory Sent to Client</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         To subscribe to this website, please enter your email address here. We
@@ -320,7 +319,7 @@ export default function AddWholeSale() {
                                     onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                     onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                                 >
-                                    {inventory.loading ? "Creating Product..." : "Create Product"}
+                                    {wholesale.loading ? "Add Client..." : "Add Client"}
                                 </span>
                             </button>
                         </div>

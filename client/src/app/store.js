@@ -5,11 +5,13 @@ import inventoryReducer from './inventory/inventorySlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import invoiceReducer from './invoice/invoiceSlice';
+import wholesaleReducer from './wholesale/wholesaleSlice';
 
 const rootReducer = combineReducers({
     user: userReducer,
     inventory: inventoryReducer,
     invoice: invoiceReducer,
+    wholesale: wholesaleReducer,
 });
 
 const persistConfig = {
