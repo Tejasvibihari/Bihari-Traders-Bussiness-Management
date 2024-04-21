@@ -4,8 +4,8 @@ export const addWholesale = async (req, res) => {
     const { productName, name, category, brand, weight, quantity, cft, userId } = req.body
     try {
         const createWholesale = new Wholesale({
-            productName,
             name,
+            clientName,
             category,
             brand,
             weight,

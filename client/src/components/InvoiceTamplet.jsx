@@ -26,6 +26,7 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
                         <div className="grid grid-cols-2 gap-2">
                             <div className="p-10 font-bold font-[italina] text-xl">
                                 {user.bussinessName}
+
                             </div>
                             <div className="col-span-1 flex flex-col bg-gradient-to-t from-[#ffb400] to-[#ff8a00] justify-center items-end pr-12 border rounded-es-[100px] text-white font-semibold">
                                 <div>
@@ -149,8 +150,13 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
                             <div>
 
                             </div>
-                            <div className="text-center">
-                                Authorised Signature
+                            <div className=" flex flex-col text-center items-center gap-2">
+                                <div>
+                                    <img src='./image/Signature.webp' className='w-32' alt='Signature' />
+                                </div>
+                                <div>
+                                    Authorised Signature
+                                </div>
                             </div>
                         </div>
                     </div>

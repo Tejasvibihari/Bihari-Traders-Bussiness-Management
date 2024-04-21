@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 
 const wholesaleSchema = new mongoose.Schema({
-    productName: {
+    name: {
         type: String,
         required: true
     },
-    name: {
+    clientName: {
         type: String,
         required: true
     },
