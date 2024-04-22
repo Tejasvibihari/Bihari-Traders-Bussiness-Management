@@ -43,7 +43,7 @@ export default function SignInForm() {
         try {
             dispatch(signInStart())
             const formData = { email, password };
-            const response = await client.post('/api/user/signin', formData);
+            const response = await client.post('api/user/signin', formData);
             dispatch(signInSuccess(response.data))
             localStorage.setItem('token', response.data.token);
             navigate("/")
