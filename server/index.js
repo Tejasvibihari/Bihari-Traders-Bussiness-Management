@@ -11,6 +11,7 @@ dotenv.config();
 const app = express();
 const port = 3000;
 mongoose.connect(process.env.MONGODB_URI)
+    // mongoose.connect("mongodb://localhost:27017/bihariTraders")
     .then(() => console.log('Connected to MongoDB...'))
     .catch(err => console.error('Could not connect to MongoDB...'));
 
