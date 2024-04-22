@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 // import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import axios from 'axios';
+import client from '../service/axiosClient';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signInStart, signInSuccess, signInFailure } from '../app/user/userSlice';
@@ -43,7 +43,7 @@ export default function SignInForm() {
         try {
             dispatch(signInStart())
             const formData = { email, password };
-            const response = await axios.post('/api/user/signin', formData);
+            const response = await client.post('/api/user/signin', formData);
             dispatch(signInSuccess(response.data))
             localStorage.setItem('token', response.data.token);
             navigate("/")

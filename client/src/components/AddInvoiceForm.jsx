@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import AddInvoiceTable from './AddInvoiceTable'
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
+import client from '../service/axiosClient';
 import { useSelector } from 'react-redux';
 
 export default function AddInvoiceForm() {
@@ -89,7 +89,7 @@ export default function AddInvoiceForm() {
         event.preventDefault();
         setInvoice([...invoice, formData]);
         try {
-            const invoiceDetail = await axios.post("/api/invoice/addinvoice", formData)
+            const invoiceDetail = await client.post("/api/invoice/addinvoice", formData)
             console.log(invoiceDetail);
             setInvoiceno("");
             setDate("");

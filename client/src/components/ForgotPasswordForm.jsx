@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 // import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import axios from 'axios';
+import client from '../service/axiosClient';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
@@ -34,7 +34,7 @@ export default function ForgotPasswordForm() {
         try {
             setLoading(true)
             const formData = { email };
-            const response = await axios.post('/api/user/forgotpassword', formData);
+            const response = await client.post('/api/user/forgotpassword', formData);
             console.log(response.data)
             navigate("/resetpassword")
             setLoading(false)

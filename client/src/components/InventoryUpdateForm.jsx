@@ -4,7 +4,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import { StockInCementForm, StockOutCementForm, StockInIronForm, StockOutIronForm, StockInGitiForm, StockOutGitiForm } from './StockUpdateForm';
-import axios from 'axios';
+import client from '../service/axiosClient';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { updateInventory } from '../app/inventory/inventorySlice';
@@ -24,7 +24,7 @@ export default function InventoryUpdateForm({ product, ...props }) {
             cft: formData.get('cft'),
         };
         try {
-            const response = await axios.post('/api/inventory/updateinventory', data);
+            const response = await client.post('/api/inventory/updateinventory', data);
             dispatch(updateInventory(response.data.data));
 
             if (props.onSuccess) {

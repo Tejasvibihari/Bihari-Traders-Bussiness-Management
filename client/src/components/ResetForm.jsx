@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 // import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import axios from 'axios';
+import client from '../service/axiosClient'
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
@@ -32,7 +32,7 @@ export default function ResetForm() {
         try {
             setLoading(true)
             const formData = { token, newPassword };
-            const response = await axios.post('/api/user/resetpassword', formData);
+            const response = await client.post('/api/user/resetpassword', formData);
             console.log(response.data.message)
             setSuccess(response.data.message)
             setLoading(false)

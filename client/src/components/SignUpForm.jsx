@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
-import axios from "axios";
+import client from '../service/axiosClient'; ";
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
@@ -41,7 +41,7 @@ export default function SignUpForm() {
         const formData = { name, email, password, bussinessName, mobile, address, gstin };
         try {
             dispatch(signUpStart())
-            const response = await axios.post('https://bihari-traders-api.vercel.app/api/user/signup', formData);
+            const response = await client.post('/api/user/signup', formData);
             dispatch(signUpSuccess(response.data))
             handleSnackOpen()
         } catch (error) {

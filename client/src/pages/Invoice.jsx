@@ -2,7 +2,7 @@ import Dashboard from '../components/Dashboard'
 import Paper from '@mui/material/Paper'
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import AddInvoiceTable from '../components/AddInvoiceTable';
-import axios from 'axios';
+import client from '../service/axiosClient';
 import { useEffect, useState } from 'react';
 
 import { getInvoiceSuccess, addFilterInvoice } from '../app/invoice/invoiceSlice';
@@ -25,7 +25,7 @@ export default function Invoice() {
                 const userId = {
                     userId: user._id
                 }
-                const response = await axios.post('/api/invoice/getinvoices', userId);
+                const response = await client.post('/api/invoice/getinvoices', userId);
                 dispatch(getInvoiceSuccess(response.data));
             } catch (error) {
                 console.log(error);

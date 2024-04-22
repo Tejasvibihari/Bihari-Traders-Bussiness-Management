@@ -17,7 +17,7 @@ import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
 import DomainAddIcon from '@mui/icons-material/DomainAdd';
-import axios from 'axios';
+import client from '../service/axiosClient';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { useSelector, useDispatch } from 'react-redux';
@@ -107,7 +107,7 @@ export default function AddInventory() {
         event.preventDefault();
         try {
             const brandFormData = { brandName: brandName, brandCategory: brandCategory }
-            const brandData = await axios.post("/api/inventory/brand/createbrand", brandFormData);
+            const brandData = await client.post("/api/inventory/brand/createbrand", brandFormData);
             setBrandMsg(brandData.data.message)
             handleBrandFormClose()
             handleSnackBarOpen()
@@ -131,7 +131,7 @@ export default function AddInventory() {
                 cft: cft,
                 userId: userId
             }
-            const inventoryData = await axios.post("/api/inventory/addinventory", inventoryFormData);
+            const inventoryData = await client.post("/api/inventory/addinventory", inventoryFormData);
             setInventoryMsg(inventoryData.data.message)
             handleInventoryClose()
             handleSnackBarOpen()
@@ -146,7 +146,7 @@ export default function AddInventory() {
     const getBrand = async () => {
         try {
             const categoryReq = { category: category }
-            const brands = await axios.post("/api/inventory/brand/getbrand", categoryReq);
+            const brands = await client.post("/api/inventory/brand/getbrand", categoryReq);
             console.log(brands)
             setFormBrand(brands.data)
         } catch (error) {

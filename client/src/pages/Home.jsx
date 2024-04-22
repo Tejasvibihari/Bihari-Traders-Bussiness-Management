@@ -11,7 +11,7 @@ import Grow from '@mui/material/Grow';
 import SimpleLineChart from '../components/SimpleLineChart'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import axios from 'axios';
+import client from '../service/axiosClient';
 import { getInventorySuccess } from '../app/inventory/inventorySlice';
 import { getInvoiceSuccess } from '../app/invoice/invoiceSlice';
 import { getWholesaleSuccess } from '../app/wholesale/wholesaleSlice.js';
@@ -29,7 +29,7 @@ export default function Home() {
                 const userId = {
                     userId: user._id
                 }
-                const response = await axios.post('/api/inventory/getinventory', userId);
+                const response = await client.post('/api/inventory/getinventory', userId);
                 dispatch(getInventorySuccess(response.data))
             } catch (error) {
                 console.log(error)
@@ -44,7 +44,7 @@ export default function Home() {
                 const userId = {
                     userId: user._id
                 }
-                const response = await axios.post('/api/inventory/wholesale/getwholesale', userId);
+                const response = await client.post('/api/inventory/wholesale/getwholesale', userId);
                 console.log(response.data)
                 dispatch(getWholesaleSuccess(response.data))
             } catch (error) {
@@ -60,7 +60,7 @@ export default function Home() {
                 const userId = {
                     userId: user._id
                 }
-                const response = await axios.post('/api/invoice/getinvoices', userId);
+                const response = await client.post('/api/invoice/getinvoices', userId);
                 dispatch(getInvoiceSuccess(response.data));
             } catch (error) {
                 console.log(error);

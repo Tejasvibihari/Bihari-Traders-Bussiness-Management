@@ -16,7 +16,7 @@ import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
-import axios from 'axios';
+import client from '../service/axiosClient';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { useSelector, useDispatch } from 'react-redux';
@@ -104,7 +104,7 @@ export default function AddWholeSale() {
                 userId: userId
             }
             console.log(wholesaleFormData)
-            const wholesaleData = await axios.post("/api/inventory/wholesale/addwholsale", wholesaleFormData);
+            const wholesaleData = await client.post("/api/inventory/wholesale/addwholsale", wholesaleFormData);
             setWholesaleMsg(wholesaleData.data.message)
             handleWholeSaleClose()
             handleSnackBarOpen()
@@ -118,7 +118,7 @@ export default function AddWholeSale() {
     const getBrand = async () => {
         try {
             const categoryReq = { category: category }
-            const brands = await axios.post("/api/inventory/brand/getbrand", categoryReq);
+            const brands = await client.post("/api/inventory/brand/getbrand", categoryReq);
             console.log(brands)
             setFormBrand(brands.data)
         } catch (error) {
@@ -323,7 +323,7 @@ export default function AddWholeSale() {
                                 </span>
                             </button>
                         </div>
-                        
+
                     </Box>
                 </DialogContent>
                 <DialogActions>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import FormControl from '@mui/material/FormControl';
 import { StockOutCementForm, StockOutIronForm, StockOutGitiForm } from './WholeSaleStockUpdateFrom';
-import axios from 'axios';
+import client from '../service/axiosClient';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { updateWholesale } from '../app/wholesale/wholesaleSlice';
@@ -22,7 +22,7 @@ export default function WholeSaleUpdateForm({ product, ...props }) {
             cft: formData.get('cft'),
         };
         try {
-            const response = await axios.post('/api/inventory/wholesale/updatewholesale', data);
+            const response = await client.post('/api/inventory/wholesale/updatewholesale', data);
             dispatch(updateWholesale(response.data.data));
 
             if (props.onSuccess) {
