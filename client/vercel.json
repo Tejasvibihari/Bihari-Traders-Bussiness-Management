@@ -1,0 +1,31 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "package.json",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*).js",
+            "dest": "/$1.js"
+        },
+        {
+            "src": "/(.*).css",
+            "dest": "/$1.css"
+        },
+        {
+            "src": "/(.*).(jpg|png|svg|gif)",
+            "dest": "/$1.$2"
+        },
+        {
+            "src": "/(.*).(ico|html)",
+            "dest": "/$1.$2"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/index.html"
+        }
+    ]
+}
