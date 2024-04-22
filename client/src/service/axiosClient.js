@@ -1,6 +1,6 @@
-import client from '../service/axiosClient';
+import axios from 'axios'
 
-const client = client.create({
+const client = axios.create({
     baseURL: 'https://bihari-traders-api.vercel.app',
     timeout: 1000,
     headers: { 'X-Custom-Header': 'foobar' }
