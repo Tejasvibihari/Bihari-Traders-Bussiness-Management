@@ -50,7 +50,7 @@ export default function SignUpForm() {
 
         }
     }
-    https://bihari-traders-api.vercel.app
+    // https://bihari-traders-api.vercel.app
     return (
         <>
             <div>
