@@ -15,7 +15,7 @@ const port = 3000;
 
 mongoose.connect("mongodb+srv://tejasvibihari2000:z1VS5wWSKyakzfds@bihari.kup0kde.mongodb.net/?retryWrites=true&w=majority")
     .then(() => console.log('Connected to MongoDB...'))
-    .catch(err => console.error('Could not connect to MongoDB...'));
+    .catch(err => console.error(`Could not connect to MongoDB... + ${err}`));
 
 app.use(cors({
     origin: 'https://bihari-traders.vercel.app',
