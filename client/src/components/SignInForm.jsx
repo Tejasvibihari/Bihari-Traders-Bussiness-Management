@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import client from '../service/axiosClient';
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { signInStart, signInSuccess, signInFailure } from '../app/user/userSlice';
@@ -43,7 +44,7 @@ export default function SignInForm() {
         try {
             dispatch(signInStart())
             const formData = { email, password };
-            const response = await client.post('api/user/signin', formData);
+            const response = await axios.post('https://bihari-traders-api.vercel.app/api/user/signin', formData);
             dispatch(signInSuccess(response.data))
             localStorage.setItem('token', response.data.token);
             navigate("/")
