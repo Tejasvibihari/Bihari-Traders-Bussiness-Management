@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
-import client from '../service/axiosClient'; ";
+import client from '../service/axiosClient';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
