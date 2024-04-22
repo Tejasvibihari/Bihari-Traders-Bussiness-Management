@@ -45,7 +45,7 @@ export default function SignUpForm() {
             dispatch(signUpSuccess(response.data))
             handleSnackOpen()
         } catch (error) {
-            dispatch(signUpFailure(error.response.data.message))
+            dispatch(signUpFailure(error.message))
             handleSnackOpen()
 
         }

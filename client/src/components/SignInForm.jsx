@@ -48,7 +48,10 @@ export default function SignInForm() {
             localStorage.setItem('token', response.data.token);
             navigate("/")
         } catch (error) {
-            dispatch(signInFailure(error.response.data.message))
+            console.log(error.message)
+            // dispatch(signInFailure(error.response.data.message))
+            dispatch(signInFailure(error.message))
+
             handleSnackOpen()
         }
     }
