@@ -17,8 +17,9 @@ mongoose.connect(process.env.MONGODB_URI)
 
 app.use(cors({
     origin: 'https://bihari-traders.vercel.app',
-    methods: ['GET', 'POST'], // Specify allowed HTTP methods
-    credentials: true // Enable credentials
+    methods: ['GET', 'POST', 'OPTIONS'], // Add OPTIONS to methods
+    allowedHeaders: ['Content-Type'], // Specify allowed headers
+    credentials: true
 }));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
