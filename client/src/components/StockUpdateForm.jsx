@@ -95,6 +95,7 @@ export function StockInCementForm({ product, onSubmit }) {
 }
 
 export function StockOutCementForm({ product, onSubmit }) {
+    const loading = useSelector((state) => state.inventory.loading);
     const [outWeight, setOutWeight] = useState('');
     const [outQuantity, setOutQuantity] = useState('');
     const [finalQuantity, setFinalQuantity] = useState("");
@@ -182,6 +183,7 @@ export function StockOutCementForm({ product, onSubmit }) {
 }
 
 export function StockInIronForm({ product, onSubmit }) {
+    const loading = useSelector((state) => state.inventory.loading);
     const [inWeight, setInWeight] = useState(0);
     const [finalCalculatedweight, setFinalCalculatedweight] = useState(0);
 
@@ -247,6 +249,7 @@ export function StockInIronForm({ product, onSubmit }) {
 }
 
 export function StockOutIronForm({ product, onSubmit }) {
+    const loading = useSelector((state) => state.inventory.loading);
     const [inWeight, setInWeight] = useState(0);
     const [finalCalculatedweight, setFinalCalculatedweight] = useState(0);
 
@@ -313,6 +316,7 @@ export function StockOutIronForm({ product, onSubmit }) {
 }
 
 export function StockInGitiForm({ product, onSubmit }) {
+    const loading = useSelector((state) => state.inventory.loading);
     const [inCft, setInCft] = useState(0);
     const [finalCalculatedCft, setFinalCalculatedCft] = useState(0);
 
@@ -378,6 +382,7 @@ export function StockInGitiForm({ product, onSubmit }) {
     );
 }
 export function StockOutGitiForm({ product, onSubmit }) {
+    const loading = useSelector((state) => state.inventory.loading);
     const [outCft, setOutCft] = useState(0);
     const [finalCalculatedCft, setFinalCalculatedCft] = useState(0);
 
