@@ -38,7 +38,9 @@ export default function InventoryUpdateForm({ product, ...props }) {
             console.log(error);
         }
     };
-
+    useEffect(() => {
+        console.log(loading)
+    }, [loading])
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
     };
