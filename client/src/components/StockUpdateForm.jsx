@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-
+import { useSelector } from 'react-redux';
 export function StockInCementForm({ product, onSubmit }) {
     const loading = useSelector((state) => state.inventory.loading);
     const [inWeight, setInWeight] = useState('');
