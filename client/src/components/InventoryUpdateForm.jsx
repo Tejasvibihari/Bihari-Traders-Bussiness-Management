@@ -12,11 +12,12 @@ import { addInventoryStart, updateInventory } from '../app/inventory/inventorySl
 
 export default function InventoryUpdateForm({ product, ...props }) {
     const [selectedValue, setSelectedValue] = useState('');
-
+    const [buttonText, setButtonText] = useState('Submit');
     const dispatch = useDispatch()
     const handleSubmit = async (e) => {
         e.preventDefault();
         dispatch(addInventoryStart());
+        setButtonText('Updating Inventory');
         const formData = new FormData(e.target);
         const data = {
             id: formData.get('id'),
@@ -34,6 +35,7 @@ export default function InventoryUpdateForm({ product, ...props }) {
             if (props.handleClose) {
                 props.handleClose();
             }
+            setButtonText('Update');
         } catch (error) {
             console.log(error);
         }
@@ -61,37 +63,37 @@ export default function InventoryUpdateForm({ product, ...props }) {
 
     const stockInCementForm = useMemo(() => {
         if (product.category === "Cement" && selectedValue === "stockIn") {
-            return <StockInCementForm product={product} onSubmit={handleSubmit} />;
+            return <StockInCementForm product={product} onSubmit={handleSubmit} buttonText={buttonText} setButtonText={setButtonText} />;
         }
     }, [selectedValue, product]);
 
     const stockOutCementForm = useMemo(() => {
         if (product.category === "Cement" && selectedValue === "stockOut") {
-            return <StockOutCementForm product={product} onSubmit={handleSubmit} />;
+            return <StockOutCementForm product={product} onSubmit={handleSubmit} buttonText={buttonText} setButtonText={setButtonText} />;
         }
     }, [selectedValue, product]);
 
     const stockInIronForm = useMemo(() => {
         if (product.category === "Iron" && selectedValue === "stockIn") {
-            return <StockInIronForm product={product} onSubmit={handleSubmit} />;
+            return <StockInIronForm product={product} onSubmit={handleSubmit} buttonText={buttonText} setButtonText={setButtonText} />;
         }
     }, [selectedValue, product]);
 
     const stockOutIronForm = useMemo(() => {
         if (product.category === "Iron" && selectedValue === "stockOut") {
-            return <StockOutIronForm product={product} onSubmit={handleSubmit} />;
+            return <StockOutIronForm product={product} onSubmit={handleSubmit} buttonText={buttonText} setButtonText={setButtonText} />;
         }
     }, [selectedValue, product]);
 
     const stockInGitiForm = useMemo(() => {
         if ((product.category === "3/4" || product.category === "5/8") && selectedValue === "stockIn") {
-            return <StockInGitiForm product={product} onSubmit={handleSubmit} />;
+            return <StockInGitiForm product={product} onSubmit={handleSubmit} buttonText={buttonText} setButtonText={setButtonText} />;
         }
     }, [selectedValue, product]);
 
     const stockOutGitiForm = useMemo(() => {
         if ((product.category === "3/4" || product.category === "5/8") && selectedValue === "stockOut") {
-            return <StockOutGitiForm product={product} onSubmit={handleSubmit} />;
+            return <StockOutGitiForm product={product} onSubmit={handleSubmit} buttonText={buttonText} setButtonText={setButtonText} />;
         }
     }, [selectedValue, product]);
 

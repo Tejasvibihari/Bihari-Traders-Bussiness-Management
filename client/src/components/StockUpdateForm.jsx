@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-export function StockInCementForm({ product, onSubmit }) {
-    const loading = useSelector((state) => state.inventory.loading);
+export function StockInCementForm({ product, onSubmit, buttonText }) {
+
     const [inWeight, setInWeight] = useState('');
     const [inQuantity, setInQuantity] = useState('');
     const [finalQuantity, setFinalQuantity] = useState('');
@@ -84,7 +84,7 @@ export function StockInCementForm({ product, onSubmit }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {loading ? "Updating Inventory" : "Update"}
+                                {buttonText}
                             </span>
                         </button>
                     </div>
@@ -94,8 +94,7 @@ export function StockInCementForm({ product, onSubmit }) {
     );
 }
 
-export function StockOutCementForm({ product, onSubmit }) {
-    const loading = useSelector((state) => state.inventory.loading);
+export function StockOutCementForm({ product, onSubmit, buttonText }) {
     const [outWeight, setOutWeight] = useState('');
     const [outQuantity, setOutQuantity] = useState('');
     const [finalQuantity, setFinalQuantity] = useState("");
@@ -172,7 +171,7 @@ export function StockOutCementForm({ product, onSubmit }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {loading ? "Updating Inventory" : "Update"}
+                                {buttonText}
                             </span>
                         </button>
                     </div>
@@ -182,8 +181,7 @@ export function StockOutCementForm({ product, onSubmit }) {
     );
 }
 
-export function StockInIronForm({ product, onSubmit }) {
-    const loading = useSelector((state) => state.inventory.loading);
+export function StockInIronForm({ product, onSubmit, buttonText }) {
     const [inWeight, setInWeight] = useState(0);
     const [finalCalculatedweight, setFinalCalculatedweight] = useState(0);
 
@@ -238,7 +236,7 @@ export function StockInIronForm({ product, onSubmit }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {loading ? "Updating Inventory" : "Update"}
+                                {buttonText}
                             </span>
                         </button>
                     </div>
@@ -248,8 +246,7 @@ export function StockInIronForm({ product, onSubmit }) {
     );
 }
 
-export function StockOutIronForm({ product, onSubmit }) {
-    const loading = useSelector((state) => state.inventory.loading);
+export function StockOutIronForm({ product, onSubmit, buttonText }) {
     const [inWeight, setInWeight] = useState(0);
     const [finalCalculatedweight, setFinalCalculatedweight] = useState(0);
 
@@ -305,7 +302,7 @@ export function StockOutIronForm({ product, onSubmit }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {loading ? "Updating Inventory" : "Update"}
+                                {buttonText}
                             </span>
                         </button>
                     </div>
@@ -315,8 +312,7 @@ export function StockOutIronForm({ product, onSubmit }) {
     );
 }
 
-export function StockInGitiForm({ product, onSubmit }) {
-    const loading = useSelector((state) => state.inventory.loading);
+export function StockInGitiForm({ product, onSubmit, buttonText }) {
     const [inCft, setInCft] = useState(0);
     const [finalCalculatedCft, setFinalCalculatedCft] = useState(0);
 
@@ -372,7 +368,7 @@ export function StockInGitiForm({ product, onSubmit }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {loading ? "Updating Inventory" : "Update"}
+                                {buttonText}
                             </span>
                         </button>
                     </div>
@@ -381,8 +377,7 @@ export function StockInGitiForm({ product, onSubmit }) {
         </>
     );
 }
-export function StockOutGitiForm({ product, onSubmit }) {
-    const loading = useSelector((state) => state.inventory.loading);
+export function StockOutGitiForm({ product, onSubmit, buttonText }) {
     const [outCft, setOutCft] = useState(0);
     const [finalCalculatedCft, setFinalCalculatedCft] = useState(0);
 
@@ -437,7 +432,7 @@ export function StockOutGitiForm({ product, onSubmit }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {loading ? "Updating Inventory" : "Update"}
+                                {buttonText}
                             </span>
                         </button>
                     </div>
