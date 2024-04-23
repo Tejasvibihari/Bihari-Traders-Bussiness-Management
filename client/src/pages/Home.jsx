@@ -138,7 +138,7 @@ export default function Home() {
                             </Grow>
                             {/* Line chart */}
                             <Grow in timeout={{ enter: 2000, exit: 500 }} style={{ transformOrigin: '0 0 0' }}>
-                                <div className='mx-auto flex justify-center items-center'>
+                                <div className='mx-auto flex justify-center items-center overflow-hidden'>
                                     <SimpleLineChart />
                                 </div>
                             </Grow>
