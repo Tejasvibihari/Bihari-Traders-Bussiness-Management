@@ -61,7 +61,7 @@ export default function InventoryUpdateForm({ product, ...props }) {
 
     const stockInCementForm = useMemo(() => {
         if (product.category === "Cement" && selectedValue === "stockIn") {
-            return <StockInCementForm product={product} onSubmit={handleSubmit} message={ } />;
+            return <StockInCementForm product={product} onSubmit={handleSubmit} />;
         }
     }, [selectedValue, product]);
 
