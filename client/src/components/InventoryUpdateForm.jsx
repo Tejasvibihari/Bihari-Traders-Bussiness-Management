@@ -63,37 +63,37 @@ export default function InventoryUpdateForm({ product, ...props }) {
 
     const stockInCementForm = useMemo(() => {
         if (product.category === "Cement" && selectedValue === "stockIn") {
-            return <StockInCementForm product={product} onSubmit={handleSubmit} buttonText={loading} />;
+            return <StockInCementForm product={product} onSubmit={handleSubmit} />;
         }
     }, [selectedValue, product]);
 
     const stockOutCementForm = useMemo(() => {
         if (product.category === "Cement" && selectedValue === "stockOut") {
-            return <StockOutCementForm product={product} onSubmit={handleSubmit} buttonText={loading} />;
+            return <StockOutCementForm product={product} onSubmit={handleSubmit} />;
         }
     }, [selectedValue, product]);
 
     const stockInIronForm = useMemo(() => {
         if (product.category === "Iron" && selectedValue === "stockIn") {
-            return <StockInIronForm product={product} onSubmit={handleSubmit} buttonText={loading} />;
+            return <StockInIronForm product={product} onSubmit={handleSubmit} />;
         }
     }, [selectedValue, product]);
 
     const stockOutIronForm = useMemo(() => {
         if (product.category === "Iron" && selectedValue === "stockOut") {
-            return <StockOutIronForm product={product} onSubmit={handleSubmit} buttonText={loading} />;
+            return <StockOutIronForm product={product} onSubmit={handleSubmit} />;
         }
     }, [selectedValue, product]);
 
     const stockInGitiForm = useMemo(() => {
         if ((product.category === "3/4" || product.category === "5/8") && selectedValue === "stockIn") {
-            return <StockInGitiForm product={product} onSubmit={handleSubmit} buttonText={loading} />;
+            return <StockInGitiForm product={product} onSubmit={handleSubmit} />;
         }
     }, [selectedValue, product]);
 
     const stockOutGitiForm = useMemo(() => {
         if ((product.category === "3/4" || product.category === "5/8") && selectedValue === "stockOut") {
-            return <StockOutGitiForm product={product} onSubmit={handleSubmit} buttonText={loading} />;
+            return <StockOutGitiForm product={product} onSubmit={handleSubmit} />;
         }
     }, [selectedValue, product]);
 
