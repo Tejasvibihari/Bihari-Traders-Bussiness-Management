@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+
 export function StockInCementForm({ product, onSubmit, buttonText }) {
 
     const [inWeight, setInWeight] = useState('');
@@ -84,7 +84,7 @@ export function StockInCementForm({ product, onSubmit, buttonText }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {buttonText}
+                                {buttonText ? "Updating Inventory...." : "Update Inventory"}
                             </span>
                         </button>
                     </div>
@@ -171,7 +171,7 @@ export function StockOutCementForm({ product, onSubmit, buttonText }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {buttonText}
+                                {buttonText ? "Updating Inventory...." : "Update Inventory"}
                             </span>
                         </button>
                     </div>
@@ -236,7 +236,7 @@ export function StockInIronForm({ product, onSubmit, buttonText }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {buttonText}
+                                {buttonText ? "Updating Inventory...." : "Update Inventory"}
                             </span>
                         </button>
                     </div>
@@ -302,7 +302,7 @@ export function StockOutIronForm({ product, onSubmit, buttonText }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {buttonText}
+                                {buttonText ? "Updating Inventory...." : "Update Inventory"}
                             </span>
                         </button>
                     </div>
@@ -368,7 +368,7 @@ export function StockInGitiForm({ product, onSubmit, buttonText }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {buttonText}
+                                {buttonText ? "Updating Inventory...." : "Update Inventory"}
                             </span>
                         </button>
                     </div>
@@ -432,7 +432,7 @@ export function StockOutGitiForm({ product, onSubmit, buttonText }) {
                                 onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
                                 onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                             >
-                                {buttonText}
+                                {buttonText ? "Updating Inventory...." : "Update Inventory"}
                             </span>
                         </button>
                     </div>
