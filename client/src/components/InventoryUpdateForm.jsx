@@ -7,7 +7,7 @@ import { StockInCementForm, StockOutCementForm, StockInIronForm, StockOutIronFor
 import client from '../service/axiosClient';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { updateInventory } from '../app/inventory/inventorySlice';
+import { addInventoryStart, updateInventory } from '../app/inventory/inventorySlice';
 
 
 export default function InventoryUpdateForm({ product, ...props }) {
@@ -16,6 +16,7 @@ export default function InventoryUpdateForm({ product, ...props }) {
     const dispatch = useDispatch()
     const handleSubmit = async (e) => {
         e.preventDefault();
+        dispatch(addInventoryStart());
         const formData = new FormData(e.target);
         const data = {
             id: formData.get('id'),
@@ -33,7 +34,6 @@ export default function InventoryUpdateForm({ product, ...props }) {
             if (props.handleClose) {
                 props.handleClose();
             }
-
         } catch (error) {
             console.log(error);
         }
@@ -61,7 +61,7 @@ export default function InventoryUpdateForm({ product, ...props }) {
 
     const stockInCementForm = useMemo(() => {
         if (product.category === "Cement" && selectedValue === "stockIn") {
-            return <StockInCementForm product={product} onSubmit={handleSubmit} />;
+            return <StockInCementForm product={product} onSubmit={handleSubmit} message={ } />;
         }
     }, [selectedValue, product]);
 

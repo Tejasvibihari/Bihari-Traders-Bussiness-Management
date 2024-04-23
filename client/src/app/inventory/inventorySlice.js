@@ -29,6 +29,8 @@ export const inventorySlice = createSlice({
         },
         updateInventory: (state, action) => {
             state.inventory = state.inventory.map(item => item._id === action.payload._id ? action.payload : item)
+            state.loading = false
+            state.error = null
         }
     }
 })
