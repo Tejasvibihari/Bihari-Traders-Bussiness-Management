@@ -116,7 +116,7 @@ export default function Home() {
                 {/* Total invoice card  and line chart */}
                 <div className='my-4'>
                     <Paper elevation={3} className='p-5'>
-                        <div className='grid grid-cols-2 gap-4'>
+                        <div className='grid md:grid-cols-2 grid-cols-1 gap-4'>
                             <Grow in timeout={{ enter: 1500, exit: 500 }} style={{ transformOrigin: '0 0 0' }}>
                                 <div className='flex items-center justify-center card5 rounded-xl shadow-gray-600 shadow-2xl overflow-hidden m-5 p-7'>
                                     <div className='flex items-center'>
