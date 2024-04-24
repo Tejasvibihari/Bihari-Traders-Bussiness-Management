@@ -149,3 +149,18 @@ export const resetPassword = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 }
+
+export const updateAccount = async (req, res) => {
+    const { id, bussinessName, name, mobile, gstin, address } = req.body
+    try {
+        const findUser = await User.findOneAndUpdate(
+            { _id: id },
+            { bussinessName, name, mobile, gstin, address },
+            { new: true })
+
+        res.json({ user: findUser, message: "User updated" })
+    } catch (error) {
+        console.log(error)
+        res.json({ error, message: "Something went wrong" })
+    }
+}

@@ -144,11 +144,11 @@ export default function MiniDrawer({ children }) {
                         {user.bussinessName}
                     </Typography>
                     <div className='flex ms-auto'>
-                        <IconButton aria-label="cart">
+                        {/* <IconButton aria-label="cart">
                             <StyledBadge badgeContent={19} color="secondary">
                                 <ShoppingCartIcon sx={{ color: 'white' }} />
                             </StyledBadge>
-                        </IconButton>
+                        </IconButton> */}
                     </div>
                 </Toolbar>
             </AppBar>

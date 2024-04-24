@@ -1,16 +1,32 @@
 import Dashboard from '../components/Dashboard'
-// import Paper from '@mui/material/Paper';
-// import Avatar from '@mui/material/Avatar';
-import profilepic from '/image/person.jpg'
 import { useDispatch, useSelector } from 'react-redux';
 import { userLogout } from '../app/user/userSlice';
 import { logoutInventory } from '../app/inventory/inventorySlice';
 import { logoutInvoice } from '../app/invoice/invoiceSlice';
 import { logoutWholesale } from '../app/wholesale/wholesaleSlice';
+import { useRef, useState } from 'react';
+import client from '../service/axiosClient';
+import { updateAccountStart, updateAccountSuccess } from '../app/user/userSlice';
+
 
 export default function Profile() {
     const user = useSelector(state => state.user.currentUser)
     const dispatch = useDispatch()
+    const [isEditable, setIsEditable] = useState(false);
+    const [bussinessName, setBussinessName] = useState('');
+    const [name, setName] = useState('');
+    const [gstin, setGstin] = useState('');
+    const [mobile, setMobile] = useState('');
+    const [address, setAddress] = useState('');
+    const [id, setId] = useState(user._id)
+    // console.log(id)
+    // const currentRef = useRef();
+
+
+    const toggleEditable = () => {
+        setIsEditable(!isEditable);
+    }
+
     const logout = () => {
         dispatch(userLogout())
         dispatch(logoutInventory())
@@ -18,69 +34,116 @@ export default function Profile() {
         dispatch(logoutWholesale())
     }
 
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        const formData = {
+            id,
+            bussinessName,
+            name,
+            gstin,
+            mobile,
+            address
+        }
+        try {
+            dispatch(updateAccountStart())
+            const response = await client.post('/api/user/update', formData)
+            console.log(response)
+            dispatch(updateAccountSuccess(response.data.user))
+            toggleEditable()
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <>
             <Dashboard>
 
-                <div className="flex items-center justify-center mt-3   ">
-                    <div className="relative w-96 h-3/4 flex flex-col items-center rounded-xl justify-center shadow-lg ">
-                        <div className="h-48 w-full rounded-t-xl overflow-hidden">
-                            <svg className="container" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                                <pattern id="diagonal-stripes" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-                                    <rect width="5" height="10" fill="orange" />
-                                    <rect width="5" height="10" x="5" y="5" fill="orangered" />
-                                </pattern>
-                                <rect width="100%" height="100%" fill="url(#diagonal-stripes)" />
-                            </svg>
+                <div className=''>
+                    {/* <form> */}
+                    <div className='grid grid-cols-2 md:grid-cols-4 justify-start items-center border '>
+                        <div className=''>
+                            <input type='file' hidden />
+                            <img src='./image/biharitraderslogo.webp' className='w-64 rounded-full' />
                         </div>
-                        <div className="absolute top-1/2 transform -translate-y-1/2 w-28 h-28 rounded-full">
-                            <img src={profilepic} alt="Profile pic" className="w-full h-full rounded-full" />
-                        </div>
-                        <div className="mt-10 text-center ">
-                            <div className="mt-10 font-semibold text-lg text-black">{user.name}</div>
-                            <div className="mt-2 text-gray-600">{user.bussinessName}</div>
-                        </div>
-                        <div className="flex space-x-4 mb-5">
-                            {/* profile edit Button */}
-                            <div className="mt-2 w-full flex justify-center items-center">
-                                <button className="w-full relative inline-flex h-12 overflow-hidden p-1 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-nowrap rounded-md">
-                                    <span className="inline-flex h-full w-full cursor-pointer items-center justify-center px-6 font-medium text-center  text-slate-200 transition-all backdrop-blur-3xl"
-                                        style={{
-                                            backgroundImage: 'linear-gradient(110deg, #e63946,40%,#1e2631,55%,#000103)',
-                                            backgroundSize: '200% 100%',
-                                            transition: 'background-position 0.5s ease',
-                                        }}
-                                        onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
-                                        onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
-                                    >
-                                        Edit Profile
-                                    </span>
-                                </button>
-                            </div>
-                            {/* Log Out Button */}
-                            <div className="mt-2 w-full flex justify-center items-center">
-                                <button className="w-full relative inline-flex h-12 overflow-hidden p-1 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                                    <span className="inline-flex h-full w-full cursor-pointer items-center justify-center px-6 font-medium text-center  text-slate-200 transition-all backdrop-blur-3xl"
-                                        style={{
-                                            backgroundImage: 'linear-gradient(110deg, #e63946,40%,#1e2631,55%,#000103)',
-                                            backgroundSize: '200% 100%',
-                                            transition: 'background-position 0.5s ease',
-                                        }}
-                                        onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
-                                        onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
-                                        onClick={logout}
-                                    >
-                                        Log Out
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
+                        <div className='p-4 col-span-3 flex flex-col'>
+                            <div className='my-1 font-semibold text-xl'>
+                                {isEditable ?
+                                    <input type='text' value={bussinessName} onChange={(e) => setBussinessName(e.target.value)} name='bussinessName' placeholder={user.bussinessName} className='w-64' />
+                                    : <div className='w-64'>{user.bussinessName}</div>
+                                }
 
+                            </div>
+                            {/*  */}
+                            <div className='my-1 text-slate-700'>
+                                {isEditable ?
+                                    <input type='text' value={name} onChange={(e) => setName(e.target.value)} name='name' placeholder={user.name} className='w-64' />
+                                    : <div className='w-64'>{user.name}</div>
+                                }
+                            </div>
+                            <div className='my-4'>
+                                {isEditable ?
+                                    <input type='text' value={gstin} onChange={(e) => setGstin(e.target.value)} name='gstin' placeholder={user.gstin} className='w-64' />
+                                    : <div className='w-64'>{user.gstin}</div>
+                                }
+                            </div>
+                            <div className='my-4 text-slate-600'>
+                                <div className='my-1'>
+                                    {isEditable ?
+                                        <input type='text' value={mobile} onChange={(e) => setMobile(e.target.value)} name='mobile' placeholder={user.mobile} className='w-64' />
+                                        : <div className='w-64'>{user.mobile}</div>
+                                    }
+                                </div>
+                                <div className='my-1'>
+                                    <span type='text' className='w-64'>{user.email}</span>
+                                </div>
+                                <div className='my-1'>
+                                    {isEditable ?
+                                        <textarea type='text' value={address} onChange={(e) => setAddress(e.target.value)} name='address' placeholder={user.address} className='w-64' />
+                                        : <div className='w-64'>{user.address}</div>
+                                    }
+                                </div>
+                            </div>
+                            <div className='flex flex-row'>
+                                <div className="mt-2 flex justify-center items-center">
+                                    <button className="w-full relative inline-flex h-12 overflow-hidden p-1 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                                        <span className="inline-flex h-full w-full cursor-pointer items-center justify-center px-6 font-medium text-center  text-slate-200 transition-all backdrop-blur-3xl"
+                                            style={{
+                                                backgroundImage: 'linear-gradient(110deg, #e63946,40%,#1e2631,55%,#000103)',
+                                                backgroundSize: '200% 100%',
+                                                transition: 'background-position 0.5s ease',
+                                            }}
+                                            onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
+                                            onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
+                                            onClick={isEditable ? handleSubmit : toggleEditable}
+                                        >
+                                            {isEditable ? 'Save Changes' : 'Edit Profile'}
+                                        </span>
+                                    </button>
+                                </div>
+                                <div>
+                                    <div className="mt-2 w-full flex justify-center items-center">
+                                        <button className="w-full relative inline-flex h-12 overflow-hidden p-1 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+                                            <span className="inline-flex h-full w-full cursor-pointer items-center justify-center px-6 font-medium text-center  text-slate-200 transition-all backdrop-blur-3xl"
+                                                style={{
+                                                    backgroundImage: 'linear-gradient(110deg, #e63946,40%,#1e2631,55%,#000103)',
+                                                    backgroundSize: '200% 100%',
+                                                    transition: 'background-position 0.5s ease',
+                                                }}
+                                                onMouseEnter={(e) => e.target.style.backgroundPosition = '-100% 0'}
+                                                onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
+                                                onClick={logout}
+                                            >
+                                                Log Out
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    {/* </form> */}
                 </div>
-
-
-            </Dashboard>
+            </Dashboard >
         </>
     )
 

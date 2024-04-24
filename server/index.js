@@ -14,7 +14,7 @@ const app = express();
 const port = 3000;
 
 mongoose.connect("mongodb+srv://tejasvibihari2000:z1VS5wWSKyakzfds@bihari.kup0kde.mongodb.net/?retryWrites=true&w=majority")
-// mongoose.connect("mongodb://localhost:27017/bihariTraders")
+    // mongoose.connect("mongodb://localhost:27017/bihariTraders")
     .then(() => console.log('Connected to MongoDB...'))
     .catch(err => console.error(`Could not connect to MongoDB... + ${err}`));
 
