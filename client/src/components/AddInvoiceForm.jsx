@@ -3,6 +3,7 @@ import AddInvoiceTable from './AddInvoiceTable'
 import Paper from '@mui/material/Paper';
 import client from '../service/axiosClient';
 import { useSelector } from 'react-redux';
+import DisplayInvoiceData from './DisplayInvoiceData';
 
 export default function AddInvoiceForm() {
     const user = useSelector(state => state.user.currentUser);
@@ -154,7 +155,9 @@ export default function AddInvoiceForm() {
                                 <div className='w-full'>
                                     <label className='text-lg font-[montserrat]'>HSN Code<span className="text-red-700">*</span></label>
                                     <select name="hsn" value={hsn} onChange={handleInputChange} className='w-full p-2 my-2 border border-gray-300 text-lg' required>
+                                        <option value="">Select HSN</option>
                                         <option value="25232930">25232930</option>
+                                        <option value="25232990">25232990</option>
                                         <option value="25232940">25232940</option>
                                         <option value="72142090">72142090</option>
                                     </select>
@@ -195,7 +198,7 @@ export default function AddInvoiceForm() {
                     </div>
                 </div>
             </Paper>
-            <AddInvoiceTable invoice={invoice} />
+            <DisplayInvoiceData invoice={invoice} />
         </>
     )
 }

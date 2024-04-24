@@ -3,7 +3,15 @@ import nodemailer from "nodemailer";
 import User from "../models/userModel.js";
 
 // Path: Bihari%20Traders%20Bussiness%20Management/server/controllers/inventoryController.js
-
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // Use `true` for port 465, `false` for all other ports
+    auth: {
+        user: "manojbihari35@gmail.com",
+        pass: "mbygodqftmlxenyl",
+    },
+});
 export const addInventory = async (req, res) => {
     const { name, category, brand, weight, quantity, cft, hsnCode, userId } = req.body;
     try {
@@ -18,6 +26,7 @@ export const addInventory = async (req, res) => {
             userId
         });
         await newInventory.save();
+
         res.status(201).json({ newInventory, message: "Product Added to Inventory successfully" });
     } catch (error) {
         res.status(409).json({ message: error.message });
@@ -43,16 +52,6 @@ export const deleteInventory = async (req, res) => {
     }
 }
 
-
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // Use `true` for port 465, `false` for all other ports
-    auth: {
-        user: "manojbihari35@gmail.com",
-        pass: "mbygodqftmlxenyl",
-    },
-});
 
 export const otpGeneration = async (req, res) => {
     const { email } = req.body;

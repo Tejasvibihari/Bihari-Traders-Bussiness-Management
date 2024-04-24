@@ -30,14 +30,18 @@ export const invoiceSlice = createSlice({
         },
         updateInvoice: (state, action) => {
             state.invoice = state.invoice.map(item => item._id === action.payload._id ? action.payload : item)
+            state.loading = false;
         },
         addFilterInvoice: (state, action) => {
             state.filterInvoice = action.payload;
-        }
+        },
+        deleteInvoice: (state, action) => {
+            state.invoice = state.invoice.filter(item => item._id !== action.payload)
+        },
     }
 })
 
 // Action creators are generated for each case reducer function
-export const { addInvoiceStart, addInvoiceSuccess, addInvoiceError, getInvoiceSuccess, logoutInvoice, updateInvoice, addFilterInvoice } = invoiceSlice.actions
+export const { addInvoiceStart, addInvoiceSuccess, addInvoiceError, getInvoiceSuccess, logoutInvoice, updateInvoice, addFilterInvoice, deleteInvoice } = invoiceSlice.actions
 
 export default invoiceSlice.reducer

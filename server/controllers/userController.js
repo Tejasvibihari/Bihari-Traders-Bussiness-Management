@@ -4,6 +4,17 @@ import jwt from "jsonwebtoken";
 import crypto from 'crypto';
 import nodemailer from "nodemailer";
 
+
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // Use `true` for port 465, `false` for all other ports
+    auth: {
+        user: "manojbihari35@gmail.com",
+        pass: "mbygodqftmlxenyl",
+    },
+});
+
 export const signUp = async (req, res) => {
     const { name, email, password, bussinessName, address, gstin, mobile } = req.body;
     try {
@@ -23,7 +34,19 @@ export const signUp = async (req, res) => {
             gstin,
             mobile
         });
+        try {
+            const info = await transporter.sendMail({
+                from: '"Bihari Traders" <tejasvibihari2000@gmail.com>', // sender address
+                to: email, // list of receivers
+                subject: "Account Created Success", // Subject line
+                text: `Thank You For Using Our Service`, // plain text body
+                html: `Thank You For Using Our Service`, // html body
+            });
+            console.log("Message sent: %s", info.messageId);
 
+        } catch (error) {
+            console.log(error)
+        }
         return res.status(201).json({ user: createUser, message: "User created" });
     } catch (error) {
         console.log(error);
@@ -61,15 +84,7 @@ export const signIn = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 }
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // Use `true` for port 465, `false` for all other ports
-    auth: {
-        user: "manojbihari35@gmail.com",
-        pass: "mbygodqftmlxenyl",
-    },
-});
+
 export const forgotPassword = async (req, res) => {
     const { email } = req.body;
     try {
@@ -101,7 +116,6 @@ export const forgotPassword = async (req, res) => {
         } catch (error) {
             console.log(error)
         }
-        console.log(`Password reset token: ${token}`);
 
         res.status(200).json({ message: "Password reset email sent" });
     } catch (error) {

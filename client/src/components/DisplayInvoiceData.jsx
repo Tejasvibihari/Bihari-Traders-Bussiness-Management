@@ -9,21 +9,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import client from '../service/axiosClient'
-import { useDispatch } from 'react-redux'
-import { deleteInvoice } from '../app/invoice/invoiceSlice'
 import { useState } from 'react';
 import EditInvoiceDialogeForm from './EditInvoiceDialogeForm';
-import React from 'react';
-import Slide from '@mui/material/Slide';
 
-
-const AddInvoiceTable = ({ invoice }) => {
-    const dispatch = useDispatch();
+const DisplayInvoiceData = ({ invoice }) => {
     const [openDialoge, setOpenDialoge] = useState(false)
     const [rowId, setRowId] = useState("");
 
@@ -59,25 +48,8 @@ const AddInvoiceTable = ({ invoice }) => {
         { id: 'hsn', label: 'HSN Code' },
         { id: 'quantity', label: 'Quantity' },
         { id: 'rate', label: 'Rate' },
-        { id: 'amount', label: 'Amount' },
-        { id: 'action', label: 'Action' },
+        { id: 'amount', label: 'Amount' }
     ];
-    const handleDelete = async (id) => {
-        const rowId = {
-            id: id,
-        }
-        try {
-            const delResponse = await client.post("/api/invoice/deleteinvoice", rowId)
-            console.log(delResponse.data.message);
-            dispatch(deleteInvoice(id));
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const Transition = React.forwardRef(function Transition(props, ref) {
-        return <Slide direction="up" ref={ref} {...props} />;
-    });
     const handleClickOpen = (id) => {
         setOpenDialoge(true);
         setRowId(id);
@@ -124,26 +96,6 @@ const AddInvoiceTable = ({ invoice }) => {
                                 <StyledTableCell align="right">{row.quantity}</StyledTableCell>
                                 <StyledTableCell align="right">{row.rate}</StyledTableCell>
                                 <StyledTableCell align="right">{row.amount}</StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <div className='flex flex-row gap-1'>
-                                        <div>
-                                            <Tooltip title="Edit">
-                                                <IconButton onClick={() => handleClickOpen(row._id)}>
-                                                    <EditIcon className='cursor-pointer text-green-500 hover:text-green-700' />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </div>
-                                        <div>
-                                            {/* onClick={() => handleDelete(row._id)} */}
-                                            <Tooltip title="Delete">
-                                                <IconButton onClick={() => handleDelete(row._id)}>
-                                                    <DeleteIcon className='cursor-pointer text-red-600 hover:text-red-800' />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </div>
-                                    </div>
-                                </StyledTableCell>
-
                             </StyledTableRow>
                         ))}
                     </TableBody>
@@ -154,8 +106,7 @@ const AddInvoiceTable = ({ invoice }) => {
 };
 
 
-
-AddInvoiceTable.propTypes = {
+DisplayInvoiceData.propTypes = {
     invoice: PropTypes.array.isRequired,
 };
-export default AddInvoiceTable;
+export default DisplayInvoiceData;

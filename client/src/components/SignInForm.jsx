@@ -49,9 +49,12 @@ export default function SignInForm() {
             navigate("/")
         } catch (error) {
             console.log(error.message)
-            // dispatch(signInFailure(error.response.data.message))
-            dispatch(signInFailure(error.message))
-
+            if (error.response && error.response.data && error.response.data.message) {
+                dispatch(signInFailure(error.response.data.message))
+            } else {
+                // If the error object does not have a response and a message, use the error message
+                dispatch(signInFailure(error.message))
+            }
             handleSnackOpen()
         }
     }

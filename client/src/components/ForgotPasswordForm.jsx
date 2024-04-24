@@ -39,8 +39,15 @@ export default function ForgotPasswordForm() {
             navigate("/resetpassword")
             setLoading(false)
         } catch (error) {
-            setError(error.response.data.message);
-            handleSnackOpen()
+            console.log(error)
+            if (error.response && error.response.data && error.response.data.message) {
+                setError(error.response.data.message);
+                setLoading(false)
+            } else {
+                // If the error object does not have a response and a message, use the error message
+                setError(error.message);
+                setLoading(false)
+            } handleSnackOpen()
         }
     }
 
