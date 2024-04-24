@@ -4,7 +4,7 @@ import { StockOutCementForm, StockOutIronForm, StockOutGitiForm } from './WholeS
 import client from '../service/axiosClient';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { updateWholesale } from '../app/wholesale/wholesaleSlice';
+import { addWholesaleStart, updateWholesale } from '../app/wholesale/wholesaleSlice';
 
 
 export default function WholeSaleUpdateForm({ product, ...props }) {
@@ -14,6 +14,7 @@ export default function WholeSaleUpdateForm({ product, ...props }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        dispatch(addWholesaleStart())
         const formData = new FormData(e.target);
         const data = {
             id: formData.get('id'),

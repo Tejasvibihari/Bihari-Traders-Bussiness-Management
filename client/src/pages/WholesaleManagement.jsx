@@ -63,11 +63,6 @@ export default function WholesaleManagement() {
         setSnackOpen(false);
     };
 
-    const cementItems = wholesale.filter(item => item.category === "Cement");
-    const ironItems = wholesale.filter(item => item.category === "Iron");
-    const gitiItems = wholesale.filter(item => item.category === "3/4" || item.category === "5/8");
-    const chemicalItems = wholesale.filter(item => item.category === "Chemicals");
-
     return (
         <div>
 
