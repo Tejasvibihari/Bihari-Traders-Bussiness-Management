@@ -11,6 +11,7 @@ import { updateAccountStart, updateAccountSuccess } from '../app/user/userSlice'
 
 export default function Profile() {
     const user = useSelector(state => state.user.currentUser)
+    const loading = useSelector(state => state.user.loading)
     const dispatch = useDispatch()
     const [isEditable, setIsEditable] = useState(false);
     const [bussinessName, setBussinessName] = useState(user.bussinessName);
@@ -116,7 +117,7 @@ export default function Profile() {
                                             onMouseLeave={(e) => e.target.style.backgroundPosition = '100% 0'}
                                             onClick={isEditable ? handleSubmit : toggleEditable}
                                         >
-                                            {isEditable ? 'Save Changes' : 'Edit Profile'}
+                                            {isEditable ? loading ? 'Saving Change' : "Save Change" : 'Edit Profile'}
                                         </span>
                                     </button>
                                 </div>
