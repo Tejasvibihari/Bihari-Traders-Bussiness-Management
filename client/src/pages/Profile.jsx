@@ -58,7 +58,9 @@ export default function Profile() {
         formData.append('gstin', gstin);
         formData.append('mobile', mobile);
         formData.append('address', address);
-        formData.append('image', image); // Add the selected file
+        if (image) {
+            formData.append('image', image);
+        } // Add the selected file
         try {
             dispatch(updateAccountStart())
             const response = await client.post('/api/user/update', formData, {
