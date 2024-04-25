@@ -125,7 +125,6 @@ export const forgotPassword = async (req, res) => {
 }
 export const resetPassword = async (req, res) => {
     const { token, newPassword } = req.body;
-    console.log(req.body)
     try {
         const user = await User.findOne({ resetPasswordToken: token, resetPasswordExpires: { $gt: Date.now() } });
         if (!user) {
@@ -151,8 +150,11 @@ export const resetPassword = async (req, res) => {
 }
 
 export const updateAccount = async (req, res) => {
-    const { id, bussinessName, name, mobile, gstin, address } = req.body
-    const image = req.file.filename;
+    const { id, bussinessName, name, mobile, gstin, address } = req.body;
+    let image = '';
+    if (req.file) {
+        image = req.file.filename;
+    }
     try {
         const findUser = await User.findOneAndUpdate(
             { _id: id },
