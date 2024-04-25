@@ -6,12 +6,15 @@ import { logoutInvoice } from '../app/invoice/invoiceSlice';
 import { logoutWholesale } from '../app/wholesale/wholesaleSlice';
 import { useRef, useState } from 'react';
 import client from '../service/axiosClient';
-import { updateAccountStart, updateAccountSuccess } from '../app/user/userSlice';
-
+import { updateAccountStart, updateAccountSuccess, updateAccountFailure } from '../app/user/userSlice';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 export default function Profile() {
     const user = useSelector(state => state.user.currentUser)
     const loading = useSelector(state => state.user.loading)
+    const error = useSelector(state => state.user.error)
+
     const dispatch = useDispatch()
     const [isEditable, setIsEditable] = useState(false);
     const [bussinessName, setBussinessName] = useState(user.bussinessName);
@@ -22,7 +25,19 @@ export default function Profile() {
     const [id, setId] = useState(user._id)
     const [image, setImage] = useState("");
 
+    const [snackOpen, setSnackOpen] = useState(false);
 
+    const handleSnackClick = () => {
+        setSnackOpen(true);
+    };
+
+    const handleSnackClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnackOpen(false);
+    };
     const toggleEditable = () => {
         setIsEditable(!isEditable);
     }
@@ -56,12 +71,23 @@ export default function Profile() {
             toggleEditable()
         } catch (error) {
             console.log(error)
+            dispatch(updateAccountFailure(error.message))
+            handleSnackClick()
         }
     }
     return (
         <>
             <Dashboard>
-
+                <Snackbar open={snackOpen} autoHideDuration={6000} onClose={handleSnackClose}>
+                    <Alert
+                        onClose={handleSnackClose}
+                        severity="error"
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                    >
+                        {error}
+                    </Alert>
+                </Snackbar>
                 <div className=''>
                     {/* <form> */}
                     <div className='grid grid-cols-2 md:grid-cols-4 justify-start items-center border '>
