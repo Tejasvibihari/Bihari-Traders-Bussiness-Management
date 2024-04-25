@@ -13,11 +13,11 @@ export default function Profile() {
     const user = useSelector(state => state.user.currentUser)
     const dispatch = useDispatch()
     const [isEditable, setIsEditable] = useState(false);
-    const [bussinessName, setBussinessName] = useState('');
-    const [name, setName] = useState('');
-    const [gstin, setGstin] = useState('');
-    const [mobile, setMobile] = useState('');
-    const [address, setAddress] = useState('');
+    const [bussinessName, setBussinessName] = useState(user.bussinessName);
+    const [name, setName] = useState(user.name);
+    const [gstin, setGstin] = useState(user.gstin);
+    const [mobile, setMobile] = useState(user.mobile);
+    const [address, setAddress] = useState(user.address);
     const [id, setId] = useState(user._id)
     // console.log(id)
     // const currentRef = useRef();
