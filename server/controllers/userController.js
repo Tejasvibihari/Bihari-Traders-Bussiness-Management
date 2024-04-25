@@ -152,10 +152,12 @@ export const resetPassword = async (req, res) => {
 
 export const updateAccount = async (req, res) => {
     const { id, bussinessName, name, mobile, gstin, address } = req.body
+    const image = req.file.filename;
+    console.log(image)
     try {
         const findUser = await User.findOneAndUpdate(
             { _id: id },
-            { bussinessName, name, mobile, gstin, address },
+            { bussinessName, name, mobile, gstin, address, image },
             { new: true })
 
         res.json({ user: findUser, message: "User updated" })

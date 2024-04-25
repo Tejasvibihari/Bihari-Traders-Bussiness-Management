@@ -20,8 +20,7 @@ export default function Profile() {
     const [mobile, setMobile] = useState(user.mobile);
     const [address, setAddress] = useState(user.address);
     const [id, setId] = useState(user._id)
-    // console.log(id)
-    // const currentRef = useRef();
+    const [image, setImage] = useState("");
 
 
     const toggleEditable = () => {
@@ -37,17 +36,21 @@ export default function Profile() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        const formData = {
-            id,
-            bussinessName,
-            name,
-            gstin,
-            mobile,
-            address
-        }
+        const formData = new FormData();
+        formData.append('id', id);
+        formData.append('bussinessName', bussinessName);
+        formData.append('name', name);
+        formData.append('gstin', gstin);
+        formData.append('mobile', mobile);
+        formData.append('address', address);
+        formData.append('image', image); // Add the selected file
         try {
             dispatch(updateAccountStart())
-            const response = await client.post('/api/user/update', formData)
+            const response = await client.post('/api/user/update', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
             console.log(response)
             dispatch(updateAccountSuccess(response.data.user))
             toggleEditable()
@@ -62,10 +65,8 @@ export default function Profile() {
                 <div className=''>
                     {/* <form> */}
                     <div className='grid grid-cols-2 md:grid-cols-4 justify-start items-center border '>
-                        <div className=''>
-                            <input type='file' hidden />
-                            <img src='./image/biharitraderslogo.webp' className='w-64 rounded-full' />
-                        </div>
+                        <div className='flex items-center justify-center'>
+                            {user.image && <img src={`https://bihari-traders-api.onrender.com/uploads/${user.image}`} className='w-64 rounded-full cursor-pointer justify-center items-center flex' title={isEditable ? "Edit Image" : null} />}                        </div>
                         <div className='p-4 col-span-3 flex flex-col'>
                             <div className='my-1 font-semibold text-xl'>
                                 {isEditable ?
@@ -101,6 +102,12 @@ export default function Profile() {
                                     {isEditable ?
                                         <textarea type='text' value={address} onChange={(e) => setAddress(e.target.value)} name='address' placeholder={user.address} className='w-64' />
                                         : <div className='w-64'>{user.address}</div>
+                                    }
+                                </div>
+                                <div className='my-1'>
+                                    {isEditable ?
+                                        <input type='file' name='image' onChange={(e) => setImage(e.target.files[0])} />
+                                        : null
                                     }
                                 </div>
                             </div>
