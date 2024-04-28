@@ -42,18 +42,16 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
 
                             </div>
                             <div className="col-span-1 flex flex-col bg-gradient-to-t from-[#ffb400] to-[#ff8a00] justify-center items-end pr-12 border rounded-es-[100px] text-white font-semibold">
-                                <div>
-                                    INVOICE
-                                </div>
-                                <div className="flex flex-row justify-between">
+                                <div className="flex flex-col justify-center items-end">
+                                    <div className='text-3xl m-1 font-[montserrat] font-bold'>
+                                        TAX INVOICE
+                                    </div>
                                     <div>
                                         Invoice Number:- {invoiceno}
                                     </div>
                                 </div>
                                 <div>
-                                    <div>
-                                        Date:- {date.slice(0, 10)}
-                                    </div>
+                                    Date:- {date.slice(0, 10)}
                                 </div>
                             </div>
                         </div>
