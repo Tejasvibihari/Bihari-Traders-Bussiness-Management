@@ -20,8 +20,21 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
     return (
         <>
             <div ref={ref}>
-                <div className="max-w-7xl border mx-auto my-1">
+                <div className="max-w-7xl border mx-auto my-1" style={{ position: 'relative' }}>
                     {/* Header Section  */}
+                    <div style={{
+                        backgroundImage: "url('./image/biharitraderslogo.webp')",
+                        backgroundSize: '700px auto',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        opacity: 0.15,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        bottom: 0,
+                        right: 0,
+                        zIndex: -1
+                    }}></div>
                     <div className="bg-slate-300 max-h-[95px]">
                         <div className="grid grid-cols-2 gap-2">
                             <div className="p-10 font-bold font-[italina] text-xl">
@@ -82,6 +95,12 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
                                             {user.address}
                                         </div>
                                     </div>
+                                    <div className="flex flex-col text-slate-400">
+                                        <div className="max-w-64">
+                                            State:- Bihar
+                                            Code:- 10
+                                        </div>
+                                    </div>
                                     <div className="mt-2">
                                         <div className="text-slate-700">
                                             Mobile No: {user.mobile}
@@ -130,15 +149,16 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
                                         <td className="p-2 text-center py-3">{sgstAmount.toFixed(2)}</td>
                                     </tr>
                                     <tr className="border-b">
-                                        <td colSpan="4" className="text-right p-2 py-3">Total</td>
-                                        <td className="p-2 text-center py-3"></td>
-                                        <td className="p-2 text-center py-3">{total.toFixed(2)}</td>
-                                    </tr>
-                                    <tr className="border-b">
-                                        <td colSpan="4" className="text-right p-2 py-3 text-[#ff8a00] font-bold">Round Off</td>
+                                        <td colSpan="4" className="text-right p-2 py-3 ">Round Off</td>
                                         <td className="p-2 text-center py-3"></td>
                                         <td className="p-2 text-center py-3">{roundOff}</td>
                                     </tr>
+                                    <tr className="border-b">
+                                        <td colSpan="4" className="text-right p-2 py-3 text-[#ff8a00] font-bold">Total</td>
+                                        <td className="p-2 text-center py-3"></td>
+                                        <td className="p-2 text-center py-3">{roundOff}</td>
+                                    </tr>
+
                                 </tbody>
                             </table>
                         </div>
@@ -162,7 +182,7 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
                     </div>
                     {/* signature section ended  */}
                     {/* footer Section Started  */}
-                    <div className="mt-20">
+                    <div className="mt-15">
                         <div className="bg-slate-300 text-center py-4">
                             <div className="flex flex-row justify-evenly">
                                 <div className="text-[#ff8a00] font-bold">
