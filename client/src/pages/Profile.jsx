@@ -104,7 +104,7 @@ export default function Profile() {
 
                             </div>
                             {/*  */}
-                            <div className='my-1 text-slate-700'>
+                            <div className='my-1 text-black'>
                                 {isEditable ?
                                     <input type='text' value={name} onChange={(e) => setName(e.target.value)} name='name' placeholder={user.name} className='w-64' />
                                     : <div className='w-64'>{user.name}</div>
@@ -116,7 +116,7 @@ export default function Profile() {
                                     : <div className='w-64'>{user.gstin}</div>
                                 }
                             </div>
-                            <div className='my-4 text-slate-600'>
+                            <div className='my-4 text-black'>
                                 <div className='my-1'>
                                     {isEditable ?
                                         <input type='text' value={mobile} onChange={(e) => setMobile(e.target.value)} name='mobile' placeholder={user.mobile} className='w-64' />

@@ -19,6 +19,7 @@ export default function Invoice() {
     const [toDateFilter, setToDateFilter] = useState('');
     const [particularFilter, setParticularFilter] = useState('');
     const [invoiceNoFilter, setInvoiceNoFilter] = useState("");
+    const [totalInvoices, setTotalInvoices] = useState(0);
     useEffect(() => {
         const fetchInvoices = async () => {
             try {
@@ -42,6 +43,7 @@ export default function Invoice() {
     });
     useEffect(() => {
         dispatch(addFilterInvoice(filteredInvoices));
+        setTotalInvoices(filteredInvoices.length)
     }, [filteredInvoices, dispatch])
 
     return (
@@ -117,7 +119,10 @@ export default function Invoice() {
                         </div>
                     </div>
                     <div className='my-4'>
-                        <div className='flex items-end justify-end'>
+                        <div className='flex items-center justify-between'>
+                            <div className='text-xl font-semibold font-[montserrat]'>
+                                Total Invoice:- {totalInvoices}
+                            </div>
                             <Link to="/viewinvoice">
                                 <button className="relative inline-flex h-12 overflow-hidden p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ">
                                     <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#fd1d1d_0%,#833ab4_50%,#fd1d1d_100%)]" />
