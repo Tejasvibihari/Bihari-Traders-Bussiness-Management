@@ -45,7 +45,10 @@ export default function AddInvoiceForm() {
                 break;
             case 'date': {
                 const date = new Date(value);
-                const dateString = date.toISOString().slice(0, 10);
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based in JavaScript
+                const year = date.getFullYear();
+                const dateString = `${day}-${month}-${year}`;
                 setDate(dateString);
                 break;
             }
