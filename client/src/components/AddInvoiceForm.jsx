@@ -32,6 +32,8 @@ export default function AddInvoiceForm() {
     const [quantity, setQuantity] = useState('');
     const [rate, setRate] = useState('');
     const [amount, setAmount] = useState('');
+    const [gstAmount, setGstAmount] = useState("");
+    const [totalGstAmount, setTotalGstAmount] = useState("")
     const [userId, setUserId] = useState('');
 
     const handleInputChange = (event) => {
@@ -86,6 +88,19 @@ export default function AddInvoiceForm() {
     }, [invoiceno, date, gstin, aadhar, to, address, particulars, hsn, quantity, rate, amount, invoice, user._id, userId]);
 
 
+    useEffect(() => {
+        const amount = quantity * rate;
+        const cgstRate = particulars === "Cement" ? 0.14 : 0.09;
+        const sgstRate = particulars === "Cement" ? 0.14 : 0.09;
+        const cgstAmount = amount * cgstRate;
+        const sgstAmount = amount * sgstRate;
+        const totalGstAmount = cgstAmount + sgstAmount;
+        setGstAmount(totalGstAmount);
+    }, [particulars, quantity, rate]);
+    useEffect(() => {
+        const total = amount + gstAmount;
+        setTotalGstAmount(total);
+    }, [amount, gstAmount]);
     const handleInvoiceSubmit = async (event) => {
         event.preventDefault();
         setInvoice([...invoice, formData]);
@@ -175,6 +190,16 @@ export default function AddInvoiceForm() {
                                 <div className='w-full'>
                                     <label className='text-lg font-[montserrat]'>Amount<span className="text-red-700">*</span></label>
                                     <input type='number' name='amount' value={amount} onChange={handleInputChange} placeholder='Amount' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
+                                </div>
+                                <div className='w-full'>
+                                    <label className='text-lg font-[montserrat]'>Gst Amount<span className="text-red-700">*</span></label>
+                                    <input type='number' name='gstamount' value={gstAmount} onChange={handleInputChange} placeholder='Total Gst Amount' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
+                                </div>
+                            </div>
+                            <div>
+                                <div className='w-[25%]'>
+                                    <label className='text-lg font-[montserrat]'>Total Gst Amount<span className="text-red-700">*</span></label>
+                                    <input type='number' name='gstamount' value={totalGstAmount} onChange={handleInputChange} placeholder='Total Gst Amount' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                                 </div>
                             </div>
                             <div className='flex justify-end'>
