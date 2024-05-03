@@ -16,6 +16,14 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
     // Round off the total amount
     const roundOff = Math.round(total);
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based in JavaScript
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
+
     InvoiceTamplet.displayName = 'InvoiceTamplet';
     return (
         <>
@@ -51,7 +59,7 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
                                     </div>
                                 </div>
                                 <div>
-                                    Date:- {date.slice(0, 10)}
+                                    Date:- {formatDate(date)}
                                 </div>
                             </div>
                         </div>
