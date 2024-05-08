@@ -129,7 +129,7 @@ export default function Home() {
                                         </div>
                                         <div className='mt-2 text-gray-900 flex items-center flex-col justify-center'>
                                             <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Iron invoice:- {ironInvoices.length}</div>
-                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Chemical invoice:- {cementInvoices.length}</div>
+                                            <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Cement invoice:- {cementInvoices.length}</div>
                                             {/* <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Stone invoice: 45</div>
                                             <div className='flex font-semibold text-lg whitespace-nowrap font-[montserrat]'>Cement invoice: 45</div> */}
                                         </div>
