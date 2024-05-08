@@ -59,7 +59,7 @@ export default function EditInvoiceDialogeForm({ invoiceId, handleClickOpen, ope
     const handleEdit = async (e) => {
         e.preventDefault()
         const formData = {
-            invoiceId, invoiceno, date, gstin, to, aadhar, particulars, hsn, quantity, rate, amount
+            invoiceId, invoiceno, date, gstin, to, aadhar, particulars, hsn, quantity, rate, amount, address
         }
         try {
             dispatch(addInvoiceStart())
