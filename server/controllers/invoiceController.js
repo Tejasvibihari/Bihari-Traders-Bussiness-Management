@@ -47,7 +47,15 @@ export const getInvoices = async (req, res) => {
 
 export const updateInvoice = async (req, res) => {
     const { invoiceno, date, gstin, aadhar, to, address, particulars, hsn, quantity, rate, amount, invoiceId } = req.body;
+
+    // Check if the address field is present in the request body
+    if (!address) {
+        console.log('Address field is missing in the request body');
+    }
+
+    console.log(req.body.address)
     console.log(req.body)
+
     try {
         const updatedInvoice = await Invoice.findByIdAndUpdate(
             { _id: invoiceId },
