@@ -15,7 +15,7 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
     const total = amount + cgstAmount + sgstAmount;
     // Round off the total amount
     const roundOff = Math.round(total);
-
+    console.log(user.email)
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const day = String(date.getDate()).padStart(2, '0');
@@ -31,7 +31,8 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
                 <div className="max-w-7xl border mx-auto my-1" style={{ position: 'relative' }}>
                     {/* Header Section  */}
                     <div style={{
-                        backgroundImage: "url('./image/biharitraderslogo.webp')",
+                        backgroundImage: user.email === "nirmantraders85@gmail.com" ? "url('./nirman.png')" : "url('./image/biharitraderslogo.webp')",
+                        // backgroundImage: "url('./nirman.png')",
                         backgroundSize: '700px auto',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
@@ -178,7 +179,7 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
                             </div>
                             <div className=" flex flex-col text-center items-center gap-2">
                                 <div>
-                                    <img src='./image/Signature.webp' className='w-32' alt='Signature' />
+                                    <img src={user.email === "nirmantraders85@gmail.com" ? "" : './image/Signature.webp'} className='w-32' />
                                 </div>
                                 <div>
                                     Authorised Signature

@@ -26,6 +26,11 @@ export default function EditInvoiceDialogeForm({ invoiceId, handleClickOpen, ope
     const [quantity, setQuantity] = useState('');
     const [rate, setRate] = useState('');
     const [amount, setAmount] = useState('');
+
+    // Add new state variables
+    const [gstAmount, setGstAmount] = useState(0);
+    const [totalGstAmount, setTotalGstAmount] = useState(0);
+
     // const handleClickOpen = () => {
     //     setOpen(true);
     // };
@@ -55,7 +60,17 @@ export default function EditInvoiceDialogeForm({ invoiceId, handleClickOpen, ope
     useEffect(() => {
         setAmount(rate * quantity);
     }, [rate, quantity]);
-
+    // Add new useEffect hook
+    useEffect(() => {
+        const amount = quantity * rate;
+        const cgstRate = particulars === "Cement" ? 0.14 : 0.09;
+        const sgstRate = particulars === "Cement" ? 0.14 : 0.09;
+        const cgstAmount = amount * cgstRate;
+        const sgstAmount = amount * sgstRate;
+        const totalGstAmount = cgstAmount + sgstAmount;
+        setGstAmount(cgstAmount + sgstAmount);
+        setTotalGstAmount(amount + totalGstAmount);
+    }, [particulars, quantity, rate]);
     const handleEdit = async (e) => {
         e.preventDefault()
         console.log(address)
@@ -141,6 +156,16 @@ export default function EditInvoiceDialogeForm({ invoiceId, handleClickOpen, ope
                             <div className='w-full'>
                                 <label className='text-lg font-[montserrat]'>Amount<span className="text-red-700">*</span></label>
                                 <input type='number' name='amount' value={amount} onChange={(e) => setAmount(e.target.value)} placeholder='Amount' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
+                            </div>
+                        </div>
+                        <div className='flex gap-5'>
+                            <div className='w-full'>
+                                <label className='text-lg font-[montserrat]'>Gst Amount<span className="text-red-700">*</span></label>
+                                <input type='number' name='gstamount' value={gstAmount} placeholder='Total Gst Amount' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
+                            </div>
+                            <div className='w-full'>
+                                <label className='text-lg font-[montserrat]'>Total Gst Amount<span className="text-red-700">*</span></label>
+                                <input type='number' name='gstamount' value={totalGstAmount} placeholder='Total Gst Amount' className='w-full p-2 my-2 border border-gray-300 text-lg' required />
                             </div>
                         </div>
                         <div className='flex justify-end'>

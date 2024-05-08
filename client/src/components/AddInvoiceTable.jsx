@@ -16,7 +16,7 @@ import Tooltip from '@mui/material/Tooltip';
 import client from '../service/axiosClient'
 import { useDispatch } from 'react-redux'
 import { deleteInvoice } from '../app/invoice/invoiceSlice'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import EditInvoiceDialogeForm from './EditInvoiceDialogeForm';
 import React from 'react';
 import Slide from '@mui/material/Slide';
@@ -26,7 +26,7 @@ const AddInvoiceTable = ({ invoice }) => {
     const dispatch = useDispatch();
     const [openDialoge, setOpenDialoge] = useState(false)
     const [rowId, setRowId] = useState("");
-
+    const [amount, setAmount] = useState(0);
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
             backgroundColor: theme.palette.common.black,
@@ -75,6 +75,7 @@ const AddInvoiceTable = ({ invoice }) => {
         }
     }
 
+
     const Transition = React.forwardRef(function Transition(props, ref) {
         return <Slide direction="up" ref={ref} {...props} />;
     });
@@ -109,43 +110,50 @@ const AddInvoiceTable = ({ invoice }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {invoice.map((row, i) => (
-                            <StyledTableRow key={i}>
-                                <StyledTableCell component="th" scope="row">
-                                    {row.invoiceno}
-                                </StyledTableCell>
-                                <StyledTableCell align="right">{row.date}</StyledTableCell>
-                                <StyledTableCell align="right">{row.to}</StyledTableCell>
-                                <StyledTableCell align="right">{row.address}</StyledTableCell>
-                                <StyledTableCell align="right">{row.aadhar}</StyledTableCell>
-                                <StyledTableCell align="right">{row.gstin}</StyledTableCell>
-                                <StyledTableCell align="right">{row.particulars}</StyledTableCell>
-                                <StyledTableCell align="right">{row.hsn}</StyledTableCell>
-                                <StyledTableCell align="right">{row.quantity}</StyledTableCell>
-                                <StyledTableCell align="right">{row.rate}</StyledTableCell>
-                                <StyledTableCell align="right">{row.amount}</StyledTableCell>
-                                <StyledTableCell align="right">
-                                    <div className='flex flex-row gap-1'>
-                                        <div>
-                                            <Tooltip title="Edit">
-                                                <IconButton onClick={() => handleClickOpen(row._id)}>
-                                                    <EditIcon className='cursor-pointer text-green-500 hover:text-green-700' />
-                                                </IconButton>
-                                            </Tooltip>
+                        {invoice.map((row, i) => {
+                            const amount = row.quantity * row.rate;
+                            const cgstRate = row.particulars === "Cement" ? 0.14 : 0.09;
+                            const sgstRate = row.particulars === "Cement" ? 0.14 : 0.09;
+                            const cgstAmount = amount * cgstRate;
+                            const sgstAmount = amount * sgstRate;
+                            const totalGstAmount = cgstAmount + sgstAmount + amount;
+                            return (
+                                <StyledTableRow key={i}>
+                                    <StyledTableCell component="th" scope="row">
+                                        {row.invoiceno}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">{row.date}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.to}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.address}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.aadhar}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.gstin}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.particulars}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.hsn}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.quantity}</StyledTableCell>
+                                    <StyledTableCell align="right">{row.rate}</StyledTableCell>
+                                    <StyledTableCell align="right">{totalGstAmount}</StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        <div className='flex flex-row gap-1'>
+                                            <div>
+                                                <Tooltip title="Edit">
+                                                    <IconButton onClick={() => handleClickOpen(row._id)}>
+                                                        <EditIcon className='cursor-pointer text-green-500 hover:text-green-700' />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </div>
+                                            <div>
+                                                {/* onClick={() => handleDelete(row._id)} */}
+                                                <Tooltip title="Delete">
+                                                    <IconButton onClick={() => handleDelete(row._id)}>
+                                                        <DeleteIcon className='cursor-pointer text-red-600 hover:text-red-800' />
+                                                    </IconButton>
+                                                </Tooltip>
+                                            </div>
                                         </div>
-                                        <div>
-                                            {/* onClick={() => handleDelete(row._id)} */}
-                                            <Tooltip title="Delete">
-                                                <IconButton onClick={() => handleDelete(row._id)}>
-                                                    <DeleteIcon className='cursor-pointer text-red-600 hover:text-red-800' />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </div>
-                                    </div>
-                                </StyledTableCell>
-
-                            </StyledTableRow>
-                        ))}
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            );
+                        })}
                     </TableBody>
                 </Table>
             </TableContainer>

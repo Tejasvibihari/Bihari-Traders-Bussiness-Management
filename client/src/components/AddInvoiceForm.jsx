@@ -21,7 +21,7 @@ export default function AddInvoiceForm() {
         amount: ''
     });
     const [invoice, setInvoice] = useState([]);
-    const [invoiceno, setInvoiceno] = useState('');
+    const [invoiceno, setInvoiceno] = useState(0);
     const [date, setDate] = useState('');
     const [gstin, setGstin] = useState('');
     const [aadhar, setAadhar] = useState('');
@@ -107,7 +107,7 @@ export default function AddInvoiceForm() {
         try {
             const invoiceDetail = await client.post("/api/invoice/addinvoice", formData)
             console.log(invoiceDetail);
-            setInvoiceno("");
+            setInvoiceno(prevInvoiceno => Number(prevInvoiceno) + 1);
             setDate("");
             setGstin("");
             setAadhar("");
