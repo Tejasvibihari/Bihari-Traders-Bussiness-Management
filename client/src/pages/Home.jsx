@@ -32,7 +32,7 @@ export default function Home() {
                 const response = await client.post('/api/inventory/getinventory', userId);
                 dispatch(getInventorySuccess(response.data))
             } catch (error) {
-                console.log(error)
+                console.error(error)
             }
         }
         getInventory();

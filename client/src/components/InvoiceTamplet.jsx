@@ -15,7 +15,6 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
     const total = amount + cgstAmount + sgstAmount;
     // Round off the total amount
     const roundOff = Math.round(total);
-    console.log(user.email)
     const formatDate = (dateString) => {
         const date = new Date(dateString);
         const day = String(date.getDate()).padStart(2, '0');
@@ -179,7 +178,7 @@ const InvoiceTamplet = React.forwardRef(({ invoiceno, date, to, address, particu
                             </div>
                             <div className=" flex flex-col text-center items-center gap-2">
                                 <div>
-                                    <img src={user.email === "nirmantraders85@gmail.com" ? "" : './image/Signature.webp'} className='w-32' />
+                                    <img src={user.email === "nirmantraders85@gmail.com" ? "" : '/image/Signature.webp'} className='w-32' />
                                 </div>
                                 <div>
                                     Authorised Signature

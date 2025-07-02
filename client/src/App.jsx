@@ -12,6 +12,8 @@ import InvoiceDownload from "./pages/InvoiceDownload"
 import ResetForm from "./components/ResetForm"
 
 import WholesaleManagement from "./pages/WholesaleManagement"
+import SingleInvoiceDownload from "./pages/SingleInvoiceDownload"
+
 export default function App() {
   return (
     <>
@@ -27,6 +29,7 @@ export default function App() {
             <Route path="/wholesale" element={<WholesaleManagement />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/viewinvoice" element={<InvoiceDownload />} />
+            <Route path="/viewinvoice/:id" element={<SingleInvoiceDownload />} />
           </Route>
         </Routes>
       </BrowserRouter>
