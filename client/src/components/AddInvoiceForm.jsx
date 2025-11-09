@@ -90,8 +90,8 @@ export default function AddInvoiceForm() {
 
     useEffect(() => {
         const amount = quantity * rate;
-        const cgstRate = particulars === "Cement" ? 0.14 : 0.09;
-        const sgstRate = particulars === "Cement" ? 0.14 : 0.09;
+        const cgstRate = 0.09;
+        const sgstRate = 0.09;
         const cgstAmount = amount * cgstRate;
         const sgstAmount = amount * sgstRate;
         const totalGstAmount = cgstAmount + sgstAmount;
